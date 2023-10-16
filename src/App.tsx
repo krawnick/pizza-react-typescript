@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import React from 'react'
 import './scss/app.scss'
+=======
+import './App.css'
+
+function App() {
+>>>>>>> 69f0cd7cfa1a95c7279a6b77df93250f5a33626e
 
 export default function App() {
   return (
+<<<<<<< HEAD
     <div class="wrapper">
       <div class="header">
         <div class="container">
@@ -438,5 +445,9 @@ export default function App() {
         </div>
       </div>
     </div>
+=======
+    <>
+    </>
+>>>>>>> 69f0cd7cfa1a95c7279a6b77df93250f5a33626e
   )
 }
