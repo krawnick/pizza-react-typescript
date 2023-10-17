@@ -7,7 +7,6 @@ export const App = () => {
   return (
     <div class="wrapper">
       <Header />
-      <h1>Hello Pizza! How are you Pizza?</h1>
       <div class="content">
         <div class="container">
           <div class="content__top">
