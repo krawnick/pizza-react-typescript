@@ -16,6 +16,8 @@ export const App = () => {
           </div>
           <h2 class="content__title">Все пиццы</h2>
           <div class="content__items">
+            <PizzaBlock title='Мекскиканская' price='450' />
+            <PizzaBlock />
             <PizzaBlock />
           </div>
         </div>
