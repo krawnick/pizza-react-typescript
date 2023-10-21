@@ -3,6 +3,9 @@ import { Categories } from './components/Categories'
 import { Header } from './components/Header'
 import { PizzaBlock } from './components/PizzaBlock'
 import { Sort } from './components/Sort'
+import pizzas from './assets/pizzas.json'
+
+console.log(pizzas)
 
 export const App = () => {
   return (
@@ -16,9 +19,9 @@ export const App = () => {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <PizzaBlock title='Мекскиканская' price='450' />
-            <PizzaBlock />
-            <PizzaBlock />
+            {pizzas.map((pizza) => (
+              <PizzaBlock title={pizza.name} price={pizza.price} />
+            ))}
           </div>
         </div>
       </div>
