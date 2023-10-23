@@ -12,10 +12,6 @@ export const Categories = () => {
     'Закрытые',
   ]
 
-  const setCategory = (index) => {
-    setActiveCategory(index)
-  }
-
   return (
     <div className="categories">
       <ul>
@@ -23,7 +19,7 @@ export const Categories = () => {
           return (
             <li
               key={category}
-              onClick={() => setCategory(i)}
+              onClick={() => setActiveCategory(i)}
               className={activeCategory === i ? 'active' : ''}
             >
               {category}
