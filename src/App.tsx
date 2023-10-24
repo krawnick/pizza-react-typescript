@@ -3,15 +3,16 @@ import { Categories } from './components/Categories'
 import { Header } from './components/Header'
 import { PizzaBlock } from './components/PizzaBlock'
 import { Sort } from './components/Sort'
-
-const pizzas = await fetch('http://localhost:5172/pizzas')
-  .then((res) => res.json())
-  .then((json) => json)
+import { useEffect, useState } from 'react'
 
 export const App = () => {
-  // fetch('URL')
-  //   .then((res) => res.json())
-  //   .then((json) => json)
+  const [pizzas, setPizzas] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:5172/pizzas')
+      .then((res) => res.json())
+      .then((json) => setPizzas(json))
+  }, [setPizzas])
 
   return (
     <div className="wrapper">
