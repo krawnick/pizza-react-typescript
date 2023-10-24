@@ -6,6 +6,11 @@ import { Sort } from './components/Sort'
 import pizzas from './assets/pizzas.json'
 
 export const App = () => {
+
+  fetch('URL')
+    .then(res => res.json())
+    .then(json => json)
+
   return (
     <div className="wrapper">
       <Header />
