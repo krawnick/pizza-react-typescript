@@ -3,13 +3,15 @@ import { Categories } from './components/Categories'
 import { Header } from './components/Header'
 import { PizzaBlock } from './components/PizzaBlock'
 import { Sort } from './components/Sort'
-import pizzas from './assets/pizzas.json'
+
+const pizzas = await fetch('http://localhost:5172/pizzas')
+  .then((res) => res.json())
+  .then((json) => json)
 
 export const App = () => {
-
-  fetch('URL')
-    .then(res => res.json())
-    .then(json => json)
+  // fetch('URL')
+  //   .then((res) => res.json())
+  //   .then((json) => json)
 
   return (
     <div className="wrapper">
