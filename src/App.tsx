@@ -8,12 +8,16 @@ import { useEffect, useState } from 'react'
 
 export const App = () => {
   const [pizzas, setPizzas] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     // fetch('http://localhost:5172/pizzas')
     fetch('./pizzasData.json')
       .then((res) => res.json())
-      .then((json) => setPizzas(json))
+      .then((json) => {
+        setPizzas(json)
+        setIsLoading(false)
+      })
   }, [setPizzas])
 
   return (
@@ -27,11 +31,16 @@ export const App = () => {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {pizzas.map((pizza) => (
-              <Skeleton key={pizza.id} {...pizza} />
-              //<PizzaBlock key={pizza.id} {...pizza} />
-
-            ))}
+            {isLoading
+              ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+              : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+            {/* {pizzas.map((pizza) =>
+              isLoading ? (
+                <Skeleton />
+              ) : (
+                <PizzaBlock key={pizza.id} {...pizza} />
+              )
+            )} */}
           </div>
         </div>
       </div>
