@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
 
-import { Header } from '../components/Header'
-import { Categories } from '../components/Categories'
-import { PizzaBlock } from '../components/PizzaBlock/'
+import { Categories } from '../components/Categories.jsx'
+import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
-import { Sort } from '../components/Sort'
+import { Sort } from '../components/Sort.jsx'
 
 export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // fetch('http://localhost:5172/pizzas')
-    fetch('./pizzasData.json')
+    fetch('http://localhost:5172/pizzas')
+      // fetch('./pizzasData.json')
       .then((res) => res.json())
       .then((json) => {
         setPizzas(json)
@@ -22,7 +21,6 @@ export const Home = () => {
   return (
     <div className="content">
       <div className="container">
-        <Home />
         <div className="content__top">
           <Categories />
           <Sort />
