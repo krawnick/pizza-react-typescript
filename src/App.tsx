@@ -2,12 +2,18 @@ import './scss/app.scss'
 
 import { Header } from './components/Header'
 import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
 
 export const App = () => {
   return (
     <div className="wrapper">
-      <Header />
-      <Home />
+          <Header />
+      <div className='content'>
+        <div className='container'>
+          <NotFound />
+          <Home />
+        </div>
+      </div>
     </div>
   )
 }

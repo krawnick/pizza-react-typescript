@@ -1,5 +1,5 @@
+import NotFoundBlock from '../components/NotFoundBlock'
+
 export const NotFound = () => {
-  return {
-    <h1>Not Foun</h1>
-  }
+  return <NotFoundBlock />
 }
