@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom'
 export const App = () => {
   return (
     <div className="wrapper">
-      {/* <Header /> */}
+      <Header />
       <div className="content">
         <div className="container">
           <Outlet></Outlet>
