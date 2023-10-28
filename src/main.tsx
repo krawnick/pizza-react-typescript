@@ -8,14 +8,12 @@ import { Header } from './components/Header'
 
 const router = createBrowserRouter([
   {
-    path: '/',
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: [<Header />, <NotFound />],
     children: [
       {
         path: '/',
-        element: <Header />,
-        children: [{ path: '/home', element: <Home /> }],
+        element: [<Header />, <Home />],
       },
     ],
   },
