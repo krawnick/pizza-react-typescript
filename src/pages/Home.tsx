@@ -36,7 +36,6 @@ export const Home = () => {
               <PizzaBlock key={pizza.id} {...pizza} />
             )
           )} */}
-
       </div>
     </>
   )
