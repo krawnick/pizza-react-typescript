@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Categories } from '../components/Categories.jsx'
 import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
-import { Sort } from '../components/Sort.jsx'
+import { Sort } from '../components/Sort'
 
 export const Home = () => {
   const [pizzas, setPizzas] = useState([])
