@@ -4,7 +4,7 @@
 
 ### ReacJS18
 ### TypeScript
-### Redux Toolkit (хранение данных)
+### Redux T_oolkit (хранение данных)
 ### React Router v6 (навигация)
 ### Axios + Fetch (отправка запроса на бэкенд)
 ### React Hooks (хуки)
