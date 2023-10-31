@@ -10,11 +10,9 @@ export const App = () => {
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <Outlet></Outlet>
-          {/* <Home /> */}
-          {/* <NotFound /> */}
-        </div>
+        <Outlet></Outlet>
+        {/* <Home /> */}
+        {/* <NotFound /> */}
       </div>
     </div>
   )
