@@ -9,9 +9,8 @@ export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const [categoryId, setCategoryId] = React.useState(0)
+  const [categoryId, setCategoryId] = useState(0)
   const [typeSort, setTypeSort] = useState(0)
-
 
   useEffect(() => {
     // fetch('http://localhost:5172/pizzas')
@@ -27,8 +26,11 @@ export const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onClickCategory={(id) => setCategoryId(id)} />
-        <Sort value={typeSort} onClickSort={(id) => setTypesort(id)} />
+        <Categories
+          value={categoryId}
+          onClickCategory={(id) => setCategoryId(id)}
+        />
+        <Sort value={typeSort} onClickSort={(id) => setTypeSort(id)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
