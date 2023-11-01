@@ -1,10 +1,9 @@
 import { useState } from 'react'
 
-export const Sort = () => {
+export const Sort = ({value, onClickSort}) => {
   const [openSort, setOpenSort] = useState(false)
 
   const sortList = ['популярности', 'цене', 'алфавиту']
-  const [typeSort, activeTypeSort] = useState(0)
 
   return (
     <div className="sort">
@@ -30,8 +29,8 @@ export const Sort = () => {
             {sortList.map((sort, index) => (
               <li
                 key={sort}
-                onClick={() => (activeTypeSort(index), setOpenSort(false))}
-                className={typeSort === index ? 'active' : ''}
+                onClick={() => (onClickSort(index), setOpenSort(false))}
+                className={value === index ? 'active' : ''}
               >
                 {sort}
               </li>

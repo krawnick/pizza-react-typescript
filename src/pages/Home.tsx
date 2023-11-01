@@ -9,9 +9,14 @@ export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  const [categoryId, setCategoryId] = React.useState(0)
+  const [typeSort, setTypeSort] = useState(0)
+
+
   useEffect(() => {
     // fetch('http://localhost:5172/pizzas')
-    fetch('./pizzasData.json')
+    // fetch('./pizzasData.json')
+    fetch('https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas')
       .then((res) => res.json())
       .then((json) => {
         setPizzas(json)
@@ -22,8 +27,8 @@ export const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories value={categoryId} onClickCategory={(id) => setCategoryId(id)} />
+        <Sort value={typeSort} onClickSort={(id) => setTypesort(id)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

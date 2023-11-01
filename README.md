@@ -12,3 +12,5 @@
 ### Prettier (форматирование кода)
 ### SCSS (стилизация)
 ### Loadash
+
+[] CSS ADAPTIVE

@@ -1,7 +1,6 @@
 import React from 'react'
 
-export const Categories = () => {
-  const [activeCategory, setActiveCategory] = React.useState(0)
+export const Categories = ({ value, onClickCategory }) => {
 
   const categories = [
     'Все',
@@ -19,8 +18,8 @@ export const Categories = () => {
           return (
             <li
               key={category}
-              onClick={() => setActiveCategory(i)}
-              className={activeCategory === i ? 'active' : ''}
+              onClick={() => onClickCategory(i)}
+              className={value === i ? 'active' : ''}
             >
               {category}
             </li>
