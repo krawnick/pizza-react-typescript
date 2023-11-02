@@ -10,20 +10,27 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   const [categoryId, setCategoryId] = useState(0)
-  const [typeSort, setTypeSort] = useState(0)
+  const [typeSort, setTypeSort] = useState({
+    name: 'популярности',
+    sortProperty: 'rating',
+  })
 
   useEffect(() => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
-    fetch(`https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?sort=${typeSort.sortProperty}`)
+    fetch(
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${
+        categoryId > 0 ? `category=${categoryId}` : ''
+      }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
+    )
       .then((res) => res.json())
       .then((json) => {
         setPizzas(json)
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [setPizzas, categoryId])
+  }, [setPizzas, categoryId, typeSort])
 
   console.log(typeSort)
   return (
@@ -33,7 +40,7 @@ export const Home = () => {
           value={categoryId}
           onChangeCategory={(id) => setCategoryId(id)}
         />
-        <Sort value={typeSort} onChangeSort={(id) => setTypeSort(id)} />
+        <Sort value={typeSort} onChangeSort={(sort) => setTypeSort(sort)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
