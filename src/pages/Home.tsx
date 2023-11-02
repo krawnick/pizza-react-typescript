@@ -13,24 +13,27 @@ export const Home = () => {
   const [typeSort, setTypeSort] = useState(0)
 
   useEffect(() => {
+    setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
-    fetch('https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas')
+    fetch(`https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?sort=${typeSort.sortProperty}`)
       .then((res) => res.json())
       .then((json) => {
         setPizzas(json)
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [setPizzas])
+  }, [setPizzas, categoryId])
+
+  console.log(typeSort)
   return (
     <div className="container">
       <div className="content__top">
         <Categories
           value={categoryId}
-          onClickCategory={(id) => setCategoryId(id)}
+          onChangeCategory={(id) => setCategoryId(id)}
         />
-        <Sort value={typeSort} onClickSort={(id) => setTypeSort(id)} />
+        <Sort value={typeSort} onChangeSort={(id) => setTypeSort(id)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
