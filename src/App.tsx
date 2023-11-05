@@ -1,16 +1,16 @@
 import './scss/app.scss'
 
 import { Header } from './components/Header'
-import { Home } from './pages/Home'
-import { NotFound } from './pages/NotFound'
 import { Outlet } from 'react-router-dom'
+import { useState } from 'react'
 
 export const App = () => {
+  const [searchValue, setSearchValue] = useState('')
   return (
     <div className="wrapper">
-      <Header />
+      <Header value={searchValue} setValue={setSearchValue} />
       <div className="content">
-        <Outlet></Outlet>
+        <Outlet />
         {/* <Home /> */}
         {/* <NotFound /> */}
       </div>
