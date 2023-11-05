@@ -1,20 +1,28 @@
 .root {
   position: relative;
 }
-.searchField {
+.input {
   margin: 0 auto;
   padding: 13px;
+  padding-right: 55px;
   width: 300px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 25px;
   font-size: 16px;
   color: grey;
+  transition: 0.2s;
+
+  &:focus {
+    width: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
 }
 
 .icon {
   position: absolute;
   right: 15px;
-  top: 6px;
-  width: 40px;
-  height: 40px;
+  top: 12px;
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
 }

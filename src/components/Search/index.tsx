@@ -6,12 +6,11 @@ export const Search = () => {
       <svg
         className={styles.icon}
         xmlns="http://www.w3.org/2000/svg"
-        enable-background="new 0 0 32 32"
+        enableBackground="new 0 0 32 32"
         height="32px"
         version="1.1"
         viewBox="0 0 32 32"
         width="32px"
-        xml:space="preserve"
       >
         <g id="search_magnifier_magnifying_glass_loupe">
           <g id="search_funds_x2C__magnifying_glass_x2C__magnifier_x2C__loupe_1_">
@@ -45,7 +44,7 @@ export const Search = () => {
           <circle cx="22" cy="13" fill="#263238" r="0.5" />
         </g>
       </svg>
-      <input className={styles.searchField} placeholder="Найти пиццу" />
+      <input className={styles.input} placeholder="Найти пиццу" />
     </div>
   )
 }
