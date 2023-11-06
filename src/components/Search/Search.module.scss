@@ -1,4 +1,5 @@
 .root {
+  margin: 0 10px;
   position: relative;
 }
 .input {
@@ -20,9 +21,26 @@
 
 .icon {
   position: absolute;
-  right: 15px;
+  right: 12px;
   top: 12px;
   width: 30px;
   height: 30px;
+}
+
+.close {
+  position: absolute;
+  right: 17px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+}
+
+.active {
+  display: inline-block;
   opacity: 0.3;
+}
+
+.disable {
+  display: none;
+  opacity: 0;
 }
