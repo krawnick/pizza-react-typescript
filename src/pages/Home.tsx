@@ -5,7 +5,7 @@ import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
 import { Sort } from '../components/Sort'
 
-export const Home = () => {
+export const Home = ({ value }) => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -15,13 +15,21 @@ export const Home = () => {
     sortProperty: 'rating',
   })
 
+  const allPizzas = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+
+  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+
+  const searchPizzas = pizzas.filter((pizza) => {
+    return pizza.name.toLowerCase().includes(value.toLowerCase())
+  })
+
+  
   useEffect(() => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${
-        categoryId > 0 ? `category=${categoryId}` : ''
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
       }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
     )
       .then((res) => res.json())
@@ -45,8 +53,8 @@ export const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoading
-          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-          : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+          ? skeletons
+          : allPizzas
         {/* {pizzas.map((pizza) =>
             isLoading ? (
               <Skeleton />

@@ -11,7 +11,7 @@ export const App = () => {
       <Header value={searchValue} setValue={setSearchValue} />
       <div className="content">
         <Outlet />
-        {/* <Home /> */}
+        <Home value={searchValue} />
         {/* <NotFound /> */}
       </div>
     </div>
