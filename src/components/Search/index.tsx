@@ -5,7 +5,10 @@ export const Search = ({ value, setValue }) => {
   return (
     <div className={styles.root}>
       <svg
-        onClick={() => setValue('')}
+        onClick={(e) => {
+          e.preventDefault()
+          setValue('')
+        }}
         className={cn(styles.close, value ? styles.active : styles.disable)}
         viewBox="0 0 20 20"
       >

@@ -15,21 +15,25 @@ export const Home = ({ value }) => {
     sortProperty: 'rating',
   })
 
-  const allPizzas = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+  const allPizzas = pizzas.map((pizza) => (
+    <PizzaBlock key={pizza.id} {...pizza} />
+  ))
 
-  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+  const skeletons = [...new Array(6)].map((_, index) => (
+    <Skeleton key={index} />
+  ))
 
   const searchPizzas = pizzas.filter((pizza) => {
-    return pizza.name.toLowerCase().includes(value.toLowerCase())
+    return pizza.name.includes(value)
   })
 
-  
   useEffect(() => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${
+        categoryId > 0 ? `category=${categoryId}` : ''
       }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
     )
       .then((res) => res.json())
@@ -40,7 +44,6 @@ export const Home = ({ value }) => {
     window.scrollTo(0, 0)
   }, [setPizzas, categoryId, typeSort])
 
-  console.log(typeSort)
   return (
     <div className="container">
       <div className="content__top">
@@ -52,9 +55,7 @@ export const Home = ({ value }) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading
-          ? skeletons
-          : allPizzas
+        {isLoading ? skeletons : allPizzas}
         {/* {pizzas.map((pizza) =>
             isLoading ? (
               <Skeleton />
