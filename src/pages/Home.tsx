@@ -15,6 +15,10 @@ export const Home = ({ value }) => {
     sortProperty: 'rating',
   })
 
+  const showPizzas = (obj) => {
+    return obj.map(item => <PizzaBlock key={item.id} {...item}) >)
+  }
+
   const allPizzas = pizzas.map((pizza) => (
     <PizzaBlock key={pizza.id} {...pizza} />
   ))
@@ -32,8 +36,7 @@ export const Home = ({ value }) => {
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${
-        categoryId > 0 ? `category=${categoryId}` : ''
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
       }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
     )
       .then((res) => res.json())
