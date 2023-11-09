@@ -15,8 +15,19 @@ export const Home = ({ value }) => {
     sortProperty: 'rating',
   })
 
-  const showPizzas = (obj) =>
-    obj.map((item) => <PizzaBlock key={item.id} {...item} />)
+  const showPizzas = () => {
+    let foundPizzas
+    
+    if (value) {
+      foundPizzas = pizzas.filter((pizza) => {
+        return pizza.name.toLocalLowerCase().includes(value.toLocalLowerCase())
+      })
+    }
+
+    
+    value ? return (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
+          : return (pizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
+  }
 
   const allPizzas = pizzas.map((pizza) => (
     <PizzaBlock key={pizza.id} {...pizza} />
@@ -26,10 +37,7 @@ export const Home = ({ value }) => {
     <Skeleton key={index} />
   ))
 
-  const searchPizzas = pizzas.filter((pizza) => {
-    return pizza.name.includes(value)
-  })
-
+  
   useEffect(() => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
