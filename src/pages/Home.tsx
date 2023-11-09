@@ -17,27 +17,26 @@ export const Home = ({ value }) => {
 
   const showPizzas = () => {
     let foundPizzas
-    
+
     if (value) {
       foundPizzas = pizzas.filter((pizza) => {
-        return pizza.name.toLocalLowerCase().includes(value.toLocalLowerCase())
+        return pizza.name.includes(value)
       })
+      console.log(foundPizzas)
+      return foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
     }
 
-    
-    value ? return (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
-          : return (pizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
+    return pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
   }
 
-  const allPizzas = pizzas.map((pizza) => (
-    <PizzaBlock key={pizza.id} {...pizza} />
-  ))
+  // const allPizzas = pizzas.map((pizza) => (
+  //   <PizzaBlock key={pizza.id} {...pizza} />
+  // ))
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ))
 
-  
   useEffect(() => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
@@ -53,6 +52,7 @@ export const Home = ({ value }) => {
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
+    showPizzas()
   }, [setPizzas, categoryId, typeSort])
 
   return (
@@ -66,7 +66,7 @@ export const Home = ({ value }) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading ? skeletons : allPizzas}
+        {isLoading ? skeletons : showPizzas()}
         {/* {pizzas.map((pizza) =>
             isLoading ? (
               <Skeleton />
