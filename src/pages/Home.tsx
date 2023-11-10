@@ -20,10 +20,10 @@ export const Home = ({ value }) => {
 
     if (value) {
       foundPizzas = pizzas.filter((pizza) => {
-        return pizza.name.includes(value)
+         return pizza.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
       })
-      console.log(foundPizzas)
-      return foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
+      return foundPizzas.length ? (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
+                                : <div className='pizzas'>Такой пиццы пока нет <br />🙄</div>
     }
 
     return pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
@@ -42,8 +42,7 @@ export const Home = ({ value }) => {
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${
-        categoryId > 0 ? `category=${categoryId}` : ''
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
       }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
     )
       .then((res) => res.json())
