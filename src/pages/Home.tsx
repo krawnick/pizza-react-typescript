@@ -5,7 +5,7 @@ import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
 import { Sort } from '../components/Sort'
 
-export const Home = ({ value }) => {
+export const Home = ({ searchValue }) => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -18,20 +18,20 @@ export const Home = ({ value }) => {
   const showPizzas = () => {
     let foundPizzas
 
-    if (value) {
+    if (searchValue) {
       foundPizzas = pizzas.filter((pizza) => {
-         return pizza.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+        return pizza.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
       })
       return foundPizzas.length ? (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
-                                : <div className='pizzas'>Такой пиццы пока нет <br />🙄</div>
+        : <div className='pizzas'>Такой пиццы пока нет <br />🙄</div>
     }
 
     return pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
   }
 
-  // const allPizzas = pizzas.map((pizza) => (
-  //   <PizzaBlock key={pizza.id} {...pizza} />
-  // ))
+  const allPizzas = pizzas.map((pizza) => (
+    <PizzaBlock key={pizza.id} {...pizza} />
+  ))
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -41,9 +41,15 @@ export const Home = ({ value }) => {
     setIsLoading(true)
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
+
+    const category = categoryId > 0 ? categoryId : ''
+    const sortBy = typeSort.sortProperty
+    const order = typeSort.desc ? 'order=desc' : ''
+    const search = searchValue ? searchValue : ''
+
     fetch(
       `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
-      }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}`
+      }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}&search=${searchValue ? searchValue : }`
     )
       .then((res) => res.json())
       .then((json) => {
