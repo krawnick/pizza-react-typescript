@@ -10,13 +10,12 @@ import { Header } from './components/Header'
 export const App = () => {
   const [searchValue, setSearchValue] = useState('')
 
-  
   return (
     <div className="wrapper">
       <Header value={searchValue} setValue={setSearchValue} />
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home value={searchValue} />}></Route>
+          <Route path="/" element={<Home searchValue={searchValue} />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
         </Routes>
