@@ -9,6 +9,8 @@ import { Header } from './components/Header'
 
 export const App = () => {
   const [searchValue, setSearchValue] = useState('')
+
+  
   return (
     <div className="wrapper">
       <Header value={searchValue} setValue={setSearchValue} />

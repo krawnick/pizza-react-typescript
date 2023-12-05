@@ -8,26 +8,25 @@ import { Sort } from '../components/Sort'
 export const Home = ({ searchValue }) => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-
   const [categoryId, setCategoryId] = useState(0)
   const [typeSort, setTypeSort] = useState({
     name: 'популярности',
     sortProperty: 'rating',
   })
 
-  const showPizzas = () => {
-    let foundPizzas
+  // const showPizzas = () => {
+  //   let foundPizzas
 
-    if (searchValue) {
-      foundPizzas = pizzas.filter((pizza) => {
-        return pizza.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-      })
-      return foundPizzas.length ? (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
-        : <div className='pizzas'>Такой пиццы пока нет <br />🙄</div>
-    }
+  //   if (searchValue) {
+  //     foundPizzas = pizzas.filter((pizza) => {
+  //       return pizza.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+  //     })
+  //     return foundPizzas.length ? (foundPizzas.map((item) => <PizzaBlock key={item.id} {...item} />))
+  //       : <div className='pizzas'>Такой пиццы пока нет <br />🙄</div>
+  //   }
 
-    return pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
-  }
+  //   return pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)
+  // }
 
   const allPizzas = pizzas.map((pizza) => (
     <PizzaBlock key={pizza.id} {...pizza} />
@@ -42,14 +41,15 @@ export const Home = ({ searchValue }) => {
     // fetch('http://localhost:5172/pizzas')
     // fetch('./pizzasData.json')
 
-    const category = categoryId > 0 ? categoryId : ''
-    const sortBy = typeSort.sortProperty
-    const order = typeSort.desc ? 'order=desc' : ''
-    const search = searchValue ? searchValue : ''
+    const category = categoryId > 0 ? `category=${categoryId}` : ''
+    const sortBy = `&sortBy=${typeSort.sortProperty}`
+    const order = typeSort.desc ? '&order=desc' : ''
+    const search = searchValue ? `&search=${searchValue}` : ''
+    console.log(searchValue)
 
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${categoryId > 0 ? `category=${categoryId}` : ''
-      }&sortBy=${typeSort.sortProperty}&${typeSort.desc ? 'order=desc' : ''}&search=${searchValue ? searchValue : }`
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${category}${sortBy}${order}${search}`
+
     )
       .then((res) => res.json())
       .then((json) => {
@@ -58,7 +58,8 @@ export const Home = ({ searchValue }) => {
       })
     window.scrollTo(0, 0)
     showPizzas()
-  }, [setPizzas, categoryId, typeSort])
+    console.log(searchValue)
+  }, [setPizzas, categoryId, typeSort, searchValue])
 
   return (
     <div className="container">
