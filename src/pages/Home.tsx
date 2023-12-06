@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Categories } from '../components/Categories.jsx'
+import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
 import { Sort } from '../components/Sort'
@@ -52,13 +53,14 @@ export const Home = ({ searchValue }) => {
         {isLoading
           ? skeletons
           : pizzas.map((pizza) =>
-              isLoading ? (
-                <Skeleton />
-              ) : (
-                <PizzaBlock key={pizza.id} {...pizza} />
-              )
-            )}
+            isLoading ? (
+              <Skeleton />
+            ) : (
+              <PizzaBlock key={pizza.id} {...pizza} />
+            )
+          )}
       </div>
+      <Pagination />
     </div>
   )
 }
