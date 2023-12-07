@@ -60,7 +60,7 @@ export const Home = ({ searchValue }) => {
             )
           )}
       </div>
-      <Pagination />
+      <Pagination className="paginationHome" />
     </div>
   )
 }

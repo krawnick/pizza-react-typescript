@@ -1,7 +1,27 @@
 .pagination {
-  :global {
-    .previous {
-      background-color: red;
-    }
+  display: flex;
+  margin: 15px;
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+    padding: 10px;
+    min-width: 44px;
+
+    font-weight: 700;
+    
+    border: solid 1px #fe5f1e;
+    border-radius: 30px;
   }
+    li:hover {
+      background-color:  #fe5f1e;
+      cursor: pointer;
+      transition: 0.3s;
+      a {
+        color: white;
+        transition: 0.3s;
+      }
+    }
 }
