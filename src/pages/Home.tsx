@@ -14,6 +14,7 @@ export const Home = ({ searchValue }) => {
     name: 'популярности',
     sortProperty: 'rating',
   })
+  const [currentPage, setCurrentPage] = useState(0)
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -53,12 +54,12 @@ export const Home = ({ searchValue }) => {
         {isLoading
           ? skeletons
           : pizzas.map((pizza) =>
-            isLoading ? (
-              <Skeleton />
-            ) : (
-              <PizzaBlock key={pizza.id} {...pizza} />
-            )
-          )}
+              isLoading ? (
+                <Skeleton />
+              ) : (
+                <PizzaBlock key={pizza.id} {...pizza} />
+              )
+            )}
       </div>
       <Pagination className="paginationHome" />
     </div>

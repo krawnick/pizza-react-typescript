@@ -10,7 +10,7 @@ export const Pagination = ({ className }) => {
       nextLabel="Следущая >"
       onPageChange={(event) => console.log(event)}
       pageRangeDisplayed={5}
-      pageCount={5}
+      pageCount={3}
       previousLabel="< Предыдущая"
       renderOnZeroPageCount={null}
     />
