@@ -14,7 +14,7 @@ export const Home = ({ searchValue }) => {
     name: 'популярности',
     sortProperty: 'rating',
   })
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -23,13 +23,14 @@ export const Home = ({ searchValue }) => {
   useEffect(() => {
     setIsLoading(true)
 
-    const category = categoryId > 0 ? `category=${categoryId}` : ''
+    const category = categoryId > 0 ? `&category=${categoryId}` : ''
     const sortBy = `&sortBy=${typeSort.sortProperty}`
     const order = typeSort.desc ? '&order=desc' : ''
     const search = searchValue ? `&search=${searchValue}` : ''
+    const page = `&page=${currentPage}`
 
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?${category}${sortBy}${order}${search}`
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${category}${sortBy}${order}${search}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -38,7 +39,7 @@ export const Home = ({ searchValue }) => {
       })
 
     window.scrollTo(0, 0)
-  }, [setPizzas, categoryId, typeSort, searchValue])
+  }, [setPizzas, categoryId, typeSort, searchValue, currentPage])
 
   return (
     <div className="container">
@@ -61,7 +62,10 @@ export const Home = ({ searchValue }) => {
               )
             )}
       </div>
-      <Pagination className="paginationHome" />
+      <Pagination
+        className="paginationHome"
+        onChangePage={(number) => setCurrentPage(number)}
+      />
     </div>
   )
 }
