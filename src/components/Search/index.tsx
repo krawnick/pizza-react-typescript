@@ -1,12 +1,10 @@
 import styles from './Search.module.scss'
 import cn from 'classnames'
 import { useContext } from 'react'
-import {SearchContext} from '../../App'
+import { SearchContext } from '../../App'
 
 export const Search = () => {
-
-  const {searchValue, setSearchValue} = useContext(SearchContext)
-
+  const { searchValue, setSearchValue } = useContext(SearchContext)
   return (
     <div className={styles.root}>
       <svg
@@ -14,13 +12,19 @@ export const Search = () => {
           e.preventDefault()
           setSearchValue('')
         }}
-        className={cn(styles.close, searchValue ? styles.active : styles.disable)}
+        className={cn(
+          styles.close,
+          searchValue ? styles.active : styles.disable
+        )}
         viewBox="0 0 20 20"
       >
         <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
       </svg>
       <svg
-        className={cn(styles.icon, !searchValue ? styles.active : styles.disable)}
+        className={cn(
+          styles.icon,
+          !searchValue ? styles.active : styles.disable
+        )}
         xmlns="http://www.w3.org/2000/svg"
         enableBackground="new 0 0 32 32"
         height="32px"
@@ -62,7 +66,7 @@ export const Search = () => {
       </svg>
       <input
         value={searchValue}
-        onChange={(event) => setSearchValue(event.target.searchValue)}
+        onChange={(event) => setSearchValue(event.target.value)}
         className={styles.input}
         placeholder="Найти пиццу"
       />

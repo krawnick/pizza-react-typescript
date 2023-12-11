@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Categories } from '../components/Categories.jsx'
 import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
 import { Sort } from '../components/Sort'
+import { SearchContext } from '../App.js'
 
-export const Home = ({ searchValue }) => {
+export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [categoryId, setCategoryId] = useState(0)
@@ -15,6 +16,7 @@ export const Home = ({ searchValue }) => {
     sortProperty: 'rating',
   })
   const [currentPage, setCurrentPage] = useState(1)
+  const { searchValue, setSearchValue } = useContext(SearchContext)
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />

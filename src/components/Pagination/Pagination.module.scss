@@ -1,9 +1,7 @@
 .pagination {
   display: flex;
   margin: 15px;
-  // li {
-  //   overflow: hidden;
-  // }
+
   a {
     display: flex;
     justify-content: center;
@@ -23,20 +21,6 @@
     cursor: pointer;
   }
 
-  // a {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   gap: 20px;
-
-  //   padding: 10px;
-  //   min-width: 44px;
-
-  //   font-weight: 700;
-
-  //   border: solid 1px #fe5f1e;
-  //   border-radius: 30px;
-  // }
   :global {
     .selected {
       a {
