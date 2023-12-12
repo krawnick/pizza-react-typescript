@@ -16,7 +16,7 @@ export const Home = () => {
     sortProperty: 'rating',
   })
   const [currentPage, setCurrentPage] = useState(1)
-  const { searchValue, setSearchValue } = useContext(SearchContext)
+  const { searchValue } = useContext(SearchContext)
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -57,12 +57,12 @@ export const Home = () => {
         {isLoading
           ? skeletons
           : pizzas.map((pizza) =>
-              isLoading ? (
-                <Skeleton />
-              ) : (
-                <PizzaBlock key={pizza.id} {...pizza} />
-              )
-            )}
+            isLoading ? (
+              <Skeleton />
+            ) : (
+              <PizzaBlock key={pizza.id} {...pizza} />
+            )
+          )}
       </div>
       <Pagination
         className="paginationHome"
