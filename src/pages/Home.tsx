@@ -10,7 +10,7 @@ import { SearchContext } from '../App.js'
 export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [categoryId, setCategoryId] = useState(0)
+  // const [categoryId, setCategoryId] = useState(0)
   const [typeSort, setTypeSort] = useState({
     name: 'популярности',
     sortProperty: 'rating',

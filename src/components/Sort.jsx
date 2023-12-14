@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setCategoryId } from '../redux/slices/filterSlice'
 
-export const Sort = ({ value, onChangeSort }) => {
+export const Sort = () => {
+  const dispatch = useDispatch()
+
   const [openSort, setOpenSort] = useState(false)
 
   const sortList = [
@@ -36,7 +40,9 @@ export const Sort = ({ value, onChangeSort }) => {
             {sortList.map((sort, index) => (
               <li
                 key={sort.sortProperty}
-                onClick={() => (onChangeSort(sort), setOpenSort(false))}
+                /* onClick={() => (onChangeSort(sort), setOpenSort(false))} */
+                onClick={() => (() => dispatch(setCategoryId(sort)), setOpenSort(false))}
+
                 className={value.name === sort.name ? 'active' : ''}
               >
                 {sortList[index].name}
