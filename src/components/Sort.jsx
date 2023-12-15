@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId } from '../redux/slices/filterSlice'
 
 export const Sort = () => {
   const dispatch = useDispatch()
+  const categoryId = useSelector((state) => state.filter.categoryId)
 
   const [openSort, setOpenSort] = useState(false)
 
@@ -32,7 +33,9 @@ export const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpenSort(!openSort)}>{value.name}</span>
+        <span onClick={() => setOpenSort(!openSort)}>
+          {sortList[categoryId].name}
+        </span>
       </div>
       {openSort && (
         <div className="sort__popup">
@@ -41,9 +44,12 @@ export const Sort = () => {
               <li
                 key={sort.sortProperty}
                 /* onClick={() => (onChangeSort(sort), setOpenSort(false))} */
-                onClick={() => (() => dispatch(setCategoryId(sort)), setOpenSort(false))}
-
-                className={value.name === sort.name ? 'active' : ''}
+                onClick={() => (
+                  () => dispatch(setCategoryId(sort)), setOpenSort(false)
+                )}
+                className={
+                  sortList[categoryId].name === sort.name ? 'active' : ''
+                }
               >
                 {sortList[index].name}
               </li>

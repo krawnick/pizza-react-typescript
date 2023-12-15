@@ -6,11 +6,13 @@ import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
 import { Sort } from '../components/Sort'
 import { SearchContext } from '../App.js'
+import { useSelector } from 'react-redux'
 
 export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   // const [categoryId, setCategoryId] = useState(0)
+  const categoryId = useSelector((state) => state.filter.categoryId)
   const [typeSort, setTypeSort] = useState({
     name: 'популярности',
     sortProperty: 'rating',
@@ -57,12 +59,12 @@ export const Home = () => {
         {isLoading
           ? skeletons
           : pizzas.map((pizza) =>
-            isLoading ? (
-              <Skeleton />
-            ) : (
-              <PizzaBlock key={pizza.id} {...pizza} />
-            )
-          )}
+              isLoading ? (
+                <Skeleton />
+              ) : (
+                <PizzaBlock key={pizza.id} {...pizza} />
+              )
+            )}
       </div>
       <Pagination
         className="paginationHome"
