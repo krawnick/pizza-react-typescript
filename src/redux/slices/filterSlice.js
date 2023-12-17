@@ -12,11 +12,11 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategoryId: (state, action) => {
-      state.categoryId = action.payload
+    setSort: (state, { payload }) => {
+      state.sort = payload
     },
   },
 })
 
 export const filterReducer = filterSlice.reducer
-export const { setCategoryId } = filterSlice.actions
+export const { setSort } = filterSlice.actions

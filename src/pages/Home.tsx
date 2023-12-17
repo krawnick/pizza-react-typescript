@@ -11,12 +11,8 @@ import { useSelector } from 'react-redux'
 export const Home = () => {
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  // const [categoryId, setCategoryId] = useState(0)
-  const categoryId = useSelector((state) => state.filter.categoryId)
-  const [typeSort, setTypeSort] = useState({
-    name: 'популярности',
-    sortProperty: 'rating',
-  })
+  const [categoryId, setCategoryId] = useState(0)
+  const sortState = useSelector((state) => state.filter.sort)
   const [currentPage, setCurrentPage] = useState(1)
   const { searchValue } = useContext(SearchContext)
 
@@ -28,8 +24,8 @@ export const Home = () => {
     setIsLoading(true)
 
     const category = categoryId > 0 ? `&category=${categoryId}` : ''
-    const sortBy = `&sortBy=${typeSort.sortProperty}`
-    const order = typeSort.desc ? '&order=desc' : ''
+    const sortBy = `&sortBy=${sortState.sortProperty}`
+    const order = sortState.desc ? '&order=desc' : ''
     const search = searchValue ? `&search=${searchValue}` : ''
     const page = `&page=${currentPage}`
 
@@ -43,7 +39,7 @@ export const Home = () => {
       })
 
     window.scrollTo(0, 0)
-  }, [setPizzas, categoryId, typeSort, searchValue, currentPage])
+  }, [setPizzas, categoryId, sortState, searchValue, currentPage])
 
   return (
     <div className="container">
@@ -52,7 +48,7 @@ export const Home = () => {
           value={categoryId}
           onChangeCategory={(id) => setCategoryId(id)}
         />
-        <Sort value={typeSort} onChangeSort={(sort) => setTypeSort(sort)} />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
