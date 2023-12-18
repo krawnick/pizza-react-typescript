@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Categories } from '../components/Categories.jsx'
+import { Categories } from '../components/Categories/'
 import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'

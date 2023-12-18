@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSort } from '../../redux/slices/filterSlice'
 import styles from './Sort.module.scss'
@@ -43,7 +43,7 @@ export const Sort = () => {
                 key={sort.name}
                 onClick={() => dispatch(setSort(sort)) & setOpenSort(false)}
                 className={
-                  sortList[index].name === sortState.name ? 'active' : ''
+                  sortList[index].name === sortState.name ? styles.active : ''
                 }
               >
                 {sortList[index].name}

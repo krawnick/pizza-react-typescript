@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId } from '../redux/slices/filterSlice'
+import { setCategoryId } from '../../redux/slices/filterSlice'
+import styles from './Categories.module.scss'
 
 export const Categories = () => {
   const dispatch = useDispatch()
@@ -16,14 +17,14 @@ export const Categories = () => {
   ]
 
   return (
-    <div className="categories">
+    <div className={styles.categories}>
       <ul>
         {categories.map((category, index) => {
           return (
             <li
               key={category}
               onClick={() => dispatch(setCategoryId(index))}
-              className={categoryState === index ? 'active' : ''}
+              className={categoryState === index ? styles.active : ''}
             >
               {category}
             </li>
