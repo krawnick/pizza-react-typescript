@@ -4,7 +4,7 @@ import { Categories } from '../components/Categories.jsx'
 import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
-import { Sort } from '../components/Sort'
+import { Sort } from '../components/Sort/'
 import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
 

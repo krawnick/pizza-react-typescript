@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSort } from '../redux/slices/filterSlice'
+import { setSort } from '../../redux/slices/filterSlice'
+import styles from './Sort.module.scss'
 
 export const Sort = () => {
   const dispatch = useDispatch()
@@ -17,8 +18,8 @@ export const Sort = () => {
   ]
 
   return (
-    <div className="sort">
-      <div className="sort__label">
+    <div className={styles.sort}>
+      <div className={styles.sortLabel}>
         <svg
           width="10"
           height="6"
@@ -35,7 +36,7 @@ export const Sort = () => {
         <span onClick={() => setOpenSort(!openSort)}>{sortState.name}</span>
       </div>
       {openSort && (
-        <div className="sort__popup">
+        <div className={styles.sortPopup}>
           <ul>
             {sortList.map((sort, index) => (
               <li
