@@ -7,7 +7,7 @@ import { Home } from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from './pages/NotFound'
 import { Cart } from './pages/Cart'
-import { Header } from './components/Header'
+import { Header } from './components/Header/'
 
 export const SearchContext = React.createContext('')
 

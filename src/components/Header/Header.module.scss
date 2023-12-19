@@ -1,17 +1,16 @@
-@import "../variables";
+@import "../../scss/variables.scss";
 
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 40px 20px;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
   }
 
-  &__logo {
+  &Logo {
     display: flex;
 
     img {
@@ -29,9 +28,9 @@
     p {
       color: #7b7b7b;
 
-    @media (max-width: 645px) {
-      display: none;
-    }
+      @media (max-width: 645px) {
+        display: none;
+      }
     }
   }
 }

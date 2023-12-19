@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId } from '../../redux/slices/filterSlice'
+import cn from 'classnames'
 import styles from './Categories.module.scss'
 
-export const Categories = () => {
+export const Categories = ({ className }) => {
   const dispatch = useDispatch()
 
   const categoryState = useSelector((state) => state.filter.categoryId)
@@ -17,7 +18,7 @@ export const Categories = () => {
   ]
 
   return (
-    <div className={styles.categories}>
+    <div className={cn(className, styles.categories)}>
       <ul>
         {categories.map((category, index) => {
           return (
