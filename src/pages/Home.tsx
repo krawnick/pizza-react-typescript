@@ -51,15 +51,16 @@ export const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading
-          ? skeletons
-          : pizzas.map((pizza) =>
-              isLoading ? (
-                <Skeleton />
-              ) : (
-                <PizzaBlock key={pizza.id} {...pizza} />
-              )
-            )}
+        {isLoading ? (
+          skeletons
+        ) : pizzas.length ? (
+          pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+        ) : (
+          <div class="content__empty">
+            Ничего не найдено <br />
+            😢
+          </div>
+        )}
       </div>
       <Pagination
         className="paginationHome"

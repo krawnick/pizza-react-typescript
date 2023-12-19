@@ -2,12 +2,17 @@ import styles from './Search.module.scss'
 import cn from 'classnames'
 import { useContext } from 'react'
 import { SearchContext } from '../../App'
+import Cross from './icons/cross.svg?react'
+// import cross from './icons/cross.svg'
 
 export const Search = () => {
   const { searchValue, setSearchValue } = useContext(SearchContext)
   return (
     <div className={styles.root}>
-      <svg
+      <Cross />
+      {/* <img src={cross} /> */}
+
+      {/* <svg
         onClick={(e) => {
           e.preventDefault()
           setSearchValue('')
@@ -19,7 +24,7 @@ export const Search = () => {
         viewBox="0 0 20 20"
       >
         <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-      </svg>
+      </svg> */}
       <svg
         className={cn(
           styles.icon,
