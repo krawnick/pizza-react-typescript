@@ -5,10 +5,10 @@ import { SearchContext } from '../../App'
 import Cross from './icons/cross.svg?react'
 import SearchIcon from './icons/search.svg?react'
 
-export const Search = () => {
+export const Search = ({ className }) => {
   const { searchValue, setSearchValue } = useContext(SearchContext)
   return (
-    <div className={styles.root}>
+    <div className={cn(className, styles.root)}>
       <Cross
         onClick={() => {
           setSearchValue('')

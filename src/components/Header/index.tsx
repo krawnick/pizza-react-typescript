@@ -16,7 +16,7 @@ export const Header = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        <Search className={styles.search} />
         <div className={styles.headerCart}>
           <Link to="/cart" className="button button--cart">
             <span>520&nbsp;₽</span>

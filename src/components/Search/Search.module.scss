@@ -1,16 +1,16 @@
 .root {
-  margin: 0 10px;
   position: relative;
+  margin: 0 10px;
 }
 .input {
   margin: 0 auto;
   padding: 13px;
   padding-right: 40px;
-  width: 300px;
+  width: 100%;
   border: 1px solid lightgrey;
   border-radius: 25px;
   font-size: 16px;
-  color: gray;
+  color: black;
   transition: 0.2s;
 
   &:focus {
