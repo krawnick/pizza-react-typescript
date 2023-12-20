@@ -5,16 +5,16 @@
 .input {
   margin: 0 auto;
   padding: 13px;
-  padding-right: 55px;
+  padding-right: 40px;
   width: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid lightgrey;
   border-radius: 25px;
   font-size: 16px;
   color: gray;
   transition: 0.2s;
 
   &:focus {
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid grey;
   }
 }
 
@@ -23,21 +23,26 @@
   right: 12px;
   top: 12px;
   width: 30px;
-  height: 30px;
+  height: 28px;
+  fill: gray;
 }
 
 .close {
   position: absolute;
-  right: 17px;
-  top: 14px;
-  width: 24px;
-  height: 24px;
+  right: 10px;
+  top: 11px;
+  width: 30px;
+  height: 30px;
+  fill: lightgray;
   cursor: pointer;
+  &:hover {
+    fill: #fe5f1e;
+  }
 }
 
 .active {
   display: inline-block;
-  opacity: 0.3;
+  // opacity: 0.3;
 }
 
 .disable {
