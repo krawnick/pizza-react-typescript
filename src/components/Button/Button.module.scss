@@ -1,0 +1,38 @@
+@import "../../scss/libs/normalize";
+@import "../../scss/variables";
+
+.button {
+  display: inline-block;
+  background-color: $orange;
+  border-radius: 30px;
+  padding: 10px 20px;
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
+  border: 1px solid transparent;
+  @include noselect();
+
+  &,
+  span {
+    color: #fff;
+  }
+
+  i,
+  span,
+  path,
+  svg {
+    transition: all $duration ease-in-out;
+  }
+
+  &:hover {
+    background-color: darken($orange, 8%);
+  }
+
+  &:active {
+    background-color: darken($orange, 12%);
+    transform: translateY(1px);
+  }
+}

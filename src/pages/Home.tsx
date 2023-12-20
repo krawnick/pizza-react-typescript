@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 
 import { Categories } from '../components/Categories/'
-import { Pagination } from '../components/Pagination/index.js'
-import { PizzaBlock } from '../components/PizzaBlock/index.jsx'
-import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx'
+import { Pagination } from '../components/Pagination/'
+import { PizzaBlock } from '../components/PizzaBlock/'
+import { Skeleton } from '../components/PizzaBlock/Skeleton'
 import { Sort } from '../components/Sort/'
 import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
@@ -14,11 +14,10 @@ export const Home = () => {
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  // const [categoryId, setCategoryId] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const { searchValue } = useContext(SearchContext)
 
-  const skeletons = [...new Array(6)].map((_, index) => (
+  const skeletons = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
   ))
 
