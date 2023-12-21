@@ -19,7 +19,13 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
             <li
               key={type}
               onClick={() => setActiveType(type)}
-              className={activeType === type ? 'active' : ''}
+              className={
+                types.length > 1
+                  ? activeType === type
+                    ? styles.active
+                    : ''
+                  : styles.active
+              }
             >
               {typeNames[type]}
             </li>
@@ -30,14 +36,11 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
             <li
               key={size}
               onClick={() => setActiveSize(index)}
-              className={activeSize === index ? 'active' : ''}
+              className={activeSize === index ? styles.active : ''}
             >
               {size} см.
             </li>
           ))}
-          {/* <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li> */}
         </ul>
       </div>
       <div className={styles.pizzaBlockBottom}>
