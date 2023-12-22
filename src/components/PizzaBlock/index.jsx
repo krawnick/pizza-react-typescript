@@ -56,9 +56,12 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
           <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
         )} */}
 
-        <Button className={cn(styles.buttonOutline, styles.buttonAdd)}>
+        <Button
+          className={(styles.buttonOutline, styles.buttonAdd)}
+          theme="outline"
+        >
           <div>
-            <AddIcon />
+            <AddIcon className={styles.addIcon} />
             <span>Добавить</span>
             <i>1</i>
           </div>
