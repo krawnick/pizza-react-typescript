@@ -9,6 +9,10 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
 
+  const pizzaPriceSize = () => {
+    return Math.floor((price / sizes[0]) * sizes[activeSize])
+  }
+
   return (
     <div className={styles.pizzaBlock}>
       <img className={styles.pizzaBlockImage} src={imageUrl} alt="Pizza" />
@@ -44,7 +48,13 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
         </ul>
       </div>
       <div className={styles.pizzaBlockBottom}>
-        <div className={styles.pizzaBlockPrice}>от {price} ₽</div>
+        <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
+
+        {/* {activeSize === 0 ? (
+          <div className={styles.pizzaBlockPrice}>от {price} ₽</div>
+        ) : (
+          <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
+        )} */}
 
         <Button className={cn(styles.buttonOutline, styles.buttonAdd)}>
           <div>
