@@ -21,7 +21,7 @@ export const Header = () => {
         <Search className={styles.search} />
         <div className={styles.headerCart}>
           <Link to="/cart">
-            <Button className={styles.buttonCart}>
+            <Button theme="orange" className={styles.buttonCart}>
               <span>520&nbsp;₽</span>
               <div className={styles.buttonDelimiter}></div>
               <CartIcon />

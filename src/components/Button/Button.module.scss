@@ -3,7 +3,6 @@
 
 .button {
   display: inline-block;
-  background-color: $orange;
   border-radius: 30px;
   padding: 10px 20px;
   min-width: 100px;
@@ -26,7 +25,10 @@
   svg {
     transition: all $duration ease-in-out;
   }
+}
 
+.buttonOrange {
+  background-color: $orange;
   &:hover {
     background-color: darken($orange, 8%);
   }
