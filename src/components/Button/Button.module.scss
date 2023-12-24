@@ -75,18 +75,19 @@
     span {
       color: $orange;
     }
-  
+
     &:hover {
       background-color: $orange;
-  
+
       &,
       span {
         color: #fff;
       }
     }
-  
+
     &:active {
       background-color: darken($orange, 8%);
       transform: translateY(1px);
     }
+  }
 }
