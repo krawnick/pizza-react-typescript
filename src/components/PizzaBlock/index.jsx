@@ -49,16 +49,9 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
       </div>
       <div className={styles.pizzaBlockBottom}>
         <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
-
-        {/* {activeSize === 0 ? (
-          <div className={styles.pizzaBlockPrice}>от {price} ₽</div>
-        ) : (
-          <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
-        )} */}
-
         <Button
           className={(styles.buttonOutline, styles.buttonAdd)}
-          theme="outline"
+          theme="outline-orange"
         >
           <div>
             <AddIcon className={styles.addIcon} />

@@ -21,7 +21,7 @@
     align-items: center;
   }
 
-  .content__title {
+  .contentTitle {
     display: flex;
     align-items: center;
     font-size: 32px;
@@ -29,12 +29,12 @@
     svg {
       position: relative;
       top: -2px;
-      width: 30px;
-      height: 30px;
       margin-right: 10px;
+      height: 30px;
+      width: 30px;
       path {
-        stroke: $black;
-        stroke-width: 1.9;
+        fill: transparent;
+        stroke: black;
       }
     }
   }
