@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Cart.module.scss'
+import BackIcon from './icons/backIcon.svg?react'
 import CartIcon from '../../components/Header/cartIcon.svg?react'
-import CartClear from './cartClear.svg?react'
+import CartClear from './icons/cartClear.svg?react'
+import { Button } from '../../components/Button'
 
 export const Cart = () => {
   return (
@@ -110,29 +112,16 @@ export const Cart = () => {
           <div className={styles.cartBottomButtons}>
             <Link
               to="/"
-              className="button button--outline button--add go-back-btn"
+              // className="button button--outline button--add go-back-btn"
             >
-              <svg
-                width="8"
-                height="14"
-                viewBox="0 0 8 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7 13L1 6.93015L6.86175 1"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-
-              <span>Вернуться назад</span>
+              <Button className={styles.goBackButton} theme="outline-gray">
+                <BackIcon />
+                <span>Вернуться назад</span>
+              </Button>
             </Link>
-            <div className="button pay-btn">
+            <Button className={styles.payButton} theme="orange">
               <span>Оплатить сейчас</span>
-            </div>
+            </Button>
           </div>
         </div>
       </div>

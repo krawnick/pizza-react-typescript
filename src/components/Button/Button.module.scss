@@ -33,7 +33,7 @@
 .buttonOrange {
   &,
   span {
-    color: white;
+    color: $white;
   }
   background-color: $orange;
   &:hover {
@@ -47,7 +47,7 @@
 }
 
 .buttonOutlineOrange {
-  background-color: #fff;
+  background-color: $white;
   border-color: $orange;
   &,
   span {
@@ -59,7 +59,7 @@
 
     &,
     span {
-      color: #fff;
+      color: $white;
     }
   }
 
@@ -67,27 +67,27 @@
     background-color: darken($orange, 8%);
     transform: translateY(1px);
   }
+}
 
-  .buttonOutlineGray {
-    background-color: #fff;
-    border-color: $orange;
+.buttonOutlineGray {
+  background-color: $transparent;
+  border-color: $gray;
+  &,
+  span {
+    color: darken($gray, 30%);
+  }
+
+  &:hover {
+    background-color: $black;
+
     &,
     span {
-      color: $orange;
+      color: $white;
     }
+  }
 
-    &:hover {
-      background-color: $orange;
-
-      &,
-      span {
-        color: #fff;
-      }
-    }
-
-    &:active {
-      background-color: darken($orange, 8%);
-      transform: translateY(1px);
-    }
+  &:active {
+    background-color: lighten($black, 10%);
+    transform: translateY(1px);
   }
 }

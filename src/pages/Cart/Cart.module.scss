@@ -200,42 +200,24 @@
       justify-content: space-between;
       margin-top: 40px;
 
-      .go-back-btn {
+      .goBackButton {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 210px;
-
-        border-color: darken($color: $gray-line, $amount: 10);
-
-        span {
-          color: darken($color: $gray-line, $amount: 20);
-          font-weight: 500;
-          font-weight: 600;
-        }
-
-        &:hover {
-          background-color: darken($color: $gray-line, $amount: 90);
-          border-color: darken($color: $gray-line, $amount: 90);
-
-          span {
-            color: $gray-line;
-          }
-        }
+        width: 230px;
+        padding: 16px;
 
         svg {
           margin-right: 12px;
           path {
-            fill: transparent;
+            fill: $transparent;
             stroke-width: 2;
           }
         }
       }
 
-      .pay-btn {
-        font-size: 16px;
-        font-weight: 600;
-        width: 210px;
+      .payBtn {
+        width: 230px;
         padding: 16px;
       }
     }
