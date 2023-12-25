@@ -23,7 +23,7 @@
 
   &Selector {
     display: flex;
-    background-color: #f3f3f3;
+    background-color: $gray-line;
     border-radius: 10px;
     flex-direction: column;
     padding: 6px;
@@ -44,8 +44,8 @@
         font-size: 14px;
         @include noselect();
         &.active {
-          background: #ffffff;
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+          background: $white;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
           border-radius: 5px;
           cursor: auto;
         }
@@ -80,7 +80,7 @@
     display: inline-block;
     border-radius: 30px;
     background-color: $orange;
-    color: #fff;
+    color: $white;
     font-weight: 600;
     width: 22px;
     height: 22px;
@@ -99,7 +99,7 @@
   }
 
   &:hover .addIcon {
-    fill: white;
+    fill: $white;
     transition: 0.05s;
   }
 }

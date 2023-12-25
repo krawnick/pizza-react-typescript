@@ -1,3 +1,4 @@
+@import "../../scss/variables";
 .pagination {
   display: flex;
   margin: 15px;
@@ -7,16 +8,16 @@
     justify-content: center;
     padding: 10px;
     min-width: 44px;
-    color: #fe5f1e;
-    border: solid 1px #fe5f1e;
+    color: $orange;
+    border: solid 1px $orange;
     border-radius: 30px;
     transition: 0.3s;
   }
 
   a:hover {
-    color: white;
+    color: $white;
 
-    background-color: #fe5f1e;
+    background-color: $orange;
     transition: 0.3s;
     cursor: pointer;
   }
@@ -24,8 +25,8 @@
   :global {
     .selected {
       a {
-        background-color: #fe5f1e;
-        color: white;
+        background-color: $orange;
+        color: $white;
       }
     }
   }

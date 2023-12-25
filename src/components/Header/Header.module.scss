@@ -19,7 +19,7 @@
     }
 
     h1 {
-      color: #181818;
+      color: $black;
       font-size: 24px;
       letter-spacing: 1%;
       text-transform: uppercase;
@@ -27,7 +27,7 @@
     }
 
     p {
-      color: #7b7b7b;
+      color: lighten($black, 50%);
 
       @media (max-width: 645px) {
         display: none;
@@ -54,13 +54,13 @@
         width: 18px;
         height: 18px;
         fill: none;
-        stroke: white;
+        stroke: $white;
       }
     }
     &Delimiter {
       width: 1px;
       height: 25px;
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: $white;
       margin-left: 14px;
       margin-right: 14px;
     }

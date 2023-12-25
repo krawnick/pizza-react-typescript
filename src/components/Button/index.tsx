@@ -2,7 +2,6 @@ import cn from 'classnames'
 import styles from './Button.module.scss'
 
 export const Button = ({ children, className, theme, ...props }) => {
-  console.log(theme)
   return (
     <button
       className={cn(styles.button, className, {
