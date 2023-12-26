@@ -36,7 +36,7 @@ export const Home = () => {
       .then((res) => res.json())
       .then((json) => {
         setPizzas(json)
-        setIsLoading(!false)
+        setIsLoading(false)
       })
 
     window.scrollTo(0, 0)

@@ -9,22 +9,3 @@ $transparent: transparent;
 $container-width: 90%;
 
 $duration: 0.15s;
-
-// :export {
-//   gray: $gray;
-// }
-// $themeColor: (
-//   black: $black,
-//   gray: $gray
-// );
-
-// :export {
-//   @each $color, $value in $themeColor {
-//     #{uniquote($color)}: $value;
-//   }
-// }
-// @each $color, $value in $themeColor {
-//   :export {
-//     $color: $value;
-//   }
-// }

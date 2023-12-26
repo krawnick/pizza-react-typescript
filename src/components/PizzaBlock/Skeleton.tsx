@@ -1,11 +1,7 @@
 import ContentLoader from 'react-content-loader'
-// import styles from './Skeleton.module.scss'
-// import { gray } from '../../scss/_variables.scss?$gray'
-import gray from '../../scss/_variables.scss?:export'
-// import '../../scss/_variables.scss?gray'
+import styles from './Skeleton.module.scss'
 
 export const Skeleton = ({ props }) => {
-  console.log(gray)
   return (
     <ContentLoader
       // className={styles.pizzaBlockSkeleton}
