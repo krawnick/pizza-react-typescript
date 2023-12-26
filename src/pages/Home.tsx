@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Categories } from '../components/Categories/'
-import { Pagination } from '../components/Pagination/'
-import { PizzaBlock } from '../components/PizzaBlock/'
-import { Skeleton } from '../components/PizzaBlock/Skeleton'
-import { Sort } from '../components/Sort/'
+import { Categories } from '../components/Categories/index.js'
+import { Pagination } from '../components/Pagination/index.js'
+import { PizzaBlock } from '../components/PizzaBlock/index.js'
+import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
+import { Sort } from '../components/Sort/index.js'
 import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
 
@@ -20,6 +20,31 @@ export const Home = () => {
   const skeletons = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
   ))
+
+  // const pizzasLoad = pizzas.length ? (
+  //   pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>)
+  // ) : (
+  //   <div>Нету</div>
+  // )
+
+  const pizzasLoad = pizzas.length ? (
+    pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>)
+  ) : (
+    <div class="content__empty">
+      Ничего не найдено <br />
+      😢
+    </div>
+  )
+
+  //   <div className="content__items">
+  //   {isLoading ? (
+  //     skeletons
+  //   ) : pizzas.length ? (
+  //     pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
+  //   ) : (
+
+  //   )}
+  // </div>
 
   useEffect(() => {
     setIsLoading(true)
@@ -42,6 +67,7 @@ export const Home = () => {
     window.scrollTo(0, 0)
   }, [setPizzas, categoryState, sortState, searchValue, currentPage])
 
+  console.log(pizzas)
   return (
     <div className="container">
       <div className="content__top">
@@ -49,18 +75,7 @@ export const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoading ? (
-          skeletons
-        ) : pizzas.length ? (
-          pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
-        ) : (
-          <div class="content__empty">
-            Ничего не найдено <br />
-            😢
-          </div>
-        )}
-      </div>
+      <div className="content__items">{isLoading ? skeletons : pizzasLoad}</div>
       <Pagination
         className="paginationHome"
         onChangePage={(number) => setCurrentPage(number)}

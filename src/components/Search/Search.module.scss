@@ -1,3 +1,6 @@
+@import "../../scss/variables";
+@import "../../scss/libs/normalize";
+
 .root {
   position: relative;
   margin: 0 10px;
@@ -7,14 +10,14 @@
   padding: 13px;
   padding-right: 40px;
   width: 100%;
-  border: 1px solid lightgrey;
+  border: 1px solid $gray;
   border-radius: 25px;
   font-size: 16px;
   color: black;
   transition: 0.2s;
 
   &:focus {
-    border: 1px solid grey;
+    border: 1px solid darken($gray, 25%);
   }
 }
 
@@ -24,7 +27,7 @@
   top: 12px;
   width: 30px;
   height: 28px;
-  fill: gray;
+  fill: $gray;
 }
 
 .close {
@@ -33,10 +36,10 @@
   top: 11px;
   width: 30px;
   height: 30px;
-  fill: lightgray;
+  fill: $gray;
   cursor: pointer;
   &:hover {
-    fill: #fe5f1e;
+    fill: $orange;
   }
 }
 
