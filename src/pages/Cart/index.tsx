@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Cart.module.scss'
+import stylesPizzaBlock from '../../components/PizzaBlock/PizzaBlock.module.scss'
 import BackIcon from './icons/backIcon.svg?react'
 import CartIcon from '../../components/Header/cartIcon.svg?react'
-import CartClear from './icons/cartClear.svg?react'
+import CartClearIcon from './icons/cartClearIcon.svg?react'
+import MinusIcon from './icons/minusIcon.svg?react'
 import { Button } from '../../components/Button'
 
 export const Cart = () => {
@@ -16,7 +18,7 @@ export const Cart = () => {
             Корзина
           </h2>
           <div className={styles.cartClear}>
-            <CartClear />
+            <CartClearIcon />
             <span>Очистить корзину</span>
           </div>
         </div>
@@ -25,7 +27,7 @@ export const Cart = () => {
           <div className={styles.cartItem}>
             <div className={styles.cartItemImg}>
               <img
-                className="pizza-block__image"
+                className={stylesPizzaBlock.pizzaBlockImage}
                 src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
                 alt="Pizza"
               />
@@ -35,7 +37,7 @@ export const Cart = () => {
               <p>тонкое тесто, 26 см.</p>
             </div>
             <div className={styles.cartItemCount}>
-              <div className="button button--outline button--circle cart__item-count-minus">
+              {/* <div className="button button--outline button--circle cart__item-count-minus">
                 <svg
                   width="10"
                   height="10"
@@ -52,7 +54,10 @@ export const Cart = () => {
                     fill="#EB5A1E"
                   />
                 </svg>
-              </div>
+              </div> */}
+              <Button theme="outline-orange">
+                <MinusIcon fill="black" />
+              </Button>
               <b>2</b>
               <div className="button button--outline button--circle cart__item-count-plus">
                 <svg
