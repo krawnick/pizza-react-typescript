@@ -21,30 +21,20 @@ export const Home = () => {
     <Skeleton key={index} />
   ))
 
-  // const pizzasLoad = pizzas.length ? (
-  //   pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>)
-  // ) : (
-  //   <div>Нету</div>
-  // )
-
-  const pizzasLoad = pizzas.length ? (
-    pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>)
-  ) : (
-    <div class="content__empty">
-      Ничего не найдено <br />
-      😢
-    </div>
-  )
-
-  //   <div className="content__items">
-  //   {isLoading ? (
-  //     skeletons
-  //   ) : pizzas.length ? (
-  //     pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
-  //   ) : (
-
-  //   )}
-  // </div>
+  const getPizzas = () => {
+    console.log(pizzas.length)
+    if (typeof pizzas === 'object') {
+      return pizzas.map((pizza) => (
+        <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>
+      ))
+    }
+    return (
+      <div className="content__empty">
+        Ничего не найдено <br />
+        😢
+      </div>
+    )
+  }
 
   useEffect(() => {
     setIsLoading(true)
@@ -56,7 +46,7 @@ export const Home = () => {
     const page = `&page=${currentPage}`
 
     fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${category}${sortBy}${order}${search}`
+      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -67,7 +57,6 @@ export const Home = () => {
     window.scrollTo(0, 0)
   }, [setPizzas, categoryState, sortState, searchValue, currentPage])
 
-  console.log(pizzas)
   return (
     <div className="container">
       <div className="content__top">
@@ -75,7 +64,9 @@ export const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skeletons : pizzasLoad}</div>
+      <div className="content__items">
+        {isLoading ? skeletons : getPizzas()}
+      </div>
       <Pagination
         className="paginationHome"
         onChangePage={(number) => setCurrentPage(number)}
