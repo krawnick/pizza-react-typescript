@@ -12,6 +12,9 @@
     background-color $duration ease-in-out,
     border-color $duration ease-in-out;
   border: 1px solid transparent;
+  &:active {
+    transform: translateY(1px);
+  }
   @include noselect();
 
   i,
@@ -89,5 +92,38 @@
   &:active {
     background-color: lighten($black, 10%);
     transform: translateY(1px);
+  }
+}
+
+.buttonOutlineAction {
+  padding: 0;
+  min-width: 40px;
+  height: 40px;
+  background-color: $transparent;
+  border: 3px solid $transparent;
+
+  svg {
+    position: relative;
+    top: 1px;
+  }
+  &Gray {
+    border-color: $gray;
+    &:hover {
+      background-color: $black;
+      border-color: $transparent;
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  &Orange {
+    border-color: $orange;
+    &:hover {
+      background-color: $orange;
+      svg {
+        fill: $white;
+      }
+    }
   }
 }
