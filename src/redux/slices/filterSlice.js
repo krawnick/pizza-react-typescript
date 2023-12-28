@@ -8,7 +8,7 @@ const initialState = {
   },
 }
 
-export const filterSlice = createSlice({
+const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {

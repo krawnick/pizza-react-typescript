@@ -7,14 +7,37 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
 import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 export const Home = () => {
   const { categoryState, sortState } = useSelector((state) => state.filter)
-
+  const { searchState } = useSelector((state) => state.search)
+  console.log(searchState)
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const { searchValue } = useContext(SearchContext)
+  // const { searchValue } = useContext(SearchContext)
+
+  useEffect(() => {
+    setIsLoading(true)
+
+    const category = categoryState > 0 ? `&category=${categoryState}` : ''
+    const sortBy = `&sortBy=${sortState.sortProperty}`
+    const order = sortState.desc ? '&order=desc' : ''
+    const search = searchState ? `&search=${searchState}` : ''
+    const page = `&page=${currentPage}`
+
+    axios
+      .get(
+        `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
+      )
+      .then((res) => {
+        setPizzas(res.data)
+        setIsLoading(false)
+      })
+
+    window.scrollTo(0, 0)
+  }, [setPizzas, categoryState, sortState, searchState, currentPage])
 
   const skeletons = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
@@ -34,27 +57,7 @@ export const Home = () => {
     )
   }
 
-  useEffect(() => {
-    setIsLoading(true)
-
-    const category = categoryState > 0 ? `&category=${categoryState}` : ''
-    const sortBy = `&sortBy=${sortState.sortProperty}`
-    const order = sortState.desc ? '&order=desc' : ''
-    const search = searchValue ? `&search=${searchValue}` : ''
-    const page = `&page=${currentPage}`
-
-    fetch(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setPizzas(json)
-        setIsLoading(false)
-      })
-
-    window.scrollTo(0, 0)
-  }, [setPizzas, categoryState, sortState, searchValue, currentPage])
-
+  console.log(pizzas)
   return (
     <div className="container">
       <div className="content__top">
