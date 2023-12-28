@@ -5,7 +5,10 @@ import { useRef } from 'react'
 import Cross from './icons/cross.svg?react'
 import SearchIcon from './icons/search.svg?react'
 import debounce from 'lodash.debounce'
-import { setValueSearch } from '../../redux/slices/searchSlice'
+import {
+  setValueSearch,
+  clearValueSearch,
+} from '../../redux/slices/searchSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const test = debounce(() => {
@@ -17,10 +20,9 @@ export const Search = ({ className }) => {
   const dispatch = useDispatch()
   const searchState = useSelector((state) => {
     state.search
-    console.log(state)
   })
 
-  console.log(searchState)
+  console.log('Search', searchState)
 
   const inputRef = useRef(null)
 
@@ -32,8 +34,7 @@ export const Search = ({ className }) => {
     <div className={cn(className, styles.root)}>
       <Cross
         onClick={() => {
-          onClearInput()
-          test()
+          dispatch(() => clearValueSearch())
         }}
         className={cn(
           styles.close,

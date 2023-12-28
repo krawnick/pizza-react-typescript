@@ -12,7 +12,7 @@ import axios from 'axios'
 export const Home = () => {
   const { categoryState, sortState } = useSelector((state) => state.filter)
   const { searchState } = useSelector((state) => state.search)
-  console.log(searchState)
+
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
@@ -27,6 +27,7 @@ export const Home = () => {
     const search = searchState ? `&search=${searchState}` : ''
     const page = `&page=${currentPage}`
 
+    console.log('useEffect', search)
     axios
       .get(
         `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
