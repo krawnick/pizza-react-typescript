@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSort } from '../../redux/slices/filterSlice'
+import { setSort } from '../../redux/slices/filterSlice.js'
 import styles from './Sort.module.scss'
+
+const sortList = [
+  { name: 'популярности (обратно)', sortProperty: 'rating', desc: true },
+  { name: 'популярности', sortProperty: 'rating' },
+  { name: 'цене (обратно)', sortProperty: 'price', desc: true },
+  { name: 'цене', sortProperty: 'price' },
+  { name: 'алфавиту (обратно)', sortProperty: 'name', desc: true },
+  { name: 'алфавиту', sortProperty: 'name' },
+]
 
 export const Sort = () => {
   const dispatch = useDispatch()
-  const sortState = useSelector((state) => state.filter.sort)
+  const sortState = useSelector((state) => state.filter.sortState)
   const [openSort, setOpenSort] = useState(false)
-
-  const sortList = [
-    { name: 'популярности (обратно)', sortProperty: 'rating', desc: true },
-    { name: 'популярности', sortProperty: 'rating' },
-    { name: 'цене (обратно)', sortProperty: 'price', desc: true },
-    { name: 'цене', sortProperty: 'price' },
-    { name: 'алфавиту (обратно)', sortProperty: 'name', desc: true },
-    { name: 'алфавиту', sortProperty: 'name' },
-  ]
 
   return (
     <div className={styles.sort}>

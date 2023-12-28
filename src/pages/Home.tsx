@@ -9,8 +9,7 @@ import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
 
 export const Home = () => {
-  const sortState = useSelector((state) => state.filter.sort)
-  const categoryState = useSelector((state) => state.filter.categoryId)
+  const { categoryState, sortState } = useSelector((state) => state.filter)
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -22,7 +21,6 @@ export const Home = () => {
   ))
 
   const getPizzas = () => {
-    console.log(pizzas.length)
     if (typeof pizzas === 'object') {
       return pizzas.map((pizza) => (
         <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>

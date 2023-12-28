@@ -6,7 +6,6 @@ export const Button = ({ children, className, theme, ...props }) => {
     <button
       className={cn(styles.button, className, {
         [styles.buttonOrange]: theme === 'orange',
-        [styles.buttonBlack]: theme === 'black',
 
         [styles.buttonOutlineOrange]: theme === 'outline-orange',
         [styles.buttonOutlineGray]: theme === 'outline-gray',

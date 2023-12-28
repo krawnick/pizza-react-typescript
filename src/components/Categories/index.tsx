@@ -7,7 +7,7 @@ import styles from './Categories.module.scss'
 export const Categories = ({ className }) => {
   const dispatch = useDispatch()
 
-  const categoryState = useSelector((state) => state.filter.categoryId)
+  const categoryState = useSelector((state) => state.filter.categoryState)
   const categories = [
     'Все',
     'Мясные',
