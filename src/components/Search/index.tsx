@@ -17,25 +17,21 @@ const test = debounce(() => {
 
 export const Search = ({ className }) => {
   // const { searchValue, setSearchValue } = useContext(SearchContext)
-  const dispatch = useDispatch()
-  const searchState = useSelector((state) => {
-    state.search
-  })
 
-  console.log('Search', searchState)
+  const dispatch = useDispatch()
+  const searchState = useSelector((state) => state.search.searchState)
 
   const inputRef = useRef(null)
 
   const onClearInput = () => {
+    dispatch(clearValueSearch())
     inputRef.current.focus()
     // setSearchValue('')
   }
   return (
     <div className={cn(className, styles.root)}>
       <Cross
-        onClick={() => {
-          dispatch(() => clearValueSearch())
-        }}
+        onClick={() => onClearInput()}
         className={cn(
           styles.close,
           searchState ? styles.active : styles.disable

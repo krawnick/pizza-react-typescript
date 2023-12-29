@@ -5,7 +5,7 @@ import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.js'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
-import { SearchContext } from '../App.js'
+// import { SearchContext } from '../App.js'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
@@ -27,7 +27,6 @@ export const Home = () => {
     const search = searchState ? `&search=${searchState}` : ''
     const page = `&page=${currentPage}`
 
-    console.log('useEffect', search)
     axios
       .get(
         `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
@@ -58,7 +57,6 @@ export const Home = () => {
     )
   }
 
-  console.log(pizzas)
   return (
     <div className="container">
       <div className="content__top">
