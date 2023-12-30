@@ -18,7 +18,7 @@ export const Search = ({ className }) => {
   const searchState = useSelector((state) => state.search.searchState)
 
   const inputRef = useRef(null)
-  const [value, setValue] = useState('')
+  const [localValueSearch, setLocalValueSearch] = useState('')
 
   const debounceSearch = useCallback(
     debounce((value) => {
@@ -28,14 +28,14 @@ export const Search = ({ className }) => {
   )
 
   const onClearInput = () => {
-    setValue('')
+    setLocalValueSearch('')
     dispatch(clearValueSearch())
     inputRef.current.focus()
     // setSearchValue('')
   }
 
   const onChangeInput = (value) => {
-    setValue(value)
+    setLocalValueSearch(value)
     debounceSearch(value)
   }
 
@@ -43,15 +43,21 @@ export const Search = ({ className }) => {
     <div className={cn(className, styles.root)}>
       <Cross
         onClick={() => onClearInput()}
-        className={cn(styles.close, value ? styles.active : styles.disable)}
+        className={cn(
+          styles.close,
+          localValueSearch ? styles.active : styles.disable
+        )}
       />
       <SearchIcon
-        className={cn(styles.icon, !value ? styles.active : styles.disable)}
+        className={cn(
+          styles.icon,
+          !localValueSearch ? styles.active : styles.disable
+        )}
       />
       <input
         ref={inputRef}
         // value={searchState}
-        value={value}
+        value={localValueSearch}
         onChange={(event) => {
           onChangeInput(event.target.value)
         }}

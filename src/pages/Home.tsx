@@ -6,16 +6,22 @@ import { PizzaBlock } from '../components/PizzaBlock/index.js'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
 // import { SearchContext } from '../App.js'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPage } from '../redux/slices/paginationSlice'
 import axios from 'axios'
 
 export const Home = () => {
+  const dispatch = useDispatch()
+
+  const paginationState = useSelector(
+    (state) => state.pagination.paginationState
+  )
+
   const { categoryState, sortState } = useSelector((state) => state.filter)
   const { searchState } = useSelector((state) => state.search)
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
   // const { searchValue } = useContext(SearchContext)
 
   useEffect(() => {
@@ -25,7 +31,7 @@ export const Home = () => {
     const sortBy = `&sortBy=${sortState.sortProperty}`
     const order = sortState.desc ? '&order=desc' : ''
     const search = searchState ? `&search=${searchState}` : ''
-    const page = `&page=${currentPage}`
+    const page = `&page=${paginationState}`
 
     axios
       .get(
@@ -37,7 +43,7 @@ export const Home = () => {
       })
 
     window.scrollTo(0, 0)
-  }, [setPizzas, categoryState, sortState, searchState, currentPage])
+  }, [setPizzas, categoryState, sortState, searchState, paginationState])
 
   const skeletons = [...new Array(4)].map((_, index) => (
     <Skeleton key={index} />
@@ -69,7 +75,7 @@ export const Home = () => {
       </div>
       <Pagination
         className="paginationHome"
-        onChangePage={(number) => setCurrentPage(number)}
+        onChangePage={(number) => dispatch(setPage(number))}
       />
     </div>
   )
