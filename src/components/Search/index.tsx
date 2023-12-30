@@ -1,6 +1,6 @@
 import styles from './Search.module.scss'
 import cn from 'classnames'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 // import { SearchContext } from '../../App'
 import Cross from './icons/cross.svg?react'
 import SearchIcon from './icons/search.svg?react'
@@ -8,14 +8,14 @@ import debounce from 'lodash.debounce'
 import {
   setValueSearch,
   clearValueSearch,
-} from '../../redux/slices/searchSlice'
+} from '../../redux/slices/filterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const Search = ({ className }) => {
   // const { searchValue, setSearchValue } = useContext(SearchContext)
 
   const dispatch = useDispatch()
-  const searchState = useSelector((state) => state.search.searchState)
+  const searchState = useSelector((state) => state.filter.searchState)
 
   const inputRef = useRef(null)
   const [localValueSearch, setLocalValueSearch] = useState('')

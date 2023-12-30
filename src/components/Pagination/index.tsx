@@ -4,9 +4,7 @@ import cn from 'classnames'
 import { useSelector } from 'react-redux'
 
 export const Pagination = ({ className, onChangePage }) => {
-  const paginationState = useSelector(
-    (state) => state.pagination.paginationState
-  )
+  const { paginationState } = useSelector((state) => state.filter)
 
   console.log('state', paginationState)
 

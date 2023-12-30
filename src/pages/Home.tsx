@@ -7,18 +7,15 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
 // import { SearchContext } from '../App.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPage } from '../redux/slices/paginationSlice'
+import { setPage } from '../redux/slices/filterSlice'
 import axios from 'axios'
 
 export const Home = () => {
   const dispatch = useDispatch()
 
-  const paginationState = useSelector(
-    (state) => state.pagination.paginationState
-  )
-
+  const { paginationState } = useSelector((state) => state.filter)
   const { categoryState, sortState } = useSelector((state) => state.filter)
-  const { searchState } = useSelector((state) => state.search)
+  const { searchState } = useSelector((state) => state.filter)
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
