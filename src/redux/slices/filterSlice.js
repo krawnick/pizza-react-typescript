@@ -14,8 +14,9 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    clearValueSearch: (state) =>
-      // (state.filter.searchState = initialState.searchState),
+    clearValueSearch: (state) => {
+      state.searchState = initialState.searchState
+    },
     setSort: (state, { payload }) => {
       state.sortState = payload
     },
@@ -23,10 +24,11 @@ const filterSlice = createSlice({
       state.categoryState = payload
     },
     setValueSearch: (state, { payload }) => {
+      state.categoryState = initialState.categoryState
+      state.paginationState = initialState.paginationState
       state.searchState = payload
     },
     setPage: (state, { payload }) => {
-      console.log('setPage', payload)
       state.paginationState = payload
     },
   },
