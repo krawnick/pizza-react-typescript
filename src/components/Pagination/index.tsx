@@ -11,7 +11,6 @@ export const Pagination = ({ className, onChangePage, onPageActive }) => {
       className={cn(styles.pagination, className)}
       breakLabel="..."
       forcePage={paginationState - 1}
-      initialPage={paginationState - 1}
       nextLabel="Следующая >"
       onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={4}
