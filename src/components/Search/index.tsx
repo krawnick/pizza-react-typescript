@@ -15,7 +15,6 @@ export const Search = ({ className }) => {
   // const { searchValue, setSearchValue } = useContext(SearchContext)
 
   const dispatch = useDispatch()
-  const searchState = useSelector((state) => state.filter.searchState)
 
   const inputRef = useRef(null)
   const [localValueSearch, setLocalValueSearch] = useState('')

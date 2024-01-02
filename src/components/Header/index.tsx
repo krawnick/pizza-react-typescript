@@ -1,11 +1,16 @@
 import { Button } from '../Button'
-import CartIcon from './cartIcon.svg?react'
 import { Link } from 'react-router-dom'
 import { Search } from '../Search'
+import { useSelector } from 'react-redux'
+import CartIcon from './cartIcon.svg?react'
 import logoSvg from '../../assets/pizza-logo.svg'
 import styles from './Header.module.scss'
 
 export const Header = () => {
+  const { totalPriceState, quantityItemsState } = useSelector(
+    (state) => state.cart
+  )
+
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -22,10 +27,10 @@ export const Header = () => {
         <div className={styles.headerCart}>
           <Link to="/cart">
             <Button theme="orange" className={styles.buttonCart}>
-              <span>520&nbsp;₽</span>
+              <span>{totalPriceState}&nbsp;₽</span>
               <div className={styles.buttonDelimiter}></div>
               <CartIcon />
-              <span>3</span>
+              <span>{quantityItemsState}</span>
             </Button>
           </Link>
         </div>
