@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSort } from '../../redux/slices/filterSlice.js'
 import styles from './Sort.module.scss'
+import { useOutsideClick } from '../../hooks/useOutsideClick'
 
 const sortList = [
   { name: 'популярности (обратно)', sortProperty: 'rating', desc: true },
@@ -14,26 +15,12 @@ const sortList = [
 
 export const Sort = () => {
   const dispatch = useDispatch()
-  const sortState = useSelector((state) => state.filter.sortState)
+  const { sortState } = useSelector((state) => state.filter)
 
   const [openSort, setOpenSort] = useState(false)
-  const sortRef = useRef()
+  const sortRef = useRef(null)
 
-  useEffect(() => {
-    const handleclickOutside = (event) => {
-      const clickElement = event.composedPath()
-
-      if (!clickElement.includes(sortRef.current)) {
-        setOpenSort(false)
-      }
-    }
-
-    document.body.addEventListener('click', handleclickOutside)
-
-    return () => {
-      document.body.removeEventListener('click', handleclickOutside)
-    }
-  }, [])
+  useOutsideClick(sortRef, setOpenSort, openSort)
 
   return (
     <div ref={sortRef} className={styles.sort} onClick={() => ''}>
