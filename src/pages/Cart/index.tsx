@@ -6,7 +6,7 @@ import BackIcon from './icons/backIcon.svg?react'
 import CartIcon from '../../components/Header/cartIcon.svg?react'
 import CartClearIcon from './icons/cartClearIcon.svg?react'
 import MinusIcon from './icons/minusIcon.svg?react'
-import PlusIcon from './icons/PlusIcon.svg?react'
+import PlusIcon from './icons/plusIcon.svg?react'
 import { Button } from '../../components/Button'
 
 export const Cart = () => {

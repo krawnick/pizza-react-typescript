@@ -46,7 +46,10 @@ export const Sort = () => {
             {sortList.map((sort, index) => (
               <li
                 key={sort.name}
-                onClick={() => dispatch(setSort(sort)) & setOpenSort(false)}
+                onClick={() => {
+                  dispatch(setSort(sort))
+                  setOpenSort(false)
+                }}
                 className={
                   sortList[index].name === sortState.name ? styles.active : ''
                 }
