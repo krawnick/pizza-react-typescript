@@ -1,16 +1,31 @@
 import { Button } from '../Button'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from './addIcon.svg?react'
-import cn from 'classnames'
 import styles from './PizzaBlock.module.scss'
+import { addItem } from '../../redux/slices/cartSlice'
 
-export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
+export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
+  const dispatch = useDispatch()
+
   const typeNames = ['тонкое', 'традиционное']
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
 
   const pizzaPriceSize = () => {
     return Math.floor((price / sizes[0]) * sizes[activeSize])
+  }
+
+  const addPizzaToCart = () => {
+    const item = {
+      id,
+      name,
+      price: pizzaPriceSize(),
+      imageUrl,
+      type: activeType,
+      size: activeSize,
+    }
+    dispatch(addItem(item))
   }
 
   return (
@@ -52,6 +67,7 @@ export const PizzaBlock = ({ price, imageUrl, name, sizes, types }) => {
         <Button
           className={(styles.buttonOutline, styles.buttonAdd)}
           theme="outline-orange"
+          onClick={addPizzaToCart}
         >
           <div>
             <AddIcon className={styles.addIcon} />

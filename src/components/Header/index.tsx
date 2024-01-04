@@ -7,9 +7,7 @@ import logoSvg from '../../assets/pizza-logo.svg'
 import styles from './Header.module.scss'
 
 export const Header = () => {
-  const { totalPriceState, quantityItemsState } = useSelector(
-    (state) => state.cart
-  )
+  const { totalPriceState, itemsState } = useSelector((state) => state.cart)
 
   return (
     <div className={styles.header}>
@@ -30,7 +28,7 @@ export const Header = () => {
               <span>{totalPriceState}&nbsp;₽</span>
               <div className={styles.buttonDelimiter}></div>
               <CartIcon />
-              <span>{quantityItemsState}</span>
+              <span>{itemsState.length}</span>
             </Button>
           </Link>
         </div>
