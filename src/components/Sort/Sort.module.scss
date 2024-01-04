@@ -2,7 +2,7 @@
 
 .sort {
   position: relative;
-  .sortLabel {
+  &Label {
     display: flex;
     align-items: center;
 
@@ -21,7 +21,17 @@
     }
   }
 
-  .sortPopup {
+  &Icon {
+    fill: $black;
+    transition: $duration;
+    &Active {
+      fill: $orange;
+      rotate: 180deg;
+      transition: $duration;
+    }
+  }
+
+  &Popup {
     position: absolute;
     overflow: hidden;
     right: 0;
