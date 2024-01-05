@@ -8,6 +8,18 @@ import { addItem } from '../../redux/slices/cartSlice'
 export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
   const dispatch = useDispatch()
 
+  const cartItemId = useSelector((state) =>
+    state.cart.itemsState.find((obj) => obj.id === id)
+  )
+  const addedItem = cartItemId ? cartItemId.count : 0
+
+  // const count = itemsState.reduce((count, item) => {
+  //   if (item.id === id) {
+  //     return count + item.count
+  //   }
+  //   return 0
+  // }, 0)
+
   const typeNames = ['тонкое', 'традиционное']
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
@@ -25,9 +37,10 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
       type: typeNames[activeType],
       size: sizes[activeSize],
     }
-    console.log(item.type, item.size)
     dispatch(addItem(item))
   }
+
+  // console.log(count)
 
   return (
     <div className={styles.pizzaBlock}>
@@ -73,7 +86,8 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
           <div>
             <AddIcon className={styles.addIcon} />
             <span>Добавить</span>
-            <i>1</i>
+            <i>{addedItem}</i>
+            {/* {count > 0 && <i>{count}</i>} */}
           </div>
         </Button>
       </div>
