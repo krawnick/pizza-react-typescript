@@ -13,15 +13,8 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
   )
   const addedItem = cartItemId ? cartItemId.count : 0
 
-  // const count = itemsState.reduce((count, item) => {
-  //   if (item.id === id) {
-  //     return count + item.count
-  //   }
-  //   return 0
-  // }, 0)
-
   const typeNames = ['тонкое', 'традиционное']
-  const [activeType, setActiveType] = useState(0)
+  const [activeType, setActiveType] = useState(types[0])
   const [activeSize, setActiveSize] = useState(0)
 
   const pizzaPriceSize = () => {
@@ -40,8 +33,6 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
     dispatch(addItem(item))
   }
 
-  // console.log(count)
-
   return (
     <div className={styles.pizzaBlock}>
       <img className={styles.pizzaBlockImage} src={imageUrl} alt="Pizza" />
@@ -52,13 +43,7 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
             <li
               key={type}
               onClick={() => setActiveType(type)}
-              className={
-                types.length > 1
-                  ? activeType === type
-                    ? styles.active
-                    : ''
-                  : styles.active
-              }
+              className={activeType === type ? styles.active : ''}
             >
               {typeNames[type]}
             </li>

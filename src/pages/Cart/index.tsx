@@ -6,9 +6,11 @@ import CartIcon from '../../components/Header/cartIcon.svg?react'
 import CartClearIcon from './icons/cartClearIcon.svg?react'
 import { Button } from '../../components/Button'
 import { CartItem } from '../../components/CartItem'
-import { useSelector } from 'react-redux'
+import { cleartItems } from '../../redux/slices/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const Cart = () => {
+  const dispatch = useDispatch()
   const { itemsState } = useSelector((state) => state.cart)
 
   return (
@@ -19,7 +21,10 @@ export const Cart = () => {
             <CartIcon />
             Корзина
           </h2>
-          <div className={styles.cartClear}>
+          <div
+            className={styles.cartClear}
+            onClick={() => dispatch(cleartItems())}
+          >
             <CartClearIcon />
             <span>Очистить корзину</span>
           </div>
