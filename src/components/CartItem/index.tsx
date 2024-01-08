@@ -1,29 +1,24 @@
 import { useDispatch } from 'react-redux'
 import { Button } from '../Button'
-import { addItem, removeItem } from '../../redux/slices/cartSlice'
+import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
 import styles from './CartItem.module.scss'
 import MinusIcon from './icons/minusIcon.svg?react'
 import PlusIcon from './icons/plusIcon.svg?react'
 
 export const CartItem = ({ id, count, name, size, price, type, imageUrl }) => {
   const dispatch = useDispatch()
+  const item = { id, size, type }
 
   const onClickPlus = () => {
-    dispatch(
-      addItem({
-        id,
-        size,
-        type,
-      })
-    )
+    dispatch(addItem(item))
   }
 
   const onClickMinus = () => {
-    dispatch()
+    dispatch(minusItem(item))
   }
 
   const onClickRemove = () => {
-    dispatch(removeItem({ id }))
+    dispatch(removeItem(item))
   }
 
   return (
@@ -34,7 +29,11 @@ export const CartItem = ({ id, count, name, size, price, type, imageUrl }) => {
         <span className={styles.cartItemInfo}>{`${size} см, ${type}`}</span>
       </div>
       <div className={styles.cartItemCount}>
-        <Button className={styles.cartItemMinus} theme="outline-action-gray">
+        <Button
+          onClick={onClickMinus}
+          className={styles.cartItemMinus}
+          theme="outline-action-gray"
+        >
           <MinusIcon />
         </Button>
         <span className={styles.cartItemQuantity}>{count}</span>

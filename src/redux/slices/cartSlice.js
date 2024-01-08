@@ -6,21 +6,25 @@ const initialState = {
   itemsState: [],
 }
 
+const findItem = (state, payload) => {
+  return state.itemsState.find((obj) => {
+    return (
+      obj.id === payload.id &&
+      obj.size === payload.size &&
+      obj.type === payload.type
+    )
+  })
+}
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addItem: (state, { payload }) => {
-      const findItem = state.itemsState.find((obj) => {
-        return (
-          obj.id === payload.id &&
-          obj.size === payload.size &&
-          obj.type === payload.type
-        )
-      })
+      const foundItem = findItem(state, payload)
 
-      if (findItem) {
-        findItem.count++
+      if (foundItem) {
+        foundItem.count++
       } else {
         state.itemsState.push({
           ...payload,
@@ -37,9 +41,17 @@ const cartSlice = createSlice({
         0
       )
     },
+
+    minusItem: (state, { payload }) => {
+      const foundItem = findItem(state, payload)
+
+      if (foundItem && foundItem.count > 1) {
+        foundItem.count--
+      }
+    },
     removeItem: (state, { payload }) => {
       state.itemsState = state.itemsState.filter((obj) => {
-        return (
+        return !(
           obj.id === payload.id &&
           obj.size === payload.size &&
           obj.type === payload.type
@@ -50,5 +62,5 @@ const cartSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem, cleartItems } = cartSlice.actions
+export const { addItem, minusItem, removeItem, cleartItems } = cartSlice.actions
 export const cartReducer = cartSlice.reducer
