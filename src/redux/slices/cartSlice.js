@@ -32,10 +32,19 @@ const cartSlice = createSlice({
         (sum, item) => sum + item.count,
         0
       )
-      state.totalPriceState = state.totalPriceState + payload.price
+      state.totalPriceState = state.itemsState.reduce(
+        (sum, item) => sum + item.price * item.count,
+        0
+      )
     },
     removeItem: (state, { payload }) => {
-      state.itemsState.filter((obj) => obj.id !== payload)
+      state.itemsState = state.itemsState.filter((obj) => {
+        return (
+          obj.id === payload.id &&
+          obj.size === payload.size &&
+          obj.type === payload.type
+        )
+      })
     },
     cleartItems: () => initialState,
   },

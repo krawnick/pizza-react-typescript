@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const Cart = () => {
   const dispatch = useDispatch()
-  const { itemsState } = useSelector((state) => state.cart)
+  const { itemsState, totalCountState, totalPriceState } = useSelector(
+    (state) => state.cart
+  )
 
   return (
     <div className={cn(styles.container, styles.containerCart)}>
@@ -39,11 +41,11 @@ export const Cart = () => {
           <div className={styles.cartBottomDetails}>
             <span>
               {' '}
-              Всего пицц: <b>3 шт.</b>{' '}
+              Всего пицц: <b>{totalCountState} шт.</b>{' '}
             </span>
             <span>
               {' '}
-              Сумма заказа: <b>900 ₽</b>{' '}
+              Сумма заказа: <b>{totalPriceState} ₽</b>{' '}
             </span>
           </div>
           <div className={styles.cartBottomButtons}>

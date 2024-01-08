@@ -1,15 +1,30 @@
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Button } from '../Button'
+import { addItem, removeItem } from '../../redux/slices/cartSlice'
 import styles from './CartItem.module.scss'
 import MinusIcon from './icons/minusIcon.svg?react'
 import PlusIcon from './icons/plusIcon.svg?react'
 
-export const CartItem = ({ id, name, size, price, type, imageUrl }) => {
-  const { itemsState } = useSelector((state) => state.cart)
-  const findItem = itemsState.find(
-    (obj) => obj.id === id && obj.size === size && obj.type === type
-  )
-  const count = findItem.count
+export const CartItem = ({ id, count, name, size, price, type, imageUrl }) => {
+  const dispatch = useDispatch()
+
+  const onClickPlus = () => {
+    dispatch(
+      addItem({
+        id,
+        size,
+        type,
+      })
+    )
+  }
+
+  const onClickMinus = () => {
+    dispatch()
+  }
+
+  const onClickRemove = () => {
+    dispatch(removeItem({ id }))
+  }
 
   return (
     <div className={styles.cartItem}>
@@ -23,13 +38,21 @@ export const CartItem = ({ id, name, size, price, type, imageUrl }) => {
           <MinusIcon />
         </Button>
         <span className={styles.cartItemQuantity}>{count}</span>
-        <Button className={styles.cartItemPlus} theme="outline-action-orange">
+        <Button
+          onClick={onClickPlus}
+          className={styles.cartItemPlus}
+          theme="outline-action-orange"
+        >
           <PlusIcon />
         </Button>
       </div>
-      <span className={styles.cartItemPrice}>{price} ₽</span>
-      <Button theme="outline-action-gray">
-        <PlusIcon className={styles.cartItemRemove} />
+      <span className={styles.cartItemPrice}>{price * count} ₽</span>
+      <Button
+        onClick={onClickRemove}
+        className={styles.cartItemRemove}
+        theme="outline-action-gray"
+      >
+        <PlusIcon />
       </Button>
     </div>
   )

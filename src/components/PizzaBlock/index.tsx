@@ -8,13 +8,18 @@ import { addItem } from '../../redux/slices/cartSlice'
 export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
   const dispatch = useDispatch()
 
-  const cartItemId = useSelector((state) =>
-    state.cart.itemsState.find((obj) => obj.id === id)
-  )
-  const addedItem = cartItemId ? cartItemId.count : 0
+  const { itemsState } = useSelector((state) => state.cart)
+
+  const countId = itemsState.reduce((sum, item) => {
+    if (item.id === id) {
+      return sum + item.count
+    } else {
+      return sum
+    }
+  }, 0)
 
   const typeNames = ['тонкое', 'традиционное']
-  const [activeType, setActiveType] = useState(types[0])
+  const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
 
   const pizzaPriceSize = () => {
@@ -43,7 +48,13 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
             <li
               key={type}
               onClick={() => setActiveType(type)}
-              className={activeType === type ? styles.active : ''}
+              className={
+                types.length > 1
+                  ? activeType === type
+                    ? styles.active
+                    : ''
+                  : styles.active
+              }
             >
               {typeNames[type]}
             </li>
@@ -71,8 +82,7 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
           <div>
             <AddIcon className={styles.addIcon} />
             <span>Добавить</span>
-            <i>{addedItem}</i>
-            {/* {count > 0 && <i>{count}</i>} */}
+            {countId > 0 ? <i>{countId}</i> : false}
           </div>
         </Button>
       </div>
