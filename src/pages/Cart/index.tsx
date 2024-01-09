@@ -15,6 +15,12 @@ export const Cart = () => {
     (state) => state.cart
   )
 
+  const onCleartCart = () => {
+    if (itemsState.length > 0 && confirm('Вы хотите очистить корзину?')) {
+      dispatch(cleartItems())
+    }
+  }
+
   return (
     <div className={cn(styles.container, styles.containerCart)}>
       <div className={styles.cart}>
@@ -23,10 +29,7 @@ export const Cart = () => {
             <CartIcon />
             Корзина
           </h2>
-          <div
-            className={styles.cartClear}
-            onClick={() => dispatch(cleartItems())}
-          >
+          <div className={styles.cartClear} onClick={onCleartCart}>
             <CartClearIcon />
             <span>Очистить корзину</span>
           </div>

@@ -18,7 +18,12 @@ export const CartItem = ({ id, count, name, size, price, type, imageUrl }) => {
   }
 
   const onClickRemove = () => {
-    dispatch(removeItem(item))
+    if (
+      confirm(
+        `Вы дейсвительно хотите удалить пиццу:\n${name}, ${type}, ${size} см?`
+      )
+    )
+      dispatch(removeItem(item))
   }
 
   return (
