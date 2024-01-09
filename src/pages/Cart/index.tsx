@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Cart.module.scss'
 import BackIcon from './icons/backIcon.svg?react'
 import CartIcon from '../../components/Header/cartIcon.svg?react'
 import CartClearIcon from './icons/cartClearIcon.svg?react'
 import { Button } from '../../components/Button'
+import { CartEmpty } from '../../components/CartEmpty'
 import { CartItem } from '../../components/CartItem'
 import { cleartItems } from '../../redux/slices/cartSlice'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const Cart = () => {
@@ -16,9 +17,13 @@ export const Cart = () => {
   )
 
   const onCleartCart = () => {
-    if (itemsState.length > 0 && confirm('Вы хотите очистить корзину?')) {
+    if (confirm('Вы хотите очистить корзину?')) {
       dispatch(cleartItems())
     }
+  }
+
+  if (totalCountState === 0) {
+    return <CartEmpty />
   }
 
   return (

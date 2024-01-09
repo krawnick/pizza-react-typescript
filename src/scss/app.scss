@@ -1,7 +1,16 @@
 @import "./variables";
 @import "./libs/normalize";
+$black: #232323;
+$background: #ffdf8c;
+$gray-line: #f6f6f6;
+$gray: #b9b9b9;
+$orange: #fe5f1e;
+$white: #ffffff;
+$transparent: transparent;
 
-@import "./components/all";
+$container-width: 90%;
+
+$duration: 0.1s;
 
 body {
   background-color: $background;
@@ -89,13 +98,13 @@ body {
   width: $container-width;
   margin: 0 auto;
 
-  &--cart {
-    max-width: 820px;
-    margin: 90px auto;
-    .content__title {
-      margin: 0;
-    }
-  }
+  // &--cart {
+  //   max-width: 820px;
+  //   margin: 90px auto;
+  //   .content__title {
+  //     margin: 0;
+  //   }
+  // }
 
   .paginationHome {
     display: flex;
