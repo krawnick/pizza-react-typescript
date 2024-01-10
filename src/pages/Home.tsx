@@ -1,14 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
-
 import { Categories } from '../components/Categories/index.js'
 import { Pagination } from '../components/Pagination/index.js'
 import { PizzaBlock } from '../components/PizzaBlock/index.js'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
-// import { SearchContext } from '../App.js'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { setPage } from '../redux/slices/filterSlice'
-import axios from 'axios'
+import { fetchPizzas } from '../redux/slices/pizzasSlice'
 
 export const Home = () => {
   const dispatch = useDispatch()
@@ -19,25 +17,29 @@ export const Home = () => {
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  // const { searchValue } = useContext(SearchContext)
 
   useEffect(() => {
     setIsLoading(true)
 
-    const category = categoryState > 0 ? `&category=${categoryState}` : ''
-    const sortBy = `&sortBy=${sortState.sortProperty}`
-    const order = sortState.desc ? '&order=desc' : ''
-    const search = searchState ? `&search=${searchState}` : ''
-    const page = `&page=${paginationState}`
+    const getPizzasState = async () => {
+      const category = categoryState > 0 ? `&category=${categoryState}` : ''
+      const sortBy = `&sortBy=${sortState.sortProperty}`
+      const order = sortState.desc ? '&order=desc' : ''
+      const search = searchState ? `&search=${searchState}` : ''
+      const page = `&page=${paginationState}`
 
-    axios
-      .get(
-        `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
-      )
-      .then((res) => {
-        setPizzas(res.data)
+      try {
+        dispatch(fetchPizzas({ category, sortBy, order, search, page }))
         setIsLoading(false)
-      })
+      } catch (error) {
+        alert('Ошибка при получении пицц')
+        console.log('MESSAGE:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    getPizzasState()
 
     window.scrollTo(0, 0)
   }, [setPizzas, categoryState, sortState, searchState, paginationState])
