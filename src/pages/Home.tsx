@@ -4,12 +4,15 @@ import { PizzaBlock } from '../components/PizzaBlock/index.js'
 import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { setPage } from '../redux/slices/filterSlice'
 import { fetchPizzas } from '../redux/slices/pizzasSlice'
+import { useNavigate } from 'react-router-dom'
+import qs from 'qs'
 
 export const Home = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const pizzas = useSelector((state) => state.pizzas.items)
   const pizzasStatus = useSelector((state) => state.pizzas.status)
@@ -51,18 +54,28 @@ export const Home = () => {
   }
 
   useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1))
+      console.log('params', params)
+    }
+  }, [categoryState, sortState, searchState, paginationState])
+
+  useEffect(() => {
     getPizzasState()
     window.scrollTo(0, 0)
   }, [categoryState, sortState, searchState, paginationState])
 
-  // const showPizzas = () => {
-  //   if (typeof pizzas === 'object') {
+  useEffect(() => {
+    const queryString = qs.stringify({
+      pagination: paginationState,
+      search: searchState,
+      category: categoryState,
+      sortBy: sortState.sortProperty,
+      order: sortState.desc ? 'desc' : '',
+    })
 
-  //   }
-  //   return (
-
-  //   )
-  // }
+    navigate(queryString)
+  }, [categoryState, sortState, searchState, paginationState])
 
   return (
     <div className="container">
