@@ -9,6 +9,6 @@ export const store = configureStore({
   reducer: {
     cart: cartReducer,
     filter: filterReducer,
-    pizza: pizzasReducer,
+    pizzas: pizzasReducer,
   },
 })
