@@ -1,7 +1,6 @@
 import styles from './Search.module.scss'
 import cn from 'classnames'
 import { useCallback, useRef, useState } from 'react'
-// import { SearchContext } from '../../App'
 import Cross from './icons/cross.svg?react'
 import SearchIcon from './icons/search.svg?react'
 import debounce from 'lodash.debounce'
@@ -9,11 +8,9 @@ import {
   setValueSearch,
   clearValueSearch,
 } from '../../redux/slices/filterSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 export const Search = ({ className }) => {
-  // const { searchValue, setSearchValue } = useContext(SearchContext)
-
   const dispatch = useDispatch()
 
   const inputRef = useRef(null)
@@ -30,7 +27,6 @@ export const Search = ({ className }) => {
     setLocalValueSearch('')
     dispatch(clearValueSearch())
     inputRef.current.focus()
-    // setSearchValue('')
   }
 
   const onChangeInput = (value) => {
@@ -55,7 +51,6 @@ export const Search = ({ className }) => {
       />
       <input
         ref={inputRef}
-        // value={searchState}
         value={localValueSearch}
         onChange={(event) => {
           onChangeInput(event.target.value)

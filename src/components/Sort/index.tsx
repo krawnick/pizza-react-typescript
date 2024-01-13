@@ -1,7 +1,7 @@
-import { setSort } from '../../redux/slices/filterSlice.js'
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
+import { selectorFilter, setSort } from '../../redux/slices/filterSlice'
 import SortIcon from './sortIcon.svg?react'
 import styles from './Sort.module.scss'
 
@@ -16,7 +16,7 @@ const sortList = [
 
 export const Sort = () => {
   const dispatch = useDispatch()
-  const { sortState } = useSelector((state) => state.filter)
+  const { sortState } = useSelector(selectorFilter)
 
   const [openSort, setOpenSort] = useState(false)
   const sortRef = useRef(null)

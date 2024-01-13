@@ -34,7 +34,8 @@ const filterSlice = createSlice({
   },
 })
 
-export const filterReducer = filterSlice.reducer
+// Actions, reducer
+
 export const {
   clearValueSearch,
   setCategoryId,
@@ -42,3 +43,9 @@ export const {
   setSort,
   setValueSearch,
 } = filterSlice.actions
+
+export const filterReducer = filterSlice.reducer
+
+// Selectors
+
+export const selectorFilter = (state) => state.filter

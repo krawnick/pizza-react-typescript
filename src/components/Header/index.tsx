@@ -2,14 +2,13 @@ import { Button } from '../Button'
 import { Link } from 'react-router-dom'
 import { Search } from '../Search'
 import { useSelector } from 'react-redux'
+import { selectorCart } from '../../redux/slices/cartSlice'
 import CartIcon from './cartIcon.svg?react'
 import logoSvg from '../../assets/pizza-logo.svg'
 import styles from './Header.module.scss'
 
 export const Header = () => {
-  const { totalPriceState, totalCountState } = useSelector(
-    (state) => state.cart
-  )
+  const { totalPriceState, totalCountState } = useSelector(selectorCart)
 
   return (
     <div className={styles.header}>
