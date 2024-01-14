@@ -3,16 +3,22 @@ import axios from 'axios'
 
 export const fetchPizzas = createAsyncThunk(
   'pizzas/fetchPizzas',
+
   async ({ category, sortBy, order, search, page }, thunkAPI) => {
-    const { data } = await axios.get(
-      `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
-    )
+    try {
+      const { data } = await axios.get(
+        `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
+      )
 
-    if (data.length === 0) {
-      return thunkAPI.rejectWithValue('Not pizzas')
+      if (data.length === 0) {
+        return thunkAPI.rejectWithValue('Not pizzas')
+      }
+
+      return data
+    } catch (error) {
+      console.log('error', error)
+      return []
     }
-
-    return data
   }
 )
 
@@ -24,11 +30,7 @@ const initialState = {
 const pizzasSlice = createSlice({
   name: 'pizzas',
   initialState,
-  // reducers: {
-  //   setItems: (state, { payload }) => {
-  //     state.items = payload
-  //   },
-  // },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchPizzas.pending, (state) => {
