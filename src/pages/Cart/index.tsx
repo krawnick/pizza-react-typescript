@@ -59,6 +59,7 @@ export const Cart = () => {
           <div className={styles.cartBottomButtons}>
             <Link to="/">
               <Button className={styles.goBackButton} theme="outline-gray">
+                <BackIcon />
                 <span>Вернуться назад</span>
               </Button>
             </Link>

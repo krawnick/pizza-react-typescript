@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from './addIcon.svg?react'
 import styles from './PizzaBlock.module.scss'
 import { addItem } from '../../redux/slices/cartSlice'
+import { Link } from 'react-router-dom'
 
 export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
   const dispatch = useDispatch()
@@ -40,8 +41,10 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
 
   return (
     <div className={styles.pizzaBlock}>
-      <img className={styles.pizzaBlockImage} src={imageUrl} alt="Pizza" />
-      <h4 className={styles.pizzaBlockTitle}>{name}</h4>
+      <Link to={`/pizza/${id}`}>
+        <img className={styles.pizzaBlockImage} src={imageUrl} alt="Pizza" />
+        <h4 className={styles.pizzaBlockTitle}>{name}</h4>
+      </Link>
       <div className={styles.pizzaBlockSelector}>
         <ul>
           {types.map((type) => (

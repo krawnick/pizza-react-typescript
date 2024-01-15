@@ -1,7 +1,13 @@
 @import "../../scss/variables";
 
+.fullPizzaLoading {
+  font-size: 30px;
+  font-weight: 700;
+}
+
 .fullPizza {
   color: $black;
+  cursor: default;
   &Body {
     display: flex;
     flex-direction: column;
@@ -22,7 +28,7 @@
     margin-bottom: 20px;
     text-indent: 30px;
   }
-  &Sizes {
+  &Params {
     margin-bottom: 20px;
     p {
       margin-bottom: 10px;
@@ -39,34 +45,15 @@
     }
     &Item {
       padding: 7px 20px;
-      background-color: $white;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
     }
   }
-  &Types {
-    margin-bottom: 20px;
-    p {
-      margin-bottom: 10px;
-      font-size: 24px;
-      text-indent: 30px;
-    }
 
-    &Items {
-      display: inline-flex;
-      padding: 8px;
-      gap: 7px;
-      background-color: $gray-line;
-      border-radius: 10px;
-    }
-
-    &Item {
-      padding: 7px 20px;
-      background-color: $white;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
+  .active {
+    background-color: $white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
+
   &Price {
     margin-bottom: 20px;
     font-size: 30px;
