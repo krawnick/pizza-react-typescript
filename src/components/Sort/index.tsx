@@ -5,7 +5,13 @@ import { selectorFilter, setSort } from '../../redux/slices/filterSlice'
 import SortIcon from './sortIcon.svg?react'
 import styles from './Sort.module.scss'
 
-const sortList = [
+type TSortList = {
+  name: string
+  sortProperty: string
+  desc?: boolean
+}
+
+const sortList: TSortList[] = [
   { name: 'популярности (обратно)', sortProperty: 'rating', desc: true },
   { name: 'популярности', sortProperty: 'rating' },
   { name: 'цене (обратно)', sortProperty: 'price', desc: true },
@@ -14,7 +20,7 @@ const sortList = [
   { name: 'алфавиту', sortProperty: 'name' },
 ]
 
-export const Sort = () => {
+export const Sort = (): JSX.Element => {
   const dispatch = useDispatch()
   const { sortState } = useSelector(selectorFilter)
 

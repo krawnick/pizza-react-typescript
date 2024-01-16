@@ -7,7 +7,7 @@ import CartIcon from './cartIcon.svg?react'
 import logoSvg from '../../assets/pizza-logo.svg'
 import styles from './Header.module.scss'
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const { totalPriceState, totalCountState } = useSelector(selectorCart)
 
   return (

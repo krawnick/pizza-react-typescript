@@ -4,7 +4,7 @@ import BackIcon from '../../pages/Cart/icons/backIcon.svg?react'
 import cartEmptyImg from '../../assets/empty-cart.png'
 import styles from './CartEmpty.module.scss'
 
-export const CartEmpty = () => {
+export const CartEmpty = (): JSX.Element => {
   return (
     <div className={styles.cartEmpty}>
       <h2>В корзине ничего нет 😕</h2>

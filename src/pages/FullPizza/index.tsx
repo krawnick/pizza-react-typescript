@@ -5,23 +5,22 @@ import axios from 'axios'
 import BackIcon from '../Cart/icons/backIcon.svg?react'
 import { useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
+import { IFullPizzaProps, IPizza } from './FullPizza.props'
 
-export const FullPizza = ({ className }) => {
+export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const [pizza, setPizza] = useState('')
-  const [isLoading, setLoading] = useState(true)
+  const [pizza, setPizza] = useState<IPizza>()
   const sizesPizza = [26, 30, 40]
   const typesPizza = ['Тонкое', 'Традиционное']
 
   useEffect(() => {
-    const fetchPizza = async () => {
+    async function fetchPizza() {
       try {
         const { data } = await axios.get(
           `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/${id}`
         )
         setPizza(data)
-        setLoading(false)
       } catch (error) {
         alert('Ошибка при получении пиццы')
         navigate('/')
@@ -31,11 +30,11 @@ export const FullPizza = ({ className }) => {
     fetchPizza()
   }, [])
 
-  const { name, sizes, types, imageUrl, price } = pizza
-
-  if (isLoading) {
+  if (!pizza) {
     return <div className={styles.fullPizzaLoading}>Готовим пиццу... 🙂</div>
   }
+
+  const { name, price, imageUrl, sizes, types } = pizza
 
   return (
     <div className={cn(className, styles.fullPizza)}>

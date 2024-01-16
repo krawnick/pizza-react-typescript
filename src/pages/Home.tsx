@@ -5,8 +5,8 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
 import { Sort } from '../components/Sort/index.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { setPage } from '../redux/slices/filterSlice'
-import { fetchPizzas } from '../redux/slices/pizzasSlice'
+import { setPage } from '../redux/slices/filterSlice.js'
+import { fetchPizzas } from '../redux/slices/pizzasSlice.js'
 
 export const Home = () => {
   const dispatch = useDispatch()
