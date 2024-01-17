@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId, selectorFilter } from '../../redux/slices/filterSlice'
 import cn from 'classnames'
 import styles from './Categories.module.scss'
+import { ICategoriesProps } from './Categories.props'
 
-export const Categories = ({ className }) => {
+export const Categories = ({ className }: ICategoriesProps): JSX.Element => {
   const dispatch = useDispatch()
   const { categoryState } = useSelector(selectorFilter)
 

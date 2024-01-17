@@ -9,11 +9,12 @@ import {
   clearValueSearch,
 } from '../../redux/slices/filterSlice'
 import { useDispatch } from 'react-redux'
+import { ISearchProps } from './Search.props'
 
-export const Search = ({ className }) => {
+export const Search = ({ className }: ISearchProps): JSX.Element => {
   const dispatch = useDispatch()
 
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const [localValueSearch, setLocalValueSearch] = useState('')
 
   const debounceSearch = useCallback(
@@ -26,7 +27,7 @@ export const Search = ({ className }) => {
   const onClearInput = () => {
     setLocalValueSearch('')
     dispatch(clearValueSearch())
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }
 
   const onChangeInput = (value) => {

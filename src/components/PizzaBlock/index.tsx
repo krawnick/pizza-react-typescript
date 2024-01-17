@@ -5,8 +5,16 @@ import AddIcon from './addIcon.svg?react'
 import styles from './PizzaBlock.module.scss'
 import { addItem } from '../../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
+import { IPizzaBlockProps } from './PizzaBlock.props'
 
-export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
+export const PizzaBlock = ({
+  id,
+  price,
+  imageUrl,
+  name,
+  sizes,
+  types,
+}: IPizzaBlockProps): JSX.Element => {
   const dispatch = useDispatch()
 
   const { itemsState } = useSelector((state) => state.cart)
@@ -20,8 +28,8 @@ export const PizzaBlock = ({ id, price, imageUrl, name, sizes, types }) => {
   }, 0)
 
   const typeNames = ['тонкое', 'традиционное']
-  const [activeType, setActiveType] = useState(0)
-  const [activeSize, setActiveSize] = useState(0)
+  const [activeType, setActiveType] = useState<number>(0)
+  const [activeSize, setActiveSize] = useState<number>(0)
 
   const pizzaPriceSize = () => {
     return Math.floor((price / sizes[0]) * sizes[activeSize])

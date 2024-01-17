@@ -4,8 +4,17 @@ import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
 import styles from './CartItem.module.scss'
 import MinusIcon from './icons/minusIcon.svg?react'
 import PlusIcon from './icons/plusIcon.svg?react'
+import { ICartItemProps } from './CartItem.props'
 
-export const CartItem = ({ id, count, name, size, price, type, imageUrl }) => {
+export const CartItem = ({
+  id,
+  count,
+  name,
+  size,
+  price,
+  type,
+  imageUrl,
+}: ICartItemProps): JSX.Element => {
   const dispatch = useDispatch()
   const item = { id, size, type }
 

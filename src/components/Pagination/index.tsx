@@ -3,8 +3,12 @@ import styles from './Pagination.module.scss'
 import cn from 'classnames'
 import { useSelector } from 'react-redux'
 import { selectorFilter } from '../../redux/slices/filterSlice'
+import { IPaginationProps } from './Pagination.props'
 
-export const Pagination = ({ className, onChangePage }) => {
+export const Pagination = ({
+  className,
+  onChangePage,
+}: IPaginationProps): JSX.Element => {
   const { paginationState } = useSelector(selectorFilter)
 
   return (

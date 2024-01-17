@@ -1,17 +1,14 @@
 import ContentLoader from 'react-content-loader'
-import styles from './Skeleton.module.scss'
 
-export const Skeleton = ({ props }) => {
+export const Skeleton = (): JSX.Element => {
   return (
     <ContentLoader
-      // className={styles.pizzaBlockSkeleton}
       speed={2}
       width={280}
       height={466}
       viewBox="0 0 280 466"
       backgroundColor="#e9e9e9"
       foregroundColor="#d4d4d4"
-      {...props}
     >
       <circle cx="140" cy="140" r="130" />
       <rect x="10" y="280" rx="7" ry="7" width="260" height="20" />

@@ -10,7 +10,7 @@ import { cleartItems } from '../../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const Cart = () => {
+export const Cart = (): JSX.Element => {
   const dispatch = useDispatch()
   const { itemsState, totalCountState, totalPriceState } = useSelector(
     (state) => state.cart

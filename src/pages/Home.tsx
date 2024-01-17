@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { setPage } from '../redux/slices/filterSlice.js'
 import { fetchPizzas } from '../redux/slices/pizzasSlice.js'
 
-export const Home = () => {
+export const Home = (): JSX.Element => {
   const dispatch = useDispatch()
 
   const pizzas = useSelector((state) => state.pizzas.items)
