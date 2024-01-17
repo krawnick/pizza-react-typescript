@@ -37,7 +37,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
   const { name, price, imageUrl, sizes, types } = pizza
 
   return (
-    <div className={cn(className, styles.fullPizza)}>
+    <div className={cn(className, styles.fullPizza, styles.container)}>
       <div className={styles.fullPizzaBody}>
         <img className={styles.fullPizzaImage} src={imageUrl} />
         <h2 className={styles.fullPizzaTitle}>Пицца "{name}"</h2>

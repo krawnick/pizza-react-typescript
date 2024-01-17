@@ -1,12 +1,13 @@
-import { Categories } from '../components/Categories/index.js'
-import { Pagination } from '../components/Pagination/index.js'
-import { PizzaBlock } from '../components/PizzaBlock/index.js'
-import { Skeleton } from '../components/PizzaBlock/Skeleton.js'
-import { Sort } from '../components/Sort/index.js'
+import { Categories } from '../../components/Categories/index.js'
+import { Pagination } from '../../components/Pagination/index.js'
+import { PizzaBlock } from '../../components/PizzaBlock/index.js'
+import { Skeleton } from '../../components/PizzaBlock/Skeleton.js'
+import { Sort } from '../../components/Sort/index.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { setPage } from '../redux/slices/filterSlice.js'
-import { fetchPizzas } from '../redux/slices/pizzasSlice.js'
+import { setPage } from '../../redux/slices/filterSlice.js'
+import { fetchPizzas } from '../../redux/slices/pizzasSlice.js'
+import styles from './Home.module.scss'
 
 export const Home = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -56,15 +57,15 @@ export const Home = (): JSX.Element => {
   }, [categoryState, sortState, searchState, paginationState])
 
   return (
-    <div className="container">
-      <div className="content__top">
-        <Categories className="categories" />
+    <div className={styles.container}>
+      <div className={styles.contentTop}>
+        <Categories className={styles.categories} />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{showPizzas()}</div>
+      <h2 className={styles.contentTitle}>Все пиццы</h2>
+      <div className={styles.contentItems}>{showPizzas()}</div>
       <Pagination
-        className="paginationHome"
+        className={styles.paginationHome}
         onChangePage={(number) => dispatch(setPage(number))}
       />
     </div>

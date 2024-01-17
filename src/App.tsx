@@ -1,4 +1,4 @@
-import './scss/app.scss'
+import './scss/App.scss'
 import { Home } from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
 import { NotFound } from './pages/NotFound'
@@ -6,7 +6,7 @@ import { Cart } from './pages/Cart'
 import { FullPizza } from './pages/FullPizza'
 import { MainLayout } from './layouts/MainLayout'
 
-export const App = () => {
+export const App = (): JSX.Element => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

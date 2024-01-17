@@ -1,4 +1,4 @@
-.root {
+.notFoundBlock {
   padding: 100px;
   height: 100%;
   text-align: center;
@@ -6,8 +6,7 @@
   span {
     font-size: 64px;
   }
-}
-
-.description {
-  font-size: 22px;
+  &Desc {
+    font-size: 22px;
+  }
 }
