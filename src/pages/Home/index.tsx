@@ -1,12 +1,15 @@
-import { Categories } from '../../components/Categories/index.js'
-import { Pagination } from '../../components/Pagination/index.js'
-import { PizzaBlock } from '../../components/PizzaBlock/index.js'
-import { Skeleton } from '../../components/PizzaBlock/Skeleton.js'
-import { Sort } from '../../components/Sort/index.js'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { setPage } from '../../redux/slices/filterSlice.js'
-import { fetchPizzas } from '../../redux/slices/pizzasSlice.js'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { Categories } from '../../components/Categories/'
+import { Pagination } from '../../components/Pagination/'
+import { PizzaBlock } from '../../components/PizzaBlock/'
+import { Skeleton } from '../../components/PizzaBlock/Skeleton'
+import { Sort } from '../../components/Sort/index'
+
+import { setPage } from '../../redux/slices/filterSlice'
+import { fetchPizzas } from '../../redux/slices/pizzasSlice'
+
 import styles from './Home.module.scss'
 
 export const Home = (): JSX.Element => {

@@ -1,14 +1,18 @@
-import styles from './Search.module.scss'
 import cn from 'classnames'
-import { useCallback, useRef, useState } from 'react'
-import Cross from './icons/cross.svg?react'
-import SearchIcon from './icons/search.svg?react'
 import debounce from 'lodash.debounce'
+import { useCallback, useRef, useState } from 'react'
+
+import { useDispatch } from 'react-redux'
+
 import {
   setValueSearch,
   clearValueSearch,
 } from '../../redux/slices/filterSlice'
-import { useDispatch } from 'react-redux'
+
+import Cross from './icons/cross.svg'
+import SearchIcon from './icons/search.svg'
+
+import styles from './Search.module.scss'
 import { ISearchProps, TElementEvent } from './Search.props'
 
 export const Search = ({ className }: ISearchProps): JSX.Element => {

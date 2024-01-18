@@ -1,10 +1,14 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import styles from './FullPizza.module.scss'
-import cn from 'classnames'
 import axios from 'axios'
-import BackIcon from '../Cart/icons/backIcon.svg?react'
+import cn from 'classnames'
+
 import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+
 import { Button } from '../../components/Button'
+import BackIcon from '../Cart/icons/backIcon.svg'
+
+import styles from './FullPizza.module.scss'
+
 import { IFullPizzaProps, IPizza } from './FullPizza.props'
 
 export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {

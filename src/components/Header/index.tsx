@@ -1,10 +1,13 @@
-import { Button } from '../Button'
-import { Link } from 'react-router-dom'
-import { Search } from '../Search'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+import LogoSvg from '../../assets/pizza-logo.svg'
 import { selectorCart } from '../../redux/slices/cartSlice'
-import CartIcon from './cartIcon.svg?react'
-import logoSvg from '../../assets/pizza-logo.svg'
+import { Button } from '../Button'
+import { Search } from '../Search'
+
+import CartIcon from './cartIcon.svg'
+
 import styles from './Header.module.scss'
 
 export const Header = (): JSX.Element => {
@@ -15,7 +18,7 @@ export const Header = (): JSX.Element => {
       <div className={styles.container}>
         <Link to="/">
           <div className={styles.headerLogo}>
-            <img width="38" src={logoSvg} alt="Pizza logo" />
+            <LogoSvg />
             <div>
               <h1>React Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>

@@ -1,10 +1,15 @@
-import { Button } from '../Button'
 import { useState } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
-import AddIcon from './addIcon.svg?react'
-import styles from './PizzaBlock.module.scss'
-import { addItem } from '../../redux/slices/cartSlice'
+
 import { Link } from 'react-router-dom'
+
+import { addItem } from '../../redux/slices/cartSlice'
+import { Button } from '../Button'
+
+import AddIcon from './addIcon.svg'
+import styles from './PizzaBlock.module.scss'
+
 import { IPizzaBlockProps } from './PizzaBlock.props'
 
 export const PizzaBlock = ({

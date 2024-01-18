@@ -1,10 +1,11 @@
 import './scss/App.scss'
-import { Home } from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
-import { NotFound } from './pages/NotFound'
+
+import { MainLayout } from './layouts/MainLayout'
 import { Cart } from './pages/Cart'
 import { FullPizza } from './pages/FullPizza'
-import { MainLayout } from './layouts/MainLayout'
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
 
 export const App = (): JSX.Element => {
   return (

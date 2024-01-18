@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId, selectorFilter } from '../../redux/slices/filterSlice'
 import cn from 'classnames'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setCategoryId, selectorFilter } from '../../redux/slices/filterSlice'
+
 import styles from './Categories.module.scss'
 import { ICategoriesProps } from './Categories.props'
 

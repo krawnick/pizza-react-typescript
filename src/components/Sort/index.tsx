@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 import { selectorFilter, setSort } from '../../redux/slices/filterSlice'
-import SortIcon from './sortIcon.svg?react'
+
 import styles from './Sort.module.scss'
+import SortIcon from './sortIcon.svg'
 
 type TSortList = {
   name: string

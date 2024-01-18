@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux'
-import { Button } from '../Button'
+
 import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
+import { Button } from '../Button'
+
 import styles from './CartItem.module.scss'
-import MinusIcon from './icons/minusIcon.svg?react'
-import PlusIcon from './icons/plusIcon.svg?react'
 import { ICartItemProps } from './CartItem.props'
+import MinusIcon from './icons/minusIcon.svg'
+import PlusIcon from './icons/plusIcon.svg'
 
 export const CartItem = ({
   id,

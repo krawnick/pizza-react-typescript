@@ -14,8 +14,9 @@
   &Logo {
     display: flex;
 
-    img {
+    svg {
       margin-right: 15px;
+      width: 38px;
     }
 
     h1 {
@@ -29,7 +30,7 @@
     p {
       color: lighten($black, 50%);
 
-      @media (max-width: 645px) {
+      @media (width <= 645px) {
         display: none;
       }
     }
@@ -57,6 +58,7 @@
         stroke: $white;
       }
     }
+
     &Delimiter {
       width: 1px;
       height: 25px;

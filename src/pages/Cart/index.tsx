@@ -1,14 +1,18 @@
 import cn from 'classnames'
-import styles from './Cart.module.scss'
-import BackIcon from './icons/backIcon.svg?react'
-import CartIcon from '../../components/Header/cartIcon.svg?react'
-import CartClearIcon from './icons/cartClearIcon.svg?react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import { Button } from '../../components/Button'
 import { CartEmpty } from '../../components/CartEmpty'
 import { CartItem } from '../../components/CartItem'
+import CartIcon from '../../components/Header/cartIcon.svg'
+
 import { cleartItems } from '../../redux/slices/cartSlice'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+
+import styles from './Cart.module.scss'
+import BackIcon from './icons/backIcon.svg'
+import CartClearIcon from './icons/cartClearIcon.svg'
 
 export const Cart = (): JSX.Element => {
   const dispatch = useDispatch()

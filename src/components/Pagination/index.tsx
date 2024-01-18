@@ -1,8 +1,11 @@
-import ReactPaginate from 'react-paginate'
-import styles from './Pagination.module.scss'
 import cn from 'classnames'
+import ReactPaginate from 'react-paginate'
 import { useSelector } from 'react-redux'
+
 import { selectorFilter } from '../../redux/slices/filterSlice'
+
+import styles from './Pagination.module.scss'
+
 import { IPaginationProps } from './Pagination.props'
 
 export const Pagination = ({
