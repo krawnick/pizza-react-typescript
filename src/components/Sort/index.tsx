@@ -25,7 +25,7 @@ export const Sort = (): JSX.Element => {
   const { sortState } = useSelector(selectorFilter)
 
   const [openSort, setOpenSort] = useState(false)
-  const sortRef = useRef(null)
+  const sortRef = useRef<HTMLDivElement>(null)
 
   useOutsideClick(sortRef, setOpenSort, openSort)
 

@@ -1,7 +1,9 @@
 @import "../../scss/variables";
 .pagination {
   display: flex;
-  margin: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
 
   a {
     display: flex;

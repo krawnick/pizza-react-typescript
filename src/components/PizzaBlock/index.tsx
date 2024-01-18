@@ -19,7 +19,7 @@ export const PizzaBlock = ({
 
   const { itemsState } = useSelector((state) => state.cart)
 
-  const countId = itemsState.reduce((sum, item) => {
+  const countId = itemsState.reduce((sum: number, item) => {
     if (item.id === id) {
       return sum + item.count
     } else {

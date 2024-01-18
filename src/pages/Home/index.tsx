@@ -56,6 +56,10 @@ export const Home = (): JSX.Element => {
     window.scrollTo(0, 0)
   }, [categoryState, sortState, searchState, paginationState])
 
+  const onChangePage = (page: number): void => {
+    dispatch(setPage(page))
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.contentTop}>
@@ -66,7 +70,7 @@ export const Home = (): JSX.Element => {
       <div className={styles.contentItems}>{showPizzas()}</div>
       <Pagination
         className={styles.paginationHome}
-        onChangePage={(number) => dispatch(setPage(number))}
+        onChangePage={onChangePage}
       />
     </div>
   )

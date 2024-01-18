@@ -1,13 +1,17 @@
 import { useEffect } from 'react'
 
-export const useOutsideClick = (elementRef, closeFunc, state = true) => {
+export const useOutsideClick = (
+  elementRef: React.RefObject<HTMLElement>,
+  closeFunc: React.Dispatch<React.SetStateAction<boolean>>,
+  state: boolean = true
+) => {
   useEffect(() => {
     if (!state) return
 
-    const handleclickOutside = (event) => {
+    const handleclickOutside = (event: MouseEvent): void => {
       const clickElement = event.composedPath()
 
-      if (!clickElement.includes(elementRef.current)) {
+      if (elementRef.current && !clickElement.includes(elementRef.current)) {
         closeFunc(false)
       }
     }

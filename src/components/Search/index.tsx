@@ -9,7 +9,7 @@ import {
   clearValueSearch,
 } from '../../redux/slices/filterSlice'
 import { useDispatch } from 'react-redux'
-import { ISearchProps } from './Search.props'
+import { ISearchProps, TElementEvent } from './Search.props'
 
 export const Search = ({ className }: ISearchProps): JSX.Element => {
   const dispatch = useDispatch()
@@ -30,9 +30,9 @@ export const Search = ({ className }: ISearchProps): JSX.Element => {
     inputRef.current?.focus()
   }
 
-  const onChangeInput = (value) => {
-    setLocalValueSearch(value)
-    debounceSearch(value)
+  const onChangeInput = (event: TElementEvent) => {
+    setLocalValueSearch(event.target.value)
+    debounceSearch(event.target.value)
   }
 
   return (
@@ -53,9 +53,7 @@ export const Search = ({ className }: ISearchProps): JSX.Element => {
       <input
         ref={inputRef}
         value={localValueSearch}
-        onChange={(event) => {
-          onChangeInput(event.target.value)
-        }}
+        onChange={onChangeInput}
         className={styles.input}
         placeholder="Найти пиццу"
       />
