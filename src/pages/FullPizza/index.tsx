@@ -40,7 +40,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
     <div className={cn(className, styles.fullPizza, styles.container)}>
       <div className={styles.fullPizzaBody}>
         <img className={styles.fullPizzaImage} src={imageUrl} />
-        <h2 className={styles.fullPizzaTitle}>Пицца "{name}"</h2>
+        <h2 className={styles.fullPizzaTitle}>Пицца &quot;{name}&quot;</h2>
         <p className={styles.fullPizzaDescription}>
           Описание пиццы необходимо добавить! Описание отсутствует! Описание
           пиццы необходимо добавить! Описание отсутствует! Описание пиццы

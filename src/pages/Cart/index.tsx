@@ -21,6 +21,7 @@ export const Cart = (): JSX.Element => {
       dispatch(cleartItems())
     }
   }
+  console.log('itemsState', itemsState)
 
   if (totalCountState === 0) {
     return <CartEmpty />
