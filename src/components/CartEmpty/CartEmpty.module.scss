@@ -1,25 +1,20 @@
 @import "../../scss/variables";
 
 .cartEmpty {
-  margin: 80px auto;
   width: 560px;
+  margin: 80px auto;
   text-align: center;
 
   h2 {
-    font-size: 32px;
     margin-bottom: 10px;
+    font-size: 32px;
   }
 
   p {
+    color: #777;
     font-size: 18px;
     line-height: 145.4%;
     letter-spacing: 0.01em;
-    color: #777777;
-  }
-
-  icon {
-    position: relative;
-    top: 2px;
   }
 
   img {
@@ -27,26 +22,19 @@
     width: 300px;
     margin: 45px auto 60px;
   }
-
-  .button--black {
-    padding: 12px 0 14px;
-    width: 230px;
-    margin: 0 auto;
-    font-weight: 600;
-    font-size: 18px;
-  }
 }
 
 .goBackButton {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 230px;
-  padding: 16px;
   margin: 0 auto;
+  padding: 16px;
 
   svg {
     margin-right: 12px;
+
     path {
       fill: $transparent;
       stroke-width: 2;

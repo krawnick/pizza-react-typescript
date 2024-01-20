@@ -1,27 +1,27 @@
 @import "../../scss/variables";
+
 .pagination {
   display: flex;
+  gap: 10px;
   justify-content: center;
   margin: 20px 0;
-  gap: 10px;
 
   a {
     display: flex;
     justify-content: center;
-    padding: 10px;
     min-width: 44px;
-    color: $orange;
+    padding: 10px;
     border: solid 1px $orange;
     border-radius: 30px;
+    color: $orange;
     transition: 0.3s;
   }
 
   a:hover {
-    color: $white;
-
     background-color: $orange;
-    transition: 0.3s;
+    color: $white;
     cursor: pointer;
+    transition: 0.3s;
   }
 
   :global {

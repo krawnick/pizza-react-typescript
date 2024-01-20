@@ -2,29 +2,29 @@
 @import "../../scss/libs/normalize";
 
 .header {
-  border-bottom: 1px solid $gray-line;
   padding: 40px 20px;
+  border-bottom: 1px solid $gray-line;
 
   .container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
 
   &Logo {
     display: flex;
 
     svg {
-      margin-right: 15px;
       width: 38px;
+      margin-right: 15px;
     }
 
     h1 {
       color: $black;
+      font-weight: 800;
       font-size: 24px;
       letter-spacing: 1%;
       text-transform: uppercase;
-      font-weight: 800;
     }
 
     p {
@@ -46,14 +46,14 @@
     &Cart {
       display: flex;
       align-items: center;
-      line-height: 23px;
       padding: 12px 25px;
+      line-height: 23px;
 
       svg {
-        margin-right: 8px;
-        margin-bottom: 1px;
         width: 18px;
         height: 18px;
+        margin-right: 8px;
+        margin-bottom: 1px;
         fill: none;
         stroke: $white;
       }
@@ -62,9 +62,9 @@
     &Delimiter {
       width: 1px;
       height: 25px;
-      background-color: $white;
-      margin-left: 14px;
       margin-right: 14px;
+      margin-left: 14px;
+      background-color: $white;
     }
   }
 }
