@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev2": "concurrently \"npm run server\" \"vite\"",
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint ./src",
+    "lint-fix": "concurrently \"npx eslint ./src --fix\" \"stylelint **/*.scss --fix\"",
+    "lint": "concurrently \"npx eslint ./src\" \"stylelint **/*.scss\"",
     "preview": "vite preview",
-    "server": "json-server -w server/db.json -p 5172"
+    "server": "json-server -w server/db.json -p 5172",
+    "dev server": "concurrently \"npm run server\" \"vite\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
@@ -29,7 +30,6 @@
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.17.0",
     "sass": "^1.69.3",
-    "stylelint-order": "^6.0.4",
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {
@@ -52,6 +52,9 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "stylelint": "^16.2.0",
     "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-config-clean-order": "^5.4.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-order": "^6.0.4",
     "typescript": "^5.3.3",
     "vite": "^4.4.5",
     "vite-plugin-svgr": "^4.2.0"

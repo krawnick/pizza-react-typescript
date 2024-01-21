@@ -14,15 +14,15 @@ body {
 
   &__empty {
     padding-top: 20px;
-    font-weight: 500;
     font-size: 24px;
+    font-weight: 500;
   }
 
   &__items {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 
     @media (width <= 1400px) {
       grid-template-columns: repeat(3, 1fr);
@@ -39,8 +39,8 @@ body {
 
   &__top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     @media (width <= 1300px) {
       flex-direction: column;
@@ -73,6 +73,7 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
+
     margin: 0 auto;
     padding: 20px;
   }

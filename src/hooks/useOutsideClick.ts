@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 export const useOutsideClick = (
   elementRef: React.RefObject<HTMLElement>,
   closeFunc: React.Dispatch<React.SetStateAction<boolean>>,
-  state: boolean = true
+  state: boolean = true,
 ) => {
   useEffect(() => {
     if (!state) return

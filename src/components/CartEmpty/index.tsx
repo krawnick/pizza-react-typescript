@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 
+import styles from './CartEmpty.module.scss'
+
 import cartEmptyImg from '../../assets/empty-cart.png'
 import BackIcon from '../../pages/Cart/icons/backIcon.svg'
 import { Button } from '../Button'
-
-import styles from './CartEmpty.module.scss'
 
 export const CartEmpty = (): JSX.Element => {
   return (

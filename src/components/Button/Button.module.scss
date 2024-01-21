@@ -1,21 +1,28 @@
-@import "../../scss/libs/normalize.scss";
-@import "../../scss/variables.scss";
+@import "../../scss/libs/normalize";
+@import "../../scss/variables";
 
 .button {
-  display: inline-block;
-  border-radius: 30px;
-  padding: 10px 20px;
-  min-width: 100px;
-  text-align: center;
+  @include noselect;
+
   cursor: pointer;
+
+  display: inline-block;
+
+  min-width: 100px;
+  padding: 10px 20px;
+
+  text-align: center;
+
+  border: 1px solid transparent;
+  border-radius: 30px;
+
   transition:
     background-color $duration ease-in-out,
     border-color $duration ease-in-out;
-  border: 1px solid transparent;
+
   &:active {
     transform: translateY(1px);
   }
-  @include noselect();
 
   i,
   span,
@@ -25,77 +32,78 @@
   }
 
   span {
-    font-weight: 600;
     font-size: 16px;
+    font-weight: 600;
   }
 }
 
 .buttonOrange {
+  background-color: $orange;
+
   &,
   span {
     color: $white;
   }
-  background-color: $orange;
+
   &:hover {
     background-color: darken($orange, 8%);
   }
 
   &:active {
+    transform: translateY(1px);
     background-color: darken($orange, 12%);
-    transform: translateY(1px);
-  }
-}
-
-.buttonOutlineOrange {
-  background-color: $white;
-  border-color: $orange;
-  &,
-  span {
-    color: $orange;
-  }
-
-  &:hover {
-    background-color: $orange;
-
-    &,
-    span {
-      color: $white;
-    }
-  }
-
-  &:active {
-    background-color: darken($orange, 8%);
-    transform: translateY(1px);
   }
 }
 
 .buttonOutlineGray {
   background-color: $transparent;
   border-color: $gray;
-  &,
-  span {
+
+  *span {
     color: darken($gray, 30%);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    background-color: lighten($black, 10%);
   }
 
   &:hover {
     background-color: $black;
 
-    &,
     span {
       color: $white;
     }
   }
+}
+
+.buttonOutlineOrange {
+  background-color: $white;
+  border-color: $orange;
+
+  span {
+    color: $orange;
+  }
 
   &:active {
-    background-color: lighten($black, 10%);
     transform: translateY(1px);
+    background-color: darken($orange, 8%);
+  }
+
+  &:hover {
+    background-color: $orange;
+
+    span {
+      color: $white;
+    }
   }
 }
 
 .buttonOutlineAction {
-  padding: 0;
   min-width: 40px;
   height: 40px;
+  padding: 0;
+
   background-color: $transparent;
   border: 3px solid $transparent;
 
@@ -104,11 +112,14 @@
     top: 1px;
     fill: $black;
   }
+
   &Gray {
     border-color: $gray;
+
     &:hover {
       background-color: $black;
       border-color: $transparent;
+
       svg {
         fill: $white;
       }
@@ -117,8 +128,10 @@
 
   &Orange {
     border-color: $orange;
+
     &:hover {
       background-color: $orange;
+
       svg {
         fill: $white;
       }

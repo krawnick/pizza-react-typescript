@@ -16,9 +16,9 @@
     }
 
     span {
-      border-bottom: 1px dashed $orange;
-      color: $orange;
       cursor: pointer;
+      color: $orange;
+      border-bottom: 1px dashed $orange;
     }
   }
 
@@ -27,30 +27,33 @@
     transition: $duration;
 
     &Active {
+      rotate: 180deg;
       fill: $orange;
       transition: $duration;
-      rotate: 180deg;
     }
   }
 
   &Popup {
     position: absolute;
     right: 0;
+
     overflow: hidden;
+
     min-width: 230px;
     margin-top: 15px;
     padding: 10px 0;
-    border-radius: 10px;
+
     background: $white;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgb(0 0 0 / 9%);
 
     ul {
-      display: inline;
       overflow: hidden;
+      display: inline;
 
       li {
-        padding: 12px 20px;
         cursor: pointer;
+        padding: 12px 20px;
 
         &.active,
         &:hover {
@@ -58,8 +61,8 @@
         }
 
         &.active {
-          color: $orange;
           font-weight: bold;
+          color: $orange;
         }
       }
     }

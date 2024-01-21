@@ -9,26 +9,30 @@
   a {
     display: flex;
     justify-content: center;
+
     min-width: 44px;
     padding: 10px;
+
+    color: $orange;
+
     border: solid 1px $orange;
     border-radius: 30px;
-    color: $orange;
+
     transition: 0.3s;
   }
 
   a:hover {
-    background-color: $orange;
-    color: $white;
     cursor: pointer;
+    color: $white;
+    background-color: $orange;
     transition: 0.3s;
   }
 
   :global {
     .selected {
       a {
-        background-color: $orange;
         color: $white;
+        background-color: $orange;
       }
     }
   }

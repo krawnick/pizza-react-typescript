@@ -1,3 +1,3 @@
-export interface ICategoriesProps {
+export interface icategoriesprops {
   className: string
 }

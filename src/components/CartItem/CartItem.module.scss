@@ -2,12 +2,14 @@
 
 .cartItem {
   display: flex;
-  justify-content: space-between;
+  column-gap: 10px;
   align-items: center;
+  justify-content: space-between;
+
   margin: 10px 0;
   padding: 10px 0;
+
   border-bottom: 1px solid lighten($gray, 20);
-  column-gap: 10px;
 
   &Image {
     width: 80px;
@@ -18,33 +20,33 @@
     width: 50%;
 
     .cartItemTitle {
-      color: $black;
-      font-weight: 700;
       font-size: 22px;
+      font-weight: 700;
+      color: $black;
     }
 
     .cartItemInfo {
-      font-weight: 300;
       font-size: 18px;
+      font-weight: 300;
     }
   }
 
   &Count {
     display: flex;
     flex-direction: row;
-    align-items: center;
     column-gap: 15px;
+    align-items: center;
 
     .cartItemQuantity {
-      font-weight: 700;
       font-size: 22px;
+      font-weight: 700;
     }
   }
 
   &Price {
     width: 25%;
-    font-weight: 700;
     font-size: 22px;
+    font-weight: 700;
     text-align: center;
   }
 

@@ -6,13 +6,13 @@
 }
 
 .fullPizzaLoading {
-  font-weight: 700;
   font-size: 30px;
+  font-weight: 700;
 }
 
 .fullPizza {
-  color: $black;
   cursor: default;
+  color: $black;
 
   &Body {
     display: flex;
@@ -27,9 +27,10 @@
 
   &Title {
     margin-bottom: 20px;
-    color: $black;
-    font-weight: 700;
+
     font-size: 32px;
+    font-weight: 700;
+    color: $black;
     text-indent: 30px;
   }
 
@@ -50,9 +51,11 @@
     &Items {
       display: inline-flex;
       gap: 7px;
+
       padding: 8px;
-      border-radius: 10px;
+
       background-color: $gray-line;
+      border-radius: 10px;
     }
 
     &Item {
@@ -68,16 +71,18 @@
 
   &Price {
     margin-bottom: 20px;
-    font-weight: 600;
     font-size: 30px;
+    font-weight: 600;
   }
 
   .goBackButton {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
     width: 230px;
     padding: 16px;
+
     font-size: 16px;
 
     svg {

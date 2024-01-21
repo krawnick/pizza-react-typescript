@@ -7,8 +7,8 @@
 
   .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   &Logo {
@@ -20,11 +20,11 @@
     }
 
     h1 {
-      color: $black;
-      font-weight: 800;
       font-size: 24px;
-      letter-spacing: 1%;
+      font-weight: 800;
+      color: $black;
       text-transform: uppercase;
+      letter-spacing: 1%;
     }
 
     p {
@@ -54,6 +54,7 @@
         height: 18px;
         margin-right: 8px;
         margin-bottom: 1px;
+
         fill: none;
         stroke: $white;
       }
@@ -64,6 +65,7 @@
       height: 25px;
       margin-right: 14px;
       margin-left: 14px;
+
       background-color: $white;
     }
   }

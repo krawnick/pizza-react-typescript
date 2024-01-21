@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
 
-import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
-import { Button } from '../Button'
-
 import styles from './CartItem.module.scss'
 import { ICartItemProps } from './CartItem.props'
 import MinusIcon from './icons/minusIcon.svg'
 import PlusIcon from './icons/plusIcon.svg'
+
+import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
+import { Button } from '../Button'
 
 export const CartItem = ({
   id,
@@ -31,7 +31,7 @@ export const CartItem = ({
   const onClickRemove = () => {
     if (
       confirm(
-        `Вы дейсвительно хотите удалить пиццу:\n${name}, ${type}, ${size} см?`
+        `Вы дейсвительно хотите удалить пиццу:\n${name}, ${type}, ${size} см?`,
       )
     )
       dispatch(removeItem(item))

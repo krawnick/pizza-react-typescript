@@ -11,9 +11,9 @@
   }
 
   p {
-    color: #777;
     font-size: 18px;
     line-height: 145.4%;
+    color: #777;
     letter-spacing: 0.01em;
   }
 
@@ -26,8 +26,9 @@
 
 .goBackButton {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   width: 230px;
   margin: 0 auto;
   padding: 16px;

@@ -4,16 +4,16 @@ import { useCallback, useRef, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 
-import {
-  setValueSearch,
-  clearValueSearch,
-} from '../../redux/slices/filterSlice'
-
 import Cross from './icons/cross.svg'
 import SearchIcon from './icons/search.svg'
 
 import styles from './Search.module.scss'
 import { ISearchProps, TElementEvent } from './Search.props'
+
+import {
+  setValueSearch,
+  clearValueSearch,
+} from '../../redux/slices/filterSlice'
 
 export const Search = ({ className }: ISearchProps): JSX.Element => {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ export const Search = ({ className }: ISearchProps): JSX.Element => {
     debounce((value) => {
       dispatch(setValueSearch(value))
     }, 500),
-    []
+    [],
   )
 
   const onClearInput = () => {
@@ -45,13 +45,13 @@ export const Search = ({ className }: ISearchProps): JSX.Element => {
         onClick={() => onClearInput()}
         className={cn(
           styles.close,
-          localValueSearch ? styles.active : styles.disable
+          localValueSearch ? styles.active : styles.disable,
         )}
       />
       <SearchIcon
         className={cn(
           styles.icon,
-          !localValueSearch ? styles.active : styles.disable
+          !localValueSearch ? styles.active : styles.disable,
         )}
       />
       <input
