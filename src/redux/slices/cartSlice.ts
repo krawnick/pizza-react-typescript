@@ -1,9 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { ICartItem } from '../../components/PizzaBlock'
 import { findItem } from '../../utils/findItemCart'
 import { updateState } from '../../utils/updateStateCart'
+import { RootState } from '../store'
 
-const initialState = {
+interface ICartState {
+  totalCountState: number
+  totalPriceState: number
+  itemsState: ICartItem[]
+}
+
+const initialState: ICartState = {
   totalCountState: 0,
   totalPriceState: 0,
   itemsState: [],
@@ -13,22 +21,22 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, { payload }) => {
-      const foundItem = findItem(state, payload)
+    addItem: (state, action: PayloadAction<ICartItem>) => {
+      const foundItem = findItem(state, action.payload)
 
-      if (foundItem) {
+      if (foundItem.count) {
         foundItem.count++
       } else {
         state.itemsState.push({
-          ...payload,
+          ...action.payload,
           count: 1,
         })
       }
       updateState(state)
     },
 
-    minusItem: (state, { payload }) => {
-      const foundItem = findItem(state, payload)
+    minusItem: (state, action: PayloadAction) => {
+      const foundItem = findItem(state, action.payload)
 
       if (foundItem && foundItem.count > 1) {
         foundItem.count--
@@ -57,4 +65,4 @@ export const cartReducer = cartSlice.reducer
 
 // Selectors
 
-export const selectorCart = (state) => state.cart
+export const selectorCart = (state: RootState) => state.cart

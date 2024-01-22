@@ -9,6 +9,16 @@ import { IPizzaBlockProps } from './PizzaBlock.props'
 import { addItem } from '../../redux/slices/cartSlice'
 import { Button } from '../Button'
 
+export interface ICartItem {
+  id: string
+  name: string
+  price: number
+  imageUrl: string
+  type: string
+  size: number
+  count?: number
+}
+
 export const PizzaBlock = ({
   id,
   price,
@@ -21,15 +31,18 @@ export const PizzaBlock = ({
 
   const { itemsState } = useSelector((state) => state.cart)
 
-  const countId = itemsState.reduce((sum: number, item) => {
-    if (item.id === id) {
-      return sum + item.count
-    } else {
-      return sum
-    }
-  }, 0)
+  const countId = itemsState.reduce(
+    (sum: number, item: { count: number; id: string }) => {
+      if (item.id === id) {
+        return sum + item.count
+      } else {
+        return sum
+      }
+    },
+    0
+  )
 
-  const typeNames = ['тонкое', 'традиционное']
+  const typeNames: ICartItem['type'][] = ['тонкое', 'традиционное']
   const [activeType, setActiveType] = useState<number>(0)
   const [activeSize, setActiveSize] = useState<number>(0)
 
@@ -38,7 +51,7 @@ export const PizzaBlock = ({
   }
 
   const addPizzaToCart = () => {
-    const item = {
+    const item: ICartItem = {
       id,
       name,
       price: pizzaPriceSize(),
