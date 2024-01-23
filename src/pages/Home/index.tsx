@@ -1,24 +1,29 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { Categories } from '../../components/Categories/'
 import { Pagination } from '../../components/Pagination/'
 import { PizzaBlock } from '../../components/PizzaBlock/'
 import { Skeleton } from '../../components/PizzaBlock/Skeleton'
 import { Sort } from '../../components/Sort/index'
-import { setPage } from '../../redux/slices/filterSlice'
-import { fetchPizzas } from '../../redux/slices/pizzasSlice'
+import { selectorFilter, setPage } from '../../redux/slices/filterSlice'
+import {
+  StatusLoading,
+  fetchPizzas,
+  selectorPizzas,
+  selectorPizzasStatus,
+} from '../../redux/slices/pizzasSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
 
 import styles from './Home.module.scss'
 
 export const Home = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const pizzas = useSelector((state) => state.pizzas.items)
-  const pizzasStatus = useSelector((state) => state.pizzas.status)
+  const pizzas = useAppSelector(selectorPizzas)
+  const pizzasStatus = useAppSelector(selectorPizzasStatus)
 
   const { paginationState, searchState, categoryState, sortState } =
-    useSelector((state) => state.filter)
+    useAppSelector(selectorFilter)
 
   const getPizzasState = async () => {
     const category = categoryState > 0 ? `&category=${categoryState}` : ''
@@ -32,11 +37,11 @@ export const Home = (): JSX.Element => {
 
   const showPizzas = () => {
     switch (pizzasStatus) {
-      case 'loading': {
+      case StatusLoading.LOADING: {
         return [...new Array(4)].map((_, index) => <Skeleton key={index} />)
       }
 
-      case 'success': {
+      case StatusLoading.SUCCESS: {
         return pizzas.map((pizza) => (
           <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>
         ))

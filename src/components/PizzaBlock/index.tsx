@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addItem, selectorCart } from '../../redux/slices/cartSlice'
+import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 import { ICartItem } from '../CartItem'
 
@@ -26,7 +27,7 @@ export const PizzaBlock = ({
   sizes,
   types,
 }: IPizzaBlockProps): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const { itemsState } = useSelector(selectorCart)
 

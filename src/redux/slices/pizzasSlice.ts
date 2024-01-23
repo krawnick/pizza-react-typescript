@@ -8,9 +8,15 @@ interface IPizzas extends IPizzaBlockProps {
   rating: number
 }
 
+export enum StatusLoading {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
 interface IPizzasState {
   items: IPizzas[]
-  status: 'loading' | 'success' | 'error'
+  status: StatusLoading
 }
 
 export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
@@ -36,7 +42,7 @@ export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
 
 const initialState: IPizzasState = {
   items: [],
-  status: 'loading',
+  status: StatusLoading.LOADING,
 }
 
 const pizzasSlice = createSlice({
@@ -48,20 +54,20 @@ const pizzasSlice = createSlice({
     builder
       .addCase(fetchPizzas.pending, (state) => {
         state.items = []
-        state.status = 'loading'
+        state.status = StatusLoading.LOADING
         console.log('pizzasSlice:', state.status)
       })
       .addCase(
         fetchPizzas.fulfilled,
         (state, action: PayloadAction<IPizzas[]>) => {
           state.items = action.payload
-          state.status = 'success'
+          state.status = StatusLoading.SUCCESS
           console.log('pizzasSlice:', state.status)
         }
       )
       .addCase(fetchPizzas.rejected, (state, { payload }) => {
         state.items = []
-        state.status = 'error'
+        state.status = StatusLoading.ERROR
         console.log('pizzasSlice:', payload)
       })
   },
@@ -73,4 +79,5 @@ export const pizzasReducer = pizzasSlice.reducer
 
 // Selectors
 
-export const selectorPizzas = (state: RootState) => state.pizzas
+export const selectorPizzas = (state: RootState) => state.pizzas.items
+export const selectorPizzasStatus = (state: RootState) => state.pizzas.status
