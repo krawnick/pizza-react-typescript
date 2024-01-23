@@ -1,12 +1,29 @@
 import { useDispatch } from 'react-redux'
 
-import styles from './CartItem.module.scss'
-import { ICartItemProps } from './CartItem.props'
-import MinusIcon from './icons/minusIcon.svg'
-import PlusIcon from './icons/plusIcon.svg'
-
 import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
 import { Button } from '../Button'
+
+import styles from './CartItem.module.scss'
+import { ReactComponent as MinusIcon } from './icons/minusIcon.svg'
+import { ReactComponent as PlusIcon } from './icons/plusIcon.svg'
+
+
+export interface ICartItem {
+  id: string
+  count: number
+  name: string
+  size: number
+  price: number
+  type: string
+  imageUrl: string
+}
+
+export type TCartItemAction = Omit<
+  ICartItem,
+  'name' | 'price' | 'imageUrl' | 'count'
+>
+
+export type TCartAddItem = Omit<ICartItem, 'count'>
 
 export const CartItem = ({
   id,
@@ -16,9 +33,14 @@ export const CartItem = ({
   price,
   type,
   imageUrl,
-}: ICartItemProps): JSX.Element => {
+}: ICartItem): JSX.Element => {
   const dispatch = useDispatch()
-  const item = { id, size, type }
+
+  const item: TCartItemAction = {
+    id,
+    size,
+    type,
+  }
 
   const onClickPlus = () => {
     dispatch(addItem(item))
@@ -31,7 +53,7 @@ export const CartItem = ({
   const onClickRemove = () => {
     if (
       confirm(
-        `Вы дейсвительно хотите удалить пиццу:\n${name}, ${type}, ${size} см?`,
+        `Вы дейсвительно хотите удалить пиццу:\n${name}, ${type}, ${size} см?`
       )
     )
       dispatch(removeItem(item))

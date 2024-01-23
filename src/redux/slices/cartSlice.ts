@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { ICartItem } from '../../components/PizzaBlock'
+import {
+  ICartItem,
+  TCartAddItem,
+  TCartItemAction,
+} from '../../components/CartItem'
 import { findItem } from '../../utils/findItemCart'
 import { updateState } from '../../utils/updateStateCart'
 import { RootState } from '../store'
@@ -21,10 +25,10 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<ICartItem>) => {
+    addItem: (state, action: PayloadAction<TCartItemAction & TCartAddItem>) => {
       const foundItem = findItem(state, action.payload)
 
-      if (foundItem.count) {
+      if (foundItem && foundItem.count > 0) {
         foundItem.count++
       } else {
         state.itemsState.push({
@@ -35,20 +39,20 @@ const cartSlice = createSlice({
       updateState(state)
     },
 
-    minusItem: (state, action: PayloadAction) => {
+    minusItem: (state, action: PayloadAction<TCartItemAction>) => {
       const foundItem = findItem(state, action.payload)
 
-      if (foundItem && foundItem.count > 1) {
+      if (foundItem && foundItem.count) {
         foundItem.count--
       }
       updateState(state)
     },
-    removeItem: (state, { payload }) => {
+    removeItem: (state, action: PayloadAction<TCartItemAction>) => {
       state.itemsState = state.itemsState.filter((obj) => {
         return !(
-          obj.id === payload.id &&
-          obj.size === payload.size &&
-          obj.type === payload.type
+          obj.id === action.payload.id &&
+          obj.size === action.payload.size &&
+          obj.type === action.payload.type
         )
       })
       updateState(state)

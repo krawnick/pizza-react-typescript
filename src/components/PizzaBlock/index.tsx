@@ -2,21 +2,20 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import AddIcon from './addIcon.svg'
-import styles from './PizzaBlock.module.scss'
-import { IPizzaBlockProps } from './PizzaBlock.props'
-
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem, selectorCart } from '../../redux/slices/cartSlice'
 import { Button } from '../Button'
+import { ICartItem } from '../CartItem'
 
-export interface ICartItem {
+import { ReactComponent as AddIcon } from './addIcon.svg'
+import styles from './PizzaBlock.module.scss'
+
+export interface IPizzaBlockProps {
   id: string
-  name: string
   price: number
   imageUrl: string
-  type: string
-  size: number
-  count?: number
+  name: string
+  sizes: number[]
+  types: number[]
 }
 
 export const PizzaBlock = ({
@@ -29,7 +28,7 @@ export const PizzaBlock = ({
 }: IPizzaBlockProps): JSX.Element => {
   const dispatch = useDispatch()
 
-  const { itemsState } = useSelector((state) => state.cart)
+  const { itemsState } = useSelector(selectorCart)
 
   const countId = itemsState.reduce(
     (sum: number, item: { count: number; id: string }) => {
@@ -42,7 +41,7 @@ export const PizzaBlock = ({
     0
   )
 
-  const typeNames: ICartItem['type'][] = ['тонкое', 'традиционное']
+  const typeNames = ['тонкое', 'традиционное']
   const [activeType, setActiveType] = useState<number>(0)
   const [activeSize, setActiveSize] = useState<number>(0)
 
@@ -51,7 +50,7 @@ export const PizzaBlock = ({
   }
 
   const addPizzaToCart = () => {
-    const item: ICartItem = {
+    const item: Omit<ICartItem, 'count'> = {
       id,
       name,
       price: pizzaPriceSize(),
@@ -59,6 +58,7 @@ export const PizzaBlock = ({
       type: typeNames[activeType],
       size: sizes[activeSize],
     }
+
     dispatch(addItem(item))
   }
 

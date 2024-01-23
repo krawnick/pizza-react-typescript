@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom'
 
+import { Header } from '../../components/Header'
+
 import styles from './MainLayout.module.scss'
 
-import { Header } from '../../components/Header'
 
 export const MainLayout = (): JSX.Element => {
   return (

@@ -1,28 +1,18 @@
 {
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
+  "root": true,
+  "env": { "browser": true, "es2020": true },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:import/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript"
+    "plugin:react-hooks/recommended"
   ],
-  "plugins": ["@typescript-eslint", "react"],
+  "ignorePatterns": [],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh", "import"],
   "rules": {
-    "prettier/prettier": [
+    "react-refresh/only-export-components": [
       "warn",
-      {
-        "semi": false,
-        "singleQuote": true
-      }
+      { "allowConstantExport": true }
     ],
     "import/order": [
       "error",
@@ -31,9 +21,15 @@
           "order": "asc",
           "caseInsensitive": true
         },
-
-        "groups": [["internal", "external"], "sibling"],
-        "newlines-between": "always-and-inside-groups"
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always"
       }
     ]
   }

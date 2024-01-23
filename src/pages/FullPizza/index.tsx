@@ -1,15 +1,13 @@
 import axios from 'axios'
 import cn from 'classnames'
-
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import styles from './FullPizza.module.scss'
-
-import { IFullPizzaProps, IPizza } from './FullPizza.props'
-
 import { Button } from '../../components/Button'
-import BackIcon from '../Cart/icons/backIcon.svg'
+import { ReactComponent as BackIcon } from '../Cart/icons/backIcon.svg'
+
+import styles from './FullPizza.module.scss'
+import { IFullPizzaProps, IPizza } from './FullPizza.props'
 
 export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
   const navigate = useNavigate()
@@ -22,7 +20,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
     async function fetchPizza() {
       try {
         const { data } = await axios.get(
-          `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/${id}`,
+          `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/${id}`
         )
         setPizza(data)
       } catch (error) {

@@ -1,16 +1,15 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import styles from './Home.module.scss'
-
 import { Categories } from '../../components/Categories/'
 import { Pagination } from '../../components/Pagination/'
 import { PizzaBlock } from '../../components/PizzaBlock/'
 import { Skeleton } from '../../components/PizzaBlock/Skeleton'
 import { Sort } from '../../components/Sort/index'
-
 import { setPage } from '../../redux/slices/filterSlice'
 import { fetchPizzas } from '../../redux/slices/pizzasSlice'
+
+import styles from './Home.module.scss'
 
 export const Home = (): JSX.Element => {
   const dispatch = useDispatch()

@@ -1,14 +1,15 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import CartIcon from './cartIcon.svg'
 
-import styles from './Header.module.scss'
 
-import LogoSvg from '../../assets/pizza-logo.svg'
+import { ReactComponent as LogoSvg } from '../../assets/pizza-logo.svg'
 import { selectorCart } from '../../redux/slices/cartSlice'
 import { Button } from '../Button'
 import { Search } from '../Search'
+
+import { ReactComponent as CartIcon } from './cartIcon.svg'
+import styles from './Header.module.scss'
 
 export const Header = (): JSX.Element => {
   const { totalPriceState, totalCountState } = useSelector(selectorCart)
