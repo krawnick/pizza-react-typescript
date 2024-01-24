@@ -6,7 +6,7 @@ import { Button } from '../../components/Button'
 import { CartEmpty } from '../../components/CartEmpty'
 import { CartItem } from '../../components/CartItem'
 import { ReactComponent as CartIcon } from '../../components/Header/cartIcon.svg'
-import { cleartItems } from '../../redux/slices/cartSlice'
+import { cleartItems, selectorCart } from '../../redux/slices/cartSlice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Cart.module.scss'
@@ -15,9 +15,8 @@ import { ReactComponent as CartClearIcon } from './icons/cartClearIcon.svg'
 
 export const Cart = (): JSX.Element => {
   const dispatch = useAppDispatch()
-  const { itemsState, totalCountState, totalPriceState } = useSelector(
-    (state) => state.cart
-  )
+  const { itemsState, totalCountState, totalPriceState } =
+    useSelector(selectorCart)
 
   const onCleartCart = () => {
     if (confirm('Вы хотите очистить корзину?')) {

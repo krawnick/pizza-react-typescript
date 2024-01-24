@@ -60,7 +60,7 @@ export const PizzaBlock = ({
       size: sizes[activeSize],
     }
 
-    dispatch(addItem(item))
+    dispatch(addItem(item as ICartItem))
   }
 
   return (
