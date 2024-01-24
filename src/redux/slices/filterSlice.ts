@@ -1,18 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+import { TSortList } from '../../components/Sort'
 import { RootState } from '../store'
-
-type TSort = {
-  name: string
-  sortProperty: 'rating' | 'price' | 'name'
-  desc?: boolean
-}
 
 interface IFilterState {
   categoryState: number
   paginationState: number
   searchState: string
-  sortState: TSort
+  sortState: TSortList
 }
 
 const initialState: IFilterState = {
@@ -32,7 +27,7 @@ const filterSlice = createSlice({
     clearValueSearch: (state) => {
       state.searchState = initialState.searchState
     },
-    setSort: (state, action: PayloadAction<TSort>) => {
+    setSort: (state, action: PayloadAction<TSortList>) => {
       state.sortState = action.payload
     },
     setCategoryId: (state, action: PayloadAction<number>) => {
@@ -46,6 +41,7 @@ const filterSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.paginationState = action.payload
     },
+    resetFilter: () => initialState,
   },
 })
 
@@ -57,6 +53,7 @@ export const {
   setPage,
   setSort,
   setValueSearch,
+  resetFilter,
 } = filterSlice.actions
 
 export const filterReducer = filterSlice.reducer

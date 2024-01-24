@@ -1,12 +1,12 @@
-import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
+import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 
 import styles from './CartItem.module.scss'
 import { ReactComponent as MinusIcon } from './icons/minusIcon.svg'
 import { ReactComponent as PlusIcon } from './icons/plusIcon.svg'
-
 
 export interface ICartItem {
   id: string
@@ -34,7 +34,7 @@ export const CartItem = ({
   type,
   imageUrl,
 }: ICartItem): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const item: TCartItemAction = {
     id,
@@ -43,7 +43,7 @@ export const CartItem = ({
   }
 
   const onClickPlus = () => {
-    dispatch(addItem(item))
+    dispatch(addItem(item as ICartItem))
   }
 
   const onClickMinus = () => {
@@ -61,7 +61,13 @@ export const CartItem = ({
 
   return (
     <div className={styles.cartItem}>
-      <img className={styles.cartItemImage} src={imageUrl} alt="pizza-image" />
+      <Link to={`/pizza/${id}`}>
+        <img
+          className={styles.cartItemImage}
+          src={imageUrl}
+          alt="pizza-image"
+        />
+      </Link>
       <div className={styles.cartItemLabel}>
         <h2 className={styles.cartItemTitle}>{name}</h2>
         <span className={styles.cartItemInfo}>{`${size} см, ${type}`}</span>

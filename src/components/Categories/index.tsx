@@ -1,14 +1,17 @@
 import cn from 'classnames'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { setCategoryId, selectorFilter } from '../../redux/slices/filterSlice'
+import { useAppDispatch } from '../../redux/store'
 
 import styles from './Categories.module.scss'
-import { ICategoriesProps } from './Categories.props'
 
+export interface ICategoriesProps {
+  className: string
+}
 
 export const Categories = ({ className }: ICategoriesProps): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { categoryState } = useSelector(selectorFilter)
 
   const categories = [

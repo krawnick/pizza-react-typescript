@@ -7,7 +7,18 @@ import { Button } from '../../components/Button'
 import { ReactComponent as BackIcon } from '../Cart/icons/backIcon.svg'
 
 import styles from './FullPizza.module.scss'
-import { IFullPizzaProps, IPizza } from './FullPizza.props'
+
+interface IFullPizzaProps {
+  className?: string
+}
+
+interface IPizza {
+  imageUrl: string
+  name: string
+  sizes: number[]
+  types: number[]
+  price: number
+}
 
 export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
   const navigate = useNavigate()

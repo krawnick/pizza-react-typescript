@@ -5,7 +5,8 @@
   margin: 50px auto;
 
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 60%);
 
   @media (width <= 425px) {
     width: 100%;

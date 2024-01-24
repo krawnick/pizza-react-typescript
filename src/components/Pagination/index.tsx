@@ -5,8 +5,11 @@ import { useSelector } from 'react-redux'
 import { selectorFilter } from '../../redux/slices/filterSlice'
 
 import styles from './Pagination.module.scss'
-import { IPaginationProps } from './Pagination.props'
 
+interface IPaginationProps {
+  className: string
+  onChangePage: (page: number) => void
+}
 
 export const Pagination = ({
   className,

@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import {
-  ICartItem,
-  TCartAddItem,
-  TCartItemAction,
-} from '../../components/CartItem'
+import { ICartItem, TCartItemAction } from '../../components/CartItem'
 import { findItem } from '../../utils/findItemCart'
 import { updateState } from '../../utils/updateStateCart'
 import { RootState } from '../store'
@@ -25,7 +21,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<TCartItemAction & TCartAddItem>) => {
+    addItem: (state, action: PayloadAction<ICartItem>) => {
       const foundItem = findItem(state, action.payload)
 
       if (foundItem && foundItem.count > 0) {

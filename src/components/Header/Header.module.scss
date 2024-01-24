@@ -2,7 +2,7 @@
 @import "../../scss/libs/normalize";
 
 .header {
-  padding: 40px 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid $gray-line;
 
   .container {
@@ -13,17 +13,18 @@
 
   &Logo {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 
     svg {
-      width: 38px;
-      margin-right: 15px;
+      width: 200px;
+      height: 70px;
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
       color: $black;
-      text-transform: uppercase;
       letter-spacing: 1%;
     }
 

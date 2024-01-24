@@ -1,20 +1,25 @@
 import cn from 'classnames'
 import debounce from 'lodash.debounce'
 import { useCallback, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 import {
   setValueSearch,
   clearValueSearch,
 } from '../../redux/slices/filterSlice'
+import { useAppDispatch } from '../../redux/store'
 
 import { ReactComponent as Cross } from './icons/cross.svg'
 import { ReactComponent as SearchIcon } from './icons/search.svg'
 import styles from './Search.module.scss'
-import { ISearchProps, TElementEvent } from './Search.props'
+
+interface ISearchProps {
+  className: string
+}
+
+type TElementEvent = React.ChangeEvent<HTMLInputElement>
 
 export const Search = ({ className }: ISearchProps): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const inputRef = useRef<HTMLInputElement>(null)
   const [localValueSearch, setLocalValueSearch] = useState('')

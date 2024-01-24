@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
@@ -7,13 +7,14 @@ import { CartEmpty } from '../../components/CartEmpty'
 import { CartItem } from '../../components/CartItem'
 import { ReactComponent as CartIcon } from '../../components/Header/cartIcon.svg'
 import { cleartItems } from '../../redux/slices/cartSlice'
+import { useAppDispatch } from '../../redux/store'
 
 import styles from './Cart.module.scss'
 import { ReactComponent as BackIcon } from './icons/backIcon.svg'
 import { ReactComponent as CartClearIcon } from './icons/cartClearIcon.svg'
 
 export const Cart = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { itemsState, totalCountState, totalPriceState } = useSelector(
     (state) => state.cart
   )

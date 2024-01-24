@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 import { selectorFilter, setSort } from '../../redux/slices/filterSlice'
+import { useAppDispatch } from '../../redux/store'
 
 import styles from './Sort.module.scss'
 import { ReactComponent as SortIcon } from './sortIcon.svg'
 
-
-type TSortList = {
+export type TSortList = {
   name: string
-  sortProperty: string
+  sortProperty: 'rating' | 'price' | 'name'
   desc?: boolean
 }
 
@@ -24,7 +24,7 @@ const sortList: TSortList[] = [
 ]
 
 export const Sort = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { sortState } = useSelector(selectorFilter)
 
   const [openSort, setOpenSort] = useState(false)

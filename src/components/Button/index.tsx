@@ -1,7 +1,22 @@
 import cn from 'classnames'
+import { ReactNode } from 'react'
 
 import styles from './Button.module.scss'
-import { IButtonProps } from './Button.props'
+
+interface IButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  className: string
+  children: ReactNode
+  theme:
+    | 'orange'
+    | 'outline-orange'
+    | 'outline-gray'
+    | 'outline-action-gray'
+    | 'outline-action-orange'
+}
 
 export const Button = ({
   children,
