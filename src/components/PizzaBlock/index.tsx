@@ -7,7 +7,6 @@ import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 import { ICartItem } from '../CartItem'
 
-import { ReactComponent as AddIcon } from './addIcon.svg'
 import styles from './PizzaBlock.module.scss'
 
 export interface IPizzaBlockProps {
@@ -101,16 +100,8 @@ export const PizzaBlock = ({
       </div>
       <div className={styles.pizzaBlockBottom}>
         <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
-        <Button
-          className={(styles.buttonOutline, styles.buttonAdd)}
-          theme="outline-orange"
-          onClick={addPizzaToCart}
-        >
-          <div>
-            <AddIcon className={styles.addIcon} />
-            <span>Добавить</span>
-            {countId > 0 ? <i>{countId}</i> : false}
-          </div>
+        <Button theme="button-add" count={countId} onClick={addPizzaToCart}>
+          <span>Добавить</span>
         </Button>
       </div>
     </div>

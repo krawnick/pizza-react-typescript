@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
-import { ReactComponent as BackIcon } from '../Cart/icons/backIcon.svg'
 
 import styles from './FullPizza.module.scss'
 
@@ -103,8 +102,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
 
         <p className={styles.fullPizzaPrice}>от {price} ₽</p>
         <Link to="/">
-          <Button className={styles.goBackButton} theme="outline-gray">
-            <BackIcon />
+          <Button className={styles.goBackButton} theme="button-back">
             Вернуться назад
           </Button>
         </Link>

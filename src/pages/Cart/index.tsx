@@ -10,7 +10,6 @@ import { cleartItems, selectorCart } from '../../redux/slices/cartSlice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Cart.module.scss'
-import { ReactComponent as BackIcon } from './icons/backIcon.svg'
 import { ReactComponent as CartClearIcon } from './icons/cartClearIcon.svg'
 
 export const Cart = (): JSX.Element => {
@@ -61,13 +60,10 @@ export const Cart = (): JSX.Element => {
           </div>
           <div className={styles.cartBottomButtons}>
             <Link to="/">
-              <Button className={styles.goBackButton} theme="outline-gray">
-                <BackIcon />
-                <span>Вернуться назад</span>
-              </Button>
+              <Button theme="button-back">Вернуться назад</Button>
             </Link>
             <Button className={styles.payButton} theme="orange">
-              <span>Оплатить сейчас</span>
+              Оплатить сейчас
             </Button>
           </div>
         </div>

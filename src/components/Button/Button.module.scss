@@ -8,9 +8,10 @@
 
   display: inline-block;
 
-  min-width: 100px;
   padding: 10px 20px;
 
+  font-size: 16px;
+  font-weight: 600;
   text-align: center;
 
   border: 1px solid transparent;
@@ -31,28 +32,104 @@
     transition: all $duration ease-in-out;
   }
 
-  span {
-    font-size: 16px;
-    font-weight: 600;
-  }
-}
+  &Orange {
+    background-color: $orange;
 
-.buttonOrange {
-  background-color: $orange;
+    &,
+    span {
+      color: $white;
+    }
 
-  &,
-  span {
-    color: $white;
+    &:hover {
+      background-color: darken($orange, 8%);
+    }
+
+    &:active {
+      background-color: darken($orange, 12%);
+    }
   }
 
-  &:hover {
-    background-color: darken($orange, 8%);
+  &Add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 160px;
+
+    background-color: $white;
+    border-color: $orange;
+
+    &:active {
+      background-color: darken($orange, 8%);
+    }
+
+    span {
+      color: $orange;
+    }
+
+    svg {
+      margin-right: 5px;
+      fill: $orange;
+      transition: 0.05s;
+    }
+
+    &:hover {
+      background-color: $orange;
+
+      span {
+        color: $white;
+      }
+
+      svg {
+        fill: $white;
+        transition: 0.05s;
+      }
+
+      i {
+        color: $orange;
+        background-color: #fff;
+      }
+    }
+
+    i {
+      display: inline-block;
+      order: 3;
+
+      width: 22px;
+      height: 22px;
+      margin-left: 5px;
+
+      font-size: 13px;
+      font-weight: 600;
+      font-style: normal;
+      line-height: 22px;
+      color: $white;
+
+      background-color: $orange;
+      border-radius: 30px;
+    }
   }
 
-  &:active {
-    transform: translateY(1px);
-    background-color: darken($orange, 12%);
+  &Back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $transparent;
+    border: 1px solid $gray;
+
+    svg {
+      margin-right: 10px;
+    }
+
+    &:hover {
+      color: $white;
+      background-color: $black;
+      border-color: $transparent;
+    }
   }
+
+  // next
 }
 
 .buttonOutlineGray {
@@ -70,28 +147,6 @@
 
   &:hover {
     background-color: $black;
-
-    span {
-      color: $white;
-    }
-  }
-}
-
-.buttonOutlineOrange {
-  background-color: $white;
-  border-color: $orange;
-
-  span {
-    color: $orange;
-  }
-
-  &:active {
-    transform: translateY(1px);
-    background-color: darken($orange, 8%);
-  }
-
-  &:hover {
-    background-color: $orange;
 
     span {
       color: $white;

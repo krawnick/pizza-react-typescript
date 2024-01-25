@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 import cartEmptyImg from '../../assets/empty-cart.png'
-import { ReactComponent as BackIcon } from '../../pages/Cart/icons/backIcon.svg'
 import { Button } from '../Button'
 
 import styles from './CartEmpty.module.scss'
@@ -18,9 +17,8 @@ export const CartEmpty = (): JSX.Element => {
       <img src={cartEmptyImg} alt="Empty cart" />
 
       <Link to="/">
-        <Button className={styles.goBackButton} theme="outline-gray">
-          <BackIcon />
-          <span>Вернуться назад</span>
+        <Button className={styles.backButton} theme="button-back">
+          Вернуться назад
         </Button>
       </Link>
     </div>
