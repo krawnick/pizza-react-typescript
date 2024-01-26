@@ -32,7 +32,7 @@
     transition: all $duration ease-in-out;
   }
 
-  &Orange {
+  &Default {
     background-color: $orange;
 
     &,
@@ -129,67 +129,84 @@
     }
   }
 
+  &Action {
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+
+    background-color: $transparent;
+    border: 3px solid $transparent;
+
+    svg {
+      position: relative;
+      top: 1px;
+      fill: $black;
+    }
+
+    &Minus {
+      border-color: $gray;
+
+      &:hover {
+        background-color: $black;
+        border-color: $transparent;
+
+        svg {
+          fill: $white;
+        }
+      }
+    }
+
+    &Plus {
+      border-color: $orange;
+
+      &:hover {
+        background-color: $orange;
+
+        svg {
+          fill: $white;
+        }
+      }
+    }
+
+    &Reset {
+      rotate: 45deg;
+      border-color: $gray;
+
+      &:hover {
+        background-color: $black;
+        border-color: $transparent;
+
+        svg {
+          fill: $white;
+        }
+      }
+    }
+  }
+
   // next
 }
 
-.buttonOutlineGray {
-  background-color: $transparent;
-  border-color: $gray;
+// .buttonOutlineGray {
+//   background-color: $transparent;
+//   border-color: $gray;
 
-  *span {
-    color: darken($gray, 30%);
-  }
+//   *span {
+//     color: darken($gray, 30%);
+//   }
 
-  &:active {
-    transform: translateY(1px);
-    background-color: lighten($black, 10%);
-  }
+//   &:active {
+//     transform: translateY(1px);
+//     background-color: lighten($black, 10%);
+//   }
 
-  &:hover {
-    background-color: $black;
+//   &:hover {
+//     background-color: $black;
 
-    span {
-      color: $white;
-    }
-  }
-}
+//     span {
+//       color: $white;
+//     }
+//   }
+// }
 
 .buttonOutlineAction {
-  min-width: 40px;
-  height: 40px;
-  padding: 0;
-
-  background-color: $transparent;
-  border: 3px solid $transparent;
-
-  svg {
-    position: relative;
-    top: 1px;
-    fill: $black;
-  }
-
-  &Gray {
-    border-color: $gray;
-
-    &:hover {
-      background-color: $black;
-      border-color: $transparent;
-
-      svg {
-        fill: $white;
-      }
-    }
-  }
-
-  &Orange {
-    border-color: $orange;
-
-    &:hover {
-      background-color: $orange;
-
-      svg {
-        fill: $white;
-      }
-    }
-  }
 }

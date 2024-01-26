@@ -100,7 +100,7 @@ export const PizzaBlock = ({
       </div>
       <div className={styles.pizzaBlockBottom}>
         <div className={styles.pizzaBlockPrice}>от {pizzaPriceSize()} ₽</div>
-        <Button theme="button-add" count={countId} onClick={addPizzaToCart}>
+        <Button appearance="add" count={countId} onClick={addPizzaToCart}>
           <span>Добавить</span>
         </Button>
       </div>

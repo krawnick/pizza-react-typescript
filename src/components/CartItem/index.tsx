@@ -5,8 +5,6 @@ import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 
 import styles from './CartItem.module.scss'
-import { ReactComponent as MinusIcon } from './icons/minusIcon.svg'
-import { ReactComponent as PlusIcon } from './icons/plusIcon.svg'
 
 export interface ICartItem {
   id: string
@@ -76,27 +74,21 @@ export const CartItem = ({
         <Button
           onClick={onClickMinus}
           className={styles.cartItemMinus}
-          theme="outline-action-gray"
-        >
-          <MinusIcon />
-        </Button>
+          appearance="action-minus"
+        ></Button>
         <span className={styles.cartItemQuantity}>{count}</span>
         <Button
           onClick={onClickPlus}
           className={styles.cartItemPlus}
-          theme="outline-action-orange"
-        >
-          <PlusIcon />
-        </Button>
+          appearance="action-plus"
+        ></Button>
       </div>
       <span className={styles.cartItemPrice}>{price * count} ₽</span>
       <Button
         onClick={onClickRemove}
         className={styles.cartItemRemove}
-        theme="outline-action-gray"
-      >
-        <PlusIcon />
-      </Button>
+        appearance="action-reset"
+      ></Button>
     </div>
   )
 }

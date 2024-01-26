@@ -60,9 +60,9 @@ export const Cart = (): JSX.Element => {
           </div>
           <div className={styles.cartBottomButtons}>
             <Link to="/">
-              <Button theme="button-back">Вернуться назад</Button>
+              <Button appearance="back">Вернуться назад</Button>
             </Link>
-            <Button className={styles.payButton} theme="orange">
+            <Button className={styles.payButton} appearance="default">
               Оплатить сейчас
             </Button>
           </div>

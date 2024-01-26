@@ -17,7 +17,7 @@ export const CartEmpty = (): JSX.Element => {
       <img src={cartEmptyImg} alt="Empty cart" />
 
       <Link to="/">
-        <Button className={styles.backButton} theme="button-back">
+        <Button className={styles.backButton} appearance="back">
           Вернуться назад
         </Button>
       </Link>

@@ -34,7 +34,7 @@ export const Header = (): JSX.Element => {
         <Search className={styles.search} />
         <div className={styles.headerCart}>
           <Link to="/cart">
-            <Button theme="orange" className={styles.buttonCart}>
+            <Button appearance="default" className={styles.buttonCart}>
               <span>{totalPriceState}&nbsp;₽</span>
               <div className={styles.buttonDelimiter}></div>
               <CartIcon />

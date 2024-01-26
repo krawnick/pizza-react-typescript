@@ -102,7 +102,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
 
         <p className={styles.fullPizzaPrice}>от {price} ₽</p>
         <Link to="/">
-          <Button className={styles.goBackButton} theme="button-back">
+          <Button className={styles.goBackButton} appearance="back">
             Вернуться назад
           </Button>
         </Link>

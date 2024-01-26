@@ -4,6 +4,8 @@ import { ReactNode } from 'react'
 import styles from './Button.module.scss'
 import { ReactComponent as AddIcon } from './icons/addIcon.svg'
 import { ReactComponent as BackIcon } from './icons/backIcon.svg'
+import { ReactComponent as MinusIcon } from './icons/minusIcon.svg'
+import { ReactComponent as PlusIcon } from './icons/plusIcon.svg'
 
 interface IButtonProps
   extends React.DetailedHTMLProps<
@@ -12,19 +14,20 @@ interface IButtonProps
   > {
   className?: string
   count?: number
-  children: ReactNode
-  theme:
-    | 'orange'
-    | 'button-add'
-    | 'button-back'
-    | 'outline-action-s'
-    | 'outline-action-orange'
+  children?: ReactNode
+  appearance:
+    | 'default'
+    | 'add'
+    | 'back'
+    | 'action-minus'
+    | 'action-plus'
+    | 'action-reset'
 }
 
 export const Button = ({
   children,
   className,
-  theme,
+  appearance,
   count,
   ...props
 }: IButtonProps) => {
@@ -33,24 +36,29 @@ export const Button = ({
   return (
     <button
       className={cn(styles.button, className, {
-        [styles.buttonOrange]: theme === 'orange',
+        [styles.buttonDefault]: appearance === 'default',
 
-        [styles.buttonAdd]: theme === 'button-add',
-        [styles.buttonBack]: theme === 'button-back',
+        [styles.buttonAdd]: appearance === 'add',
+        [styles.buttonBack]: appearance === 'back',
 
-        [styles.buttonOutlineAction]: theme.includes('outline-action'),
-        [styles.buttonOutlineActionGray]: theme === 'outline-action-gray',
-        [styles.buttonOutlineActionOrange]: theme === 'outline-action-orange',
+        [styles.buttonAction]: appearance.includes('action'),
+        [styles.buttonActionMinus]: appearance === 'action-minus',
+        [styles.buttonActionPlus]: appearance === 'action-plus',
+        [styles.buttonActionReset]: appearance === 'action-reset',
       })}
       {...props}
     >
-      {theme === 'button-add' && (
+      {appearance === 'add' && (
         <>
           <AddIcon className={styles.addIcon} />
           {countId}
         </>
       )}
-      {theme === 'button-back' && <BackIcon />}
+      {appearance === 'back' && <BackIcon />}
+
+      {appearance === 'action-minus' ? <MinusIcon /> : null}
+      {appearance === 'action-plus' ? <PlusIcon /> : null}
+      {appearance === 'action-reset' ? <PlusIcon /> : null}
 
       {children}
     </button>
