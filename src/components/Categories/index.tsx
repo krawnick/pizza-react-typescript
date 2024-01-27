@@ -1,43 +1,53 @@
 import cn from 'classnames'
-import { useSelector } from 'react-redux'
+import { memo } from 'react'
 
-import { setCategoryId, selectorFilter } from '../../redux/slices/filterSlice'
+import { setCategoryId } from '../../redux/slices/filterSlice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Categories.module.scss'
 
 export interface ICategoriesProps {
   className: string
+  value: number
 }
 
-export const Categories = ({ className }: ICategoriesProps): JSX.Element => {
-  const dispatch = useAppDispatch()
-  const { categoryState } = useSelector(selectorFilter)
+const categories = [
+  'Все',
+  'Мясные',
+  'Вегетарианская',
+  'Гриль',
+  'Острые',
+  'Закрытые',
+]
 
-  const categories = [
-    'Все',
-    'Мясные',
-    'Вегетарианская',
-    'Гриль',
-    'Острые',
-    'Закрытые',
-  ]
+export const Categories = memo(
+  ({ className, value }: ICategoriesProps): JSX.Element => {
+    console.log('render Categories')
+    const dispatch = useAppDispatch()
 
-  return (
-    <div className={cn(className, styles.categories)}>
-      <ul>
-        {categories.map((category, index) => {
-          return (
-            <li
-              key={category}
-              onClick={() => dispatch(setCategoryId(index))}
-              className={categoryState === index ? styles.active : ''}
-            >
-              {category}
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
-}
+    return (
+      <div className={cn(className, styles.categories)}>
+        <ul>
+          {categories.map((category, index) => {
+            return (
+              <li
+                key={category}
+                onClick={() => dispatch(setCategoryId(index))}
+                className={value === index ? styles.active : ''}
+              >
+                {category}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  },
+  (prevProps, nextProps) => {
+    if (nextProps.value !== prevProps.value) {
+      return false
+    } else {
+      return true
+    }
+  }
+)

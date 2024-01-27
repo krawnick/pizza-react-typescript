@@ -38,7 +38,7 @@ const cartSlice = createSlice({
     minusItem: (state, action: PayloadAction<TCartItemAction>) => {
       const foundItem = findItem(state, action.payload)
 
-      if (foundItem && foundItem.count) {
+      if (foundItem && foundItem.count > 1) {
         foundItem.count--
       }
       updateState(state)

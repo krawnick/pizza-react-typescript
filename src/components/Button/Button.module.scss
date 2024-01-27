@@ -21,6 +21,17 @@
     background-color $duration ease-in-out,
     border-color $duration ease-in-out;
 
+  &:disabled {
+    pointer-events: none;
+    color: $gray-line;
+    background-color: $gray;
+    border-color: $gray;
+
+    svg {
+      fill: $gray-line;
+    }
+  }
+
   &:active {
     transform: translateY(1px);
   }
@@ -182,31 +193,4 @@
       }
     }
   }
-
-  // next
-}
-
-// .buttonOutlineGray {
-//   background-color: $transparent;
-//   border-color: $gray;
-
-//   *span {
-//     color: darken($gray, 30%);
-//   }
-
-//   &:active {
-//     transform: translateY(1px);
-//     background-color: lighten($black, 10%);
-//   }
-
-//   &:hover {
-//     background-color: $black;
-
-//     span {
-//       color: $white;
-//     }
-//   }
-// }
-
-.buttonOutlineAction {
 }

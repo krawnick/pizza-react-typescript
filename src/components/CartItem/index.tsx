@@ -75,6 +75,7 @@ export const CartItem = ({
           onClick={onClickMinus}
           className={styles.cartItemMinus}
           appearance="action-minus"
+          disabled={count === 1 ? true : false}
         ></Button>
         <span className={styles.cartItemQuantity}>{count}</span>
         <Button
