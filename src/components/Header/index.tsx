@@ -1,5 +1,6 @@
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/pizza-logo.svg'
 import { selectorCart } from '../../redux/slices/cartSlice'
@@ -13,11 +14,22 @@ import styles from './Header.module.scss'
 
 export const Header = (): JSX.Element => {
   const dispatch = useAppDispatch()
-  const { totalPriceState, totalCountState } = useSelector(selectorCart)
-
+  const { itemsState, totalCountState, totalPriceState } =
+    useSelector(selectorCart)
+  const location = useLocation()
   const onResetFilter = () => {
     dispatch(resetFilter())
   }
+
+  const isMounted = useRef(false)
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(itemsState)
+      localStorage.setItem('cart', json)
+    }
+    isMounted.current = true
+  }, [itemsState])
 
   return (
     <div className={styles.header}>
@@ -31,7 +43,7 @@ export const Header = (): JSX.Element => {
             </div>
           </div>
         </Link>
-        <Search className={styles.search} />
+        {location.pathname === '/' && <Search className={styles.search} />}
         <div className={styles.headerCart}>
           <Link to="/cart">
             <Button appearance="default" className={styles.buttonCart}>

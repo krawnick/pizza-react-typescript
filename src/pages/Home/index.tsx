@@ -71,7 +71,7 @@ export const Home = (): JSX.Element => {
     <div className={styles.container}>
       <div className={styles.contentTop}>
         <Categories value={categoryState} className={styles.categories} />
-        <Sort />
+        <Sort value={sortState} />
       </div>
       <h2 className={styles.contentTitle}>Все пиццы</h2>
       <div className={styles.contentItems}>{showPizzas()}</div>

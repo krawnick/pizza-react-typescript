@@ -33,16 +33,10 @@ const filterSlice = createSlice({
     setCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryState = action.payload
     },
-    _setValueSearch: (state, action: PayloadAction<string>) => {
+    setValueSearch: (state, action: PayloadAction<string>) => {
       state.categoryState = initialState.categoryState
       state.paginationState = initialState.paginationState
       state.searchState = action.payload
-    },
-    get setValueSearch() {
-      return this._setValueSearch
-    },
-    set setValueSearch(value) {
-      this._setValueSearch = value
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.paginationState = action.payload

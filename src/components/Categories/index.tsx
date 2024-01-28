@@ -22,7 +22,6 @@ const categories = [
 
 export const Categories = memo(
   ({ className, value }: ICategoriesProps): JSX.Element => {
-    console.log('render Categories')
     const dispatch = useAppDispatch()
 
     return (
@@ -44,10 +43,6 @@ export const Categories = memo(
     )
   },
   (prevProps, nextProps) => {
-    if (nextProps.value !== prevProps.value) {
-      return false
-    } else {
-      return true
-    }
+    return nextProps.value !== prevProps.value ? false : true
   }
 )

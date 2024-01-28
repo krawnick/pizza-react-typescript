@@ -6,7 +6,7 @@ import { Button } from '../../components/Button'
 import { CartEmpty } from '../../components/CartEmpty'
 import { CartItem } from '../../components/CartItem'
 import { ReactComponent as CartIcon } from '../../components/Header/cartIcon.svg'
-import { cleartItems, selectorCart } from '../../redux/slices/cartSlice'
+import { clearItems, selectorCart } from '../../redux/slices/cartSlice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Cart.module.scss'
@@ -19,10 +19,9 @@ export const Cart = (): JSX.Element => {
 
   const onCleartCart = () => {
     if (confirm('Вы хотите очистить корзину?')) {
-      dispatch(cleartItems())
+      dispatch(clearItems())
     }
   }
-  console.log('itemsState', itemsState)
 
   if (totalCountState === 0) {
     return <CartEmpty />

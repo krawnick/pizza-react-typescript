@@ -2,19 +2,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { ICartItem, TCartItemAction } from '../../components/CartItem'
 import { findItem } from '../../utils/findItemCart'
-import { updateState } from '../../utils/updateStateCart'
+import { getCartFromLS } from '../../utils/getCartFromLS'
+import { updateStateCart } from '../../utils/updateCartState'
 import { RootState } from '../store'
 
 interface ICartState {
+  itemsState: ICartItem[]
   totalCountState: number
   totalPriceState: number
-  itemsState: ICartItem[]
 }
 
+const { itemsState, totalCountState, totalPriceState } = getCartFromLS()
+
 const initialState: ICartState = {
-  totalCountState: 0,
-  totalPriceState: 0,
-  itemsState: [],
+  itemsState,
+  totalCountState,
+  totalPriceState,
 }
 
 const cartSlice = createSlice({
@@ -32,7 +35,7 @@ const cartSlice = createSlice({
           count: 1,
         })
       }
-      updateState(state)
+      updateStateCart(state)
     },
 
     minusItem: (state, action: PayloadAction<TCartItemAction>) => {
@@ -41,7 +44,7 @@ const cartSlice = createSlice({
       if (foundItem && foundItem.count > 1) {
         foundItem.count--
       }
-      updateState(state)
+      updateStateCart(state)
     },
     removeItem: (state, action: PayloadAction<TCartItemAction>) => {
       state.itemsState = state.itemsState.filter((obj) => {
@@ -51,15 +54,18 @@ const cartSlice = createSlice({
           obj.type === action.payload.type
         )
       })
-      updateState(state)
+      updateStateCart(state)
     },
-    cleartItems: () => initialState,
+    clearItems: (state) => {
+      state.itemsState = []
+      updateStateCart(state)
+    },
   },
 })
 
 // Actions, reducer
 
-export const { addItem, minusItem, removeItem, cleartItems } = cartSlice.actions
+export const { addItem, minusItem, removeItem, clearItems } = cartSlice.actions
 
 export const cartReducer = cartSlice.reducer
 

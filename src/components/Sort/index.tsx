@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { memo, useRef, useState } from 'react'
 
 import { useOutsideClick } from '../../hooks/useOutsideClick'
-import { selectorFilter, setSort } from '../../redux/slices/filterSlice'
+import { setSort } from '../../redux/slices/filterSlice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Sort.module.scss'
@@ -23,44 +22,48 @@ const sortList: TSortList[] = [
   { name: 'алфавиту', sortProperty: 'name' },
 ]
 
-export const Sort = (): JSX.Element => {
-  const dispatch = useAppDispatch()
-  const { sortState } = useSelector(selectorFilter)
+export const Sort = memo(
+  ({ value }: { value: TSortList }): JSX.Element => {
+    const dispatch = useAppDispatch()
 
-  const [openSort, setOpenSort] = useState(false)
-  const sortRef = useRef<HTMLDivElement>(null)
+    const [openSort, setOpenSort] = useState(false)
+    const sortRef = useRef<HTMLDivElement>(null)
 
-  useOutsideClick(sortRef, setOpenSort, openSort)
+    useOutsideClick(sortRef, setOpenSort, openSort)
 
-  return (
-    <div ref={sortRef} className={styles.sort} onClick={() => ''}>
-      <div className={styles.sortLabel}>
-        <SortIcon
-          className={openSort ? styles.sortIconActive : styles.sortIcon}
-        />
-        <b>Сортировка по:</b>
-        <span onClick={() => setOpenSort(!openSort)}>{sortState.name}</span>
-      </div>
-      {openSort && (
-        <div className={styles.sortPopup}>
-          <ul>
-            {sortList.map((sort, index) => (
-              <li
-                key={sort.name}
-                onClick={() => {
-                  dispatch(setSort(sort))
-                  setOpenSort(false)
-                }}
-                className={
-                  sortList[index].name === sortState.name ? styles.active : ''
-                }
-              >
-                {sortList[index].name}
-              </li>
-            ))}
-          </ul>
+    return (
+      <div ref={sortRef} className={styles.sort} onClick={() => ''}>
+        <div className={styles.sortLabel}>
+          <SortIcon
+            className={openSort ? styles.sortIconActive : styles.sortIcon}
+          />
+          <b>Сортировка по:</b>
+          <span onClick={() => setOpenSort(!openSort)}>{value.name}</span>
         </div>
-      )}
-    </div>
-  )
-}
+        {openSort && (
+          <div className={styles.sortPopup}>
+            <ul>
+              {sortList.map((sort, index) => (
+                <li
+                  key={sort.name}
+                  onClick={() => {
+                    dispatch(setSort(sort))
+                    setOpenSort(false)
+                  }}
+                  className={
+                    sortList[index].name === value.name ? styles.active : ''
+                  }
+                >
+                  {sortList[index].name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    )
+  },
+  (prevProps, nextProps) => {
+    return nextProps.value.name !== prevProps.value.name ? false : true
+  }
+)
