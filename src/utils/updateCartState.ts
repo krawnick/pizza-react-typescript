@@ -1,10 +1,11 @@
 import { RootState } from '../redux/store'
 
-import { getCartFromLS } from './getCartFromLS'
+export const updateCartState = (state: RootState['cart']) => {
+  state.totalCountState = state.itemsState.reduce((sum, item) => {
+    return sum + item.count
+  }, 0)
 
-export const updateStateCart = (state: RootState['cart']) => {
-  state.totalPriceState = getCartFromLS().totalPriceState
-  state.totalCountState = getCartFromLS().totalCountState
-  console.log('state.totalPriceState', state.totalPriceState)
-  console.log('state.totalCountState', state.totalCountState)
+  state.totalPriceState = state.itemsState.reduce((sum, item) => {
+    return sum + item.count * item.price
+  }, 0)
 }

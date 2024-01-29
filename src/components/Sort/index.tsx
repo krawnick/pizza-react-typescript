@@ -1,7 +1,7 @@
 import { memo, useRef, useState } from 'react'
 
 import { useOutsideClick } from '../../hooks/useOutsideClick'
-import { setSort } from '../../redux/slices/filterSlice'
+import { setSort } from '../../redux/slices/filter/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Sort.module.scss'

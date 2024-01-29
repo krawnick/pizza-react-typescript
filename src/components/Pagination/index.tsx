@@ -2,7 +2,7 @@ import cn from 'classnames'
 import ReactPaginate from 'react-paginate'
 import { useSelector } from 'react-redux'
 
-import { selectorFilter } from '../../redux/slices/filterSlice'
+import { selectorFilter } from '../../redux/slices/filter/selectors'
 
 import styles from './Pagination.module.scss'
 

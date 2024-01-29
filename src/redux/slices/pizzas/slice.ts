@@ -1,23 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-import { IPizzaBlockProps } from '../../components/PizzaBlock'
-import { RootState } from '../store'
-
-interface IPizzas extends IPizzaBlockProps {
-  rating: number
-}
-
-export enum StatusLoading {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-interface IPizzasState {
-  items: IPizzas[]
-  status: StatusLoading
-}
+import { IPizzas, IPizzasState, StatusLoading } from './types'
 
 export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
   'pizzas/fetchPizzas',
@@ -78,6 +62,3 @@ const pizzasSlice = createSlice({
 export const pizzasReducer = pizzasSlice.reducer
 
 // Selectors
-
-export const selectorPizzas = (state: RootState) => state.pizzas.items
-export const selectorPizzasStatus = (state: RootState) => state.pizzas.status

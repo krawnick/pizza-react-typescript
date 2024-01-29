@@ -1,14 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { TSortList } from '../../components/Sort'
-import { RootState } from '../store'
+import { TSortList } from '../../../components/Sort'
 
-interface IFilterState {
-  categoryState: number
-  paginationState: number
-  searchState: string
-  sortState: TSortList
-}
+import { IFilterState } from './types'
 
 const initialState: IFilterState = {
   categoryState: 0,
@@ -59,5 +53,3 @@ export const {
 export const filterReducer = filterSlice.reducer
 
 // Selectors
-
-export const selectorFilter = (state: RootState) => state.filter

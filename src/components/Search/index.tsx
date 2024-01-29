@@ -3,9 +3,9 @@ import debounce from 'lodash.debounce'
 import { useCallback, useRef, useState } from 'react'
 
 import {
-  setValueSearch,
   clearValueSearch,
-} from '../../redux/slices/filterSlice'
+  setValueSearch,
+} from '../../redux/slices/filter/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import { ReactComponent as Cross } from './icons/cross.svg'

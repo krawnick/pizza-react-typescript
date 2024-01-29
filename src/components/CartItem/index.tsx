@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice'
+import { addItem, minusItem, removeItem } from '../../redux/slices/cart/slice'
 import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 

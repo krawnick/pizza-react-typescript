@@ -1,20 +1,10 @@
-import { ICartItem } from '../components/CartItem'
+import { ICartState } from '../redux/slices/cartSlice'
 
-export const getCartFromLS = () => {
-  const data = localStorage.getItem('cart')
-  const itemsState = data ? JSON.parse(data) : []
+export const getCartFromLS = (): ICartState => {
+  const json = localStorage.getItem('cart')
+  const { itemsState, totalCountState, totalPriceState } = json
+    ? JSON.parse(json)
+    : []
 
-  const totalCountState = itemsState.reduce((sum: number, item: ICartItem) => {
-    return sum + item.count
-  }, 0)
-
-  const totalPriceState = itemsState.reduce((sum: number, item: ICartItem) => {
-    return sum + item.price * item.count
-  }, 0)
-
-  return {
-    itemsState,
-    totalCountState,
-    totalPriceState,
-  }
+  return { itemsState, totalCountState, totalPriceState }
 }

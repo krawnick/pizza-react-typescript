@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/pizza-logo.svg'
-import { selectorCart } from '../../redux/slices/cartSlice'
-import { resetFilter } from '../../redux/slices/filterSlice'
+import { selectorCart } from '../../redux/slices/cart/selectors'
+import { resetFilter } from '../../redux/slices/filter/slice'
 import { useAppDispatch } from '../../redux/store'
 import { Button } from '../Button'
 import { Search } from '../Search'
@@ -25,11 +25,15 @@ export const Header = (): JSX.Element => {
 
   useEffect(() => {
     if (isMounted.current) {
-      const json = JSON.stringify(itemsState)
+      const json = JSON.stringify({
+        itemsState,
+        totalCountState,
+        totalPriceState,
+      })
       localStorage.setItem('cart', json)
     }
     isMounted.current = true
-  }, [itemsState])
+  }, [totalPriceState])
 
   return (
     <div className={styles.header}>

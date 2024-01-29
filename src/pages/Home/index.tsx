@@ -5,13 +5,14 @@ import { Pagination } from '../../components/Pagination/'
 import { PizzaBlock } from '../../components/PizzaBlock/'
 import { Skeleton } from '../../components/PizzaBlock/Skeleton'
 import { Sort } from '../../components/Sort/index'
-import { selectorFilter, setPage } from '../../redux/slices/filterSlice'
+import { selectorFilter } from '../../redux/slices/filter/selectors'
+import { setPage } from '../../redux/slices/filter/slice'
 import {
-  StatusLoading,
-  fetchPizzas,
   selectorPizzas,
   selectorPizzasStatus,
-} from '../../redux/slices/pizzasSlice'
+} from '../../redux/slices/pizzas/selectors'
+import { fetchPizzas } from '../../redux/slices/pizzas/slice'
+import { StatusLoading } from '../../redux/slices/pizzas/types'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
 
 import styles from './Home.module.scss'

@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { memo } from 'react'
 
-import { setCategoryId } from '../../redux/slices/filterSlice'
+import { setCategoryId } from '../../redux/slices/filter/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './Categories.module.scss'
