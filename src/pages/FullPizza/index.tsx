@@ -1,7 +1,6 @@
-import axios from 'axios'
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { Await, Link, useLoaderData } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
 
@@ -19,94 +18,89 @@ interface IPizza {
   price: number
 }
 
-export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
-  const navigate = useNavigate()
-  const { id } = useParams()
-  const [pizza, setPizza] = useState<IPizza>()
-  const sizesPizza = [26, 30, 40]
-  const typesPizza = ['Тонкое', 'Традиционное']
+const sizesPizza = [26, 30, 40]
+const typesPizza = ['Тонкое', 'Традиционное']
 
-  useEffect(() => {
-    async function fetchPizza() {
-      try {
-        const { data } = await axios.get(
-          `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/${id}`
-        )
-        setPizza(data)
-      } catch (error) {
-        alert('Ошибка при получении пиццы')
-        navigate('/')
-      }
-    }
-
-    fetchPizza()
-  }, [])
-
-  if (!pizza) {
-    return <div className={styles.fullPizzaLoading}>Готовим пиццу... 🙂</div>
-  }
-
-  const { name, price, imageUrl, sizes, types } = pizza
+const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
+  const { pizza } = useLoaderData() as { pizza: IPizza }
 
   return (
-    <div className={cn(className, styles.fullPizza, styles.container)}>
-      <div className={styles.fullPizzaBody}>
-        <img className={styles.fullPizzaImage} src={imageUrl} />
-        <h2 className={styles.fullPizzaTitle}>Пицца &quot;{name}&quot;</h2>
-        <p className={styles.fullPizzaDescription}>
-          Описание пиццы необходимо добавить! Описание отсутствует! Описание
-          пиццы необходимо добавить! Описание отсутствует! Описание пиццы
-          необходимо добавить! Описание отсутствует! Описание пиццы необходимо
-          добавить! Описание отсутствует! Описание пиццы необходимо добавить!
-          Описание отсутствует!
-        </p>
-        <div className={styles.fullPizzaParams}>
-          <p>Доступные размеры:</p>
-          <ul className={styles.fullPizzaParamsItems}>
-            {sizesPizza.map((size) => {
-              const checkingSize = sizes.includes(size)
-              return (
-                <li
-                  key={size}
-                  className={cn({
-                    [styles.fullPizzaParamsItem]: true,
-                    [styles.active]: checkingSize,
-                  })}
-                >
-                  {size} см
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+    <React.Suspense
+      fallback={
+        <div className={styles.fullPizzaLoading}>Готовим пиццу... 🙂</div>
+      }
+    >
+      <div className={cn(className, styles.fullPizza, styles.container)}>
+        <div className={styles.fullPizzaBody}>
+          <Await resolve={pizza} errorElement={<div>Ошибка</div>}>
+            {(data) => {
+              console.log(data)
 
-        <div className={styles.fullPizzaParams}>
-          <p>Доступные виды теста:</p>
-          <ul className={styles.fullPizzaParamsItems}>
-            {typesPizza.map((type, index) => {
-              const checkingType = types.includes(index)
               return (
-                <li
-                  key={type}
-                  className={cn({
-                    [styles.fullPizzaParamsItem]: true,
-                    [styles.active]: checkingType,
-                  })}
-                >
-                  {type} тесто
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+                <>
+                  <img className={styles.fullPizzaImage} src={data.imageUrl} />
+                  <h2 className={styles.fullPizzaTitle}>
+                    Пицца &quot;{data.name}&quot;
+                  </h2>
+                  <p className={styles.fullPizzaDescription}>
+                    Описание пиццы необходимо добавить! Описание отсутствует!
+                    Описание пиццы необходимо добавить! Описание отсутствует!
+                    Описание пиццы необходимо добавить! Описание отсутствует!
+                    Описание пиццы необходимо добавить! Описание отсутствует!
+                    Описание пиццы необходимо добавить! Описание отсутствует!
+                  </p>
+                  <div className={styles.fullPizzaParams}>
+                    <p>Доступные размеры:</p>
+                    <ul className={styles.fullPizzaParamsItems}>
+                      {sizesPizza.map((size) => {
+                        const checkingSize = data.sizes.includes(size)
+                        return (
+                          <li
+                            key={size}
+                            className={cn({
+                              [styles.fullPizzaParamsItem]: true,
+                              [styles.active]: checkingSize,
+                            })}
+                          >
+                            {size} см
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
 
-        <p className={styles.fullPizzaPrice}>от {price} ₽</p>
-        <Link to="/">
-          <Button className={styles.goBackButton} appearance="back">
-            Вернуться назад
-          </Button>
-        </Link>
+                  <div className={styles.fullPizzaParams}>
+                    <p>Доступные виды теста:</p>
+                    <ul className={styles.fullPizzaParamsItems}>
+                      {typesPizza.map((type, index) => {
+                        const checkingType = data.types.includes(index)
+                        return (
+                          <li
+                            key={type}
+                            className={cn({
+                              [styles.fullPizzaParamsItem]: true,
+                              [styles.active]: checkingType,
+                            })}
+                          >
+                            {type} тесто
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <p className={styles.fullPizzaPrice}>от {data.price} ₽</p>
+                </>
+              )
+            }}
+          </Await>
+          <Link to="/">
+            <Button className={styles.goBackButton} appearance="back">
+              Вернуться назад
+            </Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </React.Suspense>
   )
 }
+export default FullPizza
