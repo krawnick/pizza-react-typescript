@@ -1,10 +1,20 @@
+import React from 'react'
 import { createBrowserRouter, defer } from 'react-router-dom'
 
 import { MainLayout } from '../layouts/MainLayout'
-import { Cart } from '../pages/Cart'
-import FullPizza from '../pages/FullPizza'
-import { Home } from '../pages/Home'
-import { NotFound } from '../pages/NotFound'
+import { Home, NotFound } from '../pages'
+
+const FullPizza = React.lazy(() =>
+  import(/* webpackChunkName: 'FullPizzaChunk' */ '../pages/FullPizza').then(
+    (module) => ({ default: module.FullPizza })
+  )
+)
+
+const Cart = React.lazy(() =>
+  import(/* webpackChunkName: 'CartChunk' */ '../pages/Cart').then(
+    (module) => ({ default: module.Cart })
+  )
+)
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +24,11 @@ export const router = createBrowserRouter([
       { path: '', element: <Home /> },
       {
         path: 'cart',
-        element: <Cart />,
+        element: (
+          <React.Suspense fallback={<h1>🍕🍕🍕🍕🍕🍕🍕🍕</h1>}>
+            <Cart />
+          </React.Suspense>
+        ),
       },
       {
         loader: async ({ params }) => {

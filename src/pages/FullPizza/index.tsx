@@ -2,7 +2,7 @@ import cn from 'classnames'
 import React from 'react'
 import { Await, Link, useLoaderData } from 'react-router-dom'
 
-import { Button } from '../../components/Button'
+import { Button } from '../../components'
 
 import styles from './FullPizza.module.scss'
 
@@ -21,7 +21,7 @@ interface IPizza {
 const sizesPizza = [26, 30, 40]
 const typesPizza = ['Тонкое', 'Традиционное']
 
-const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
+export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
   const { pizza } = useLoaderData() as { pizza: IPizza }
 
   return (
@@ -103,4 +103,3 @@ const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
     </React.Suspense>
   )
 }
-export default FullPizza

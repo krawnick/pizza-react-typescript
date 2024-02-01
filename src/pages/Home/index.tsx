@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 
-import { Categories } from '../../components/Categories/'
-import { Pagination } from '../../components/Pagination/'
-import { PizzaBlock } from '../../components/PizzaBlock/'
-import { Skeleton } from '../../components/PizzaBlock/Skeleton'
-import { Sort } from '../../components/Sort/index'
+import {
+  Categories,
+  Pagination,
+  PizzaBlock,
+  Skeleton,
+  Sort,
+} from '../../components'
 import { selectorFilter } from '../../redux/slices/filter/selectors'
 import { setPage } from '../../redux/slices/filter/slice'
 import {
