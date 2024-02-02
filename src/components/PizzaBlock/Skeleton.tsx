@@ -1,8 +1,11 @@
 import ContentLoader from 'react-content-loader'
 
+import styles from './PizzaBlock.module.scss'
+
 export const Skeleton = (): JSX.Element => {
   return (
     <ContentLoader
+      className={styles.skeleton}
       speed={2}
       width={280}
       height={466}
@@ -10,11 +13,11 @@ export const Skeleton = (): JSX.Element => {
       backgroundColor="#e9e9e9"
       foregroundColor="#d4d4d4"
     >
-      <circle cx="140" cy="140" r="130" />
-      <rect x="10" y="280" rx="7" ry="7" width="260" height="20" />
+      <circle cx="130" cy="125" r="122" />
+      <rect x="10" y="275" rx="7" ry="7" width="260" height="20" />
       <rect x="10" y="430" rx="7" ry="7" width="80" height="25" />
-      <rect x="120" y="420" rx="10" ry="10" width="150" height="35" />
-      <rect x="10" y="330" rx="9" ry="9" width="260" height="75" />
+      <rect x="120" y="420" rx="20" ry="20" width="150" height="40" />
+      <rect x="10" y="315" rx="15" ry="15" width="260" height="85" />
     </ContentLoader>
   )
 }

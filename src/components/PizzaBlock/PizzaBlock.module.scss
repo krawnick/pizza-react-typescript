@@ -10,7 +10,7 @@
   text-align: center;
 
   // &:not(:nth-of-type(4n)) {
-  // margin-right: 35px;
+  //   margin-right: 35px;
   // }
 
   &Image {
@@ -79,4 +79,8 @@
     line-height: 27px;
     letter-spacing: 0.015em;
   }
+}
+
+.skeleton {
+  margin: 0 auto;
 }
