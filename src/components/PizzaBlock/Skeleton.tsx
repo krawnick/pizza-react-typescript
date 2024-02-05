@@ -8,7 +8,7 @@ export const Skeleton = (): JSX.Element => {
       className={styles.skeleton}
       speed={2}
       width={280}
-      height={466}
+      height={465}
       viewBox="0 0 280 466"
       backgroundColor="#e9e9e9"
       foregroundColor="#d4d4d4"

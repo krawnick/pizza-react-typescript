@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
-import './scss/App.scss'
+import './scss/main.scss'
 
 import { store } from './redux/store'
 import { router } from './router/router'

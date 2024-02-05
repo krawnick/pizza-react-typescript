@@ -1,22 +1,28 @@
+@import "../../scss/variables";
+
 .wrapper {
   width: calc(100vw - 100px);
   max-width: 1400px;
   height: 100%;
   margin: 50px auto;
 
-  background-color: #fff;
+  background-color: $white;
   border-radius: 20px;
   box-shadow: 0 0 30px 1px rgba($color: black, $alpha: 60%);
 
-  @media (width <= 425px) {
+  @media (width <= 800px) {
     width: 100%;
-
-    .header__logo h1 {
-      font-size: 20px;
-    }
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
 .content {
   padding: 30px;
+
+  @media (width <= 425px) {
+    min-height: 100%;
+    padding: 10px;
+  }
 }

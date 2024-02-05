@@ -27,20 +27,12 @@
       color: $black;
       letter-spacing: 1%;
     }
-
-    p {
-      color: lighten($black, 50%);
-
-      @media (width <= 645px) {
-        display: none;
-      }
-    }
   }
 
   .search {
     flex: 1 1 auto;
-    max-width: 500px;
-    margin: 0 30px;
+    max-width: 400px;
+    margin: 10px 30px;
   }
 
   .button {
@@ -68,6 +60,42 @@
       margin-left: 14px;
 
       background-color: $white;
+    }
+  }
+
+  @media (width <= 800px) {
+    .container {
+      flex-wrap: wrap;
+
+      .search {
+        order: 2;
+        width: 100%;
+        margin: 10px auto;
+      }
+    }
+  }
+
+  @media (width <= 425px) {
+    .container {
+      flex-direction: column;
+      justify-content: center;
+
+      .header {
+        &Logo {
+          width: 200px;
+          height: 120px;
+          margin: 20px 0;
+
+          border: 14px $orange outset;
+          border-radius: 30px;
+        }
+      }
+
+      .search {
+        order: 0;
+        width: 100%;
+        margin: 20px auto;
+      }
     }
   }
 }

@@ -2,6 +2,18 @@
 @import "../../scss/libs/normalize";
 
 .categories {
+  width: 100%;
+  padding-bottom: 10px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $orange;
+    border-radius: 8px;
+  }
+
   ul {
     display: flex;
 
@@ -10,8 +22,7 @@
 
       cursor: pointer;
 
-      margin-right: 10px;
-      padding: 13px 30px;
+      padding: 13px 20px;
 
       font-weight: bold;
 
@@ -33,5 +44,13 @@
         background-color: $black;
       }
     }
+
+    li:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  @media (width <= 1300px) {
+    overflow-x: auto;
   }
 }

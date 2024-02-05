@@ -54,4 +54,35 @@
     font-weight: 700;
     text-align: center;
   }
+
+  @media (width <= 425px) {
+    position: relative;
+    flex-direction: column;
+
+    &Label {
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: center;
+
+      .cartItemTitle {
+        width: 100%;
+        font-size: 22px;
+      }
+    }
+
+    &Count {
+      margin-bottom: 10px;
+    }
+
+    &Price {
+      width: 100%;
+      font-size: 18px;
+    }
+
+    &Remove {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+  }
 }

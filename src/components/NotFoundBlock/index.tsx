@@ -3,7 +3,7 @@ import styles from './NotFoundBlock.module.scss'
 export const NotFoundBlock = (): JSX.Element => {
   return (
     <div className={styles.notFoundBlock}>
-      <h1>
+      <h1 className={styles.notFoundBlockTitle}>
         <span>😕</span>
         <br />
         Ничего не найдено

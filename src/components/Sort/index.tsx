@@ -14,12 +14,11 @@ export type TSortList = {
 }
 
 const sortList: TSortList[] = [
-  { name: 'популярности (обратно)', sortProperty: 'rating', desc: true },
-  { name: 'популярности', sortProperty: 'rating' },
-  { name: 'цене (обратно)', sortProperty: 'price', desc: true },
-  { name: 'цене', sortProperty: 'price' },
-  { name: 'алфавиту (обратно)', sortProperty: 'name', desc: true },
-  { name: 'алфавиту', sortProperty: 'name' },
+  { name: 'сначала популярные', sortProperty: 'rating', desc: true },
+  { name: 'сначала дорогие', sortProperty: 'price', desc: true },
+  { name: 'сначала недорогие', sortProperty: 'price' },
+  { name: 'по названию (Я-А)', sortProperty: 'name', desc: true },
+  { name: 'по названию (А-Я)', sortProperty: 'name' },
 ]
 
 export const Sort = memo(
@@ -37,7 +36,7 @@ export const Sort = memo(
           <SortIcon
             className={openSort ? styles.sortIconActive : styles.sortIcon}
           />
-          <b>Сортировка по:</b>
+          <b>Сортировка:</b>
           <span onClick={() => setOpenSort(!openSort)}>{value.name}</span>
         </div>
         {openSort && (

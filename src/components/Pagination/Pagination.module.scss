@@ -39,4 +39,11 @@
       }
     }
   }
+
+  @media (width <= 425px) {
+    li:first-child,
+    li:last-child {
+      display: none;
+    }
+  }
 }

@@ -26,7 +26,7 @@ export const Pagination = ({
       onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={4}
       pageCount={3}
-      previousLabel="< Предыдущая"
+      previousLabel="<"
       renderOnZeroPageCount={null}
     />
   )

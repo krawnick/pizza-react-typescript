@@ -1,0 +1,35 @@
+@import "./variables";
+@import "./libs/normalize";
+
+html {
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darken($white, 10);
+    border-radius: 8px;
+  }
+
+  @media (width <= 800px) {
+    &::-webkit-scrollbar {
+      width: 8px;
+      background-color: $white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $orange;
+      border-radius: 8px;
+    }
+  }
+}
+
+body {
+  background-color: $background;
+
+  @media (width <= 800px) {
+    background-color: $white;
+  }
+}
