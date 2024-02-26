@@ -1,8 +1,9 @@
 @import "./variables";
 @import "./libs/normalize";
 
-html {
+body {
   overflow-x: hidden;
+  background-color: $background;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -24,10 +25,6 @@ html {
       border-radius: 8px;
     }
   }
-}
-
-body {
-  background-color: $background;
 
   @media (width <= 800px) {
     background-color: $white;
