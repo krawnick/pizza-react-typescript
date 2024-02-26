@@ -1,0 +1,56 @@
+@import "../../scss/variables";
+
+.modal {
+  pointer-events: none;
+  pointer-events: all;
+
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba($color: $black, $alpha: 90%);
+
+  transition: $duration;
+  animation: modal $duration ease-in-out forwards;
+
+  &Content {
+    transform: scale(0.5);
+
+    width: 80vw;
+    padding: 20px;
+
+    background-color: $white;
+    border-radius: 20px;
+
+    transition: $duration;
+    animation: content $duration ease-in-out forwards;
+  }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
