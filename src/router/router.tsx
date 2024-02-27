@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const data = await fetch(
-              `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/${params.id}`
+              `${import.meta.env.VITE_API_URL}/${params.id}`
             ).then((res) => res.json())
 
             if (typeof data === 'string') throw Error('Not found')

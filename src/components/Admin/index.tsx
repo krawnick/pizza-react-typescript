@@ -1,8 +1,10 @@
 import cn from 'classnames'
+import { nanoid } from 'nanoid'
 import { useState } from 'react'
 
 import { Button } from '..'
-import { getData } from '../../hooks/useFetch.ts'
+import { data as dataDefault } from '../../assets/defaultData.ts'
+import { fetchData } from '../../utils/fetchData.ts'
 import { Modal } from '../Modal'
 
 import styles from './Admin.module.scss'
@@ -15,7 +17,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   const [modalActive, setModalActive] = useState(false)
 
   const putFetch = async () => {
-    await fetch('https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas/3', {
+    await fetch('http://localhost:5172/pizzas/3', {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -27,10 +29,30 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   }
 
   const resetData = async () => {
-    const data = await getData(
-      'https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas'
-    )
-    console.log(data)
+    const res = await fetch(import.meta.env.VITE_API_URL)
+    const data = await res.json()
+
+    const ids = data
+      .reduce((id, pizza) => {
+        id.push(pizza.id)
+        return id
+      }, [])
+      .sort((a, b) => (Number(a) > Number(b) ? 1 : -1))
+    console.log('ids', ids)
+
+    for (let i = ids.length - 1; i >= 0; i--) {
+      await fetch(import.meta.env.VITE_API_URL + `/${ids[i]}`, {
+        method: 'DELETE',
+      })
+    }
+
+    for (let i = 0; i < dataDefault.length; i++) {
+      await fetch(import.meta.env.VITE_API_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(dataDefault[i]),
+      })
+    }
   }
 
   return (

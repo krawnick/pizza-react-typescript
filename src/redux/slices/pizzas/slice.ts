@@ -9,7 +9,9 @@ export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
   async ({ category, sortBy, order, search, page }, thunkAPI) => {
     try {
       const { data } = await axios.get<IPizzas[]>(
-        `https://6541fc13f0b8287df1ff3ff6.mockapi.io/pizzas?limit=4${page}${search}${category}${sortBy}${order}`
+        `${
+          import.meta.env.VITE_API_URL
+        }?limit=4${page}${search}${category}${sortBy}${order}`
       )
 
       if (data.length === 0) {

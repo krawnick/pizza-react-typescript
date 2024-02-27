@@ -1,4 +1,4 @@
-export const getData = async (url, options?) => {
+export const fetchData = async (url: string, options?: RequestInit) => {
   try {
     const response = await fetch(url, options)
     const data = await response.json()
