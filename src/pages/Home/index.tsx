@@ -13,9 +13,9 @@ import {
   selectorPizzas,
   selectorPizzasStatus,
 } from '../../redux/slices/pizzas/selectors'
-import { fetchPizzas } from '../../redux/slices/pizzas/slice'
 import { StatusLoading } from '../../redux/slices/pizzas/types'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
+import { fetchWithParams } from '../../utils/paramsFetch'
 
 import styles from './Home.module.scss'
 
@@ -28,15 +28,21 @@ export const Home = (): JSX.Element => {
   const { paginationState, searchState, categoryState, sortState } =
     useAppSelector(selectorFilter)
 
-  const getPizzasState = async () => {
-    const category = categoryState > 0 ? `&category=${categoryState}` : ''
-    const sortBy = `&sortBy=${sortState.sortProperty}`
-    const order = sortState.desc ? '&order=desc' : ''
-    const search = searchState ? `&search=${searchState}` : ''
-    const page = `&page=${paginationState}`
-
-    dispatch(fetchPizzas({ category, sortBy, order, search, page }))
+  const getPizzasState = () => {
+    dispatch(
+      fetchWithParams({
+        paginationState,
+        searchState,
+        categoryState,
+        sortState,
+      })
+    )
   }
+
+  useEffect(() => {
+    getPizzasState()
+    window.scrollTo(0, 0)
+  }, [categoryState, sortState, searchState, paginationState])
 
   const showPizzas = () => {
     switch (pizzasStatus) {
@@ -60,11 +66,6 @@ export const Home = (): JSX.Element => {
       }
     }
   }
-
-  useEffect(() => {
-    getPizzasState()
-    window.scrollTo(0, 0)
-  }, [categoryState, sortState, searchState, paginationState])
 
   const onChangePage = (page: number): void => {
     dispatch(setPage(page))
