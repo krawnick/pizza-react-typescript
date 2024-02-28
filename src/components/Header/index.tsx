@@ -21,18 +21,17 @@ export const Header = (): JSX.Element => {
     dispatch(resetFilter())
   }
 
-  const isMounted = useRef(false)
-
+  // const isMounted = useRef(false)
   useEffect(() => {
-    if (isMounted.current) {
-      const json = JSON.stringify({
-        itemsState,
-        totalCountState,
-        totalPriceState,
-      })
-      localStorage.setItem('cart', json)
-    }
-    isMounted.current = true
+    // if (isMounted.current) {
+    const json = JSON.stringify({
+      itemsState,
+      totalCountState,
+      totalPriceState,
+    })
+    localStorage.setItem('cart', json)
+    // }
+    // isMounted.current = true
   }, [totalPriceState])
 
   return (

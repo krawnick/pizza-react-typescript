@@ -15,7 +15,7 @@ import {
 } from '../../redux/slices/pizzas/selectors'
 import { StatusLoading } from '../../redux/slices/pizzas/types'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
-import { fetchWithParams } from '../../utils/paramsFetch'
+import { fetchWithParams } from '../../utils/fetchWithParams'
 
 import styles from './Home.module.scss'
 

@@ -18,7 +18,7 @@ export const Cart = (): JSX.Element => {
   const { itemsState, totalCountState, totalPriceState } =
     useSelector(selectorCart)
 
-  const onCleartCart = () => {
+  const onClearCart = () => {
     if (confirm('Вы хотите очистить корзину?')) {
       dispatch(clearItems())
     }
@@ -36,7 +36,7 @@ export const Cart = (): JSX.Element => {
             <CartIcon />
             Корзина
           </h2>
-          <div className={styles.cartClear} onClick={onCleartCart}>
+          <div className={styles.cartClear} onClick={onClearCart}>
             <CartClearIcon />
             <span>Очистить корзину</span>
           </div>

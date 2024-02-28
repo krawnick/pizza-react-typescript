@@ -1,10 +1,13 @@
 import cn from 'classnames'
-import { nanoid } from 'nanoid'
 import { useState } from 'react'
 
 import { Button } from '..'
 import { data as dataDefault } from '../../assets/defaultData.ts'
-import { fetchData } from '../../utils/fetchData.ts'
+import { useToggle } from '../../hooks/useToggle.ts'
+import { selectorFilter } from '../../redux/slices/filter/selectors.ts'
+import { IPizzas } from '../../redux/slices/pizzas/types.ts'
+import { useAppDispatch, useAppSelector } from '../../redux/store.ts'
+import { fetchWithParams } from '../../utils/fetchWithParams.ts'
 import { Modal } from '../Modal'
 
 import styles from './Admin.module.scss'
@@ -14,7 +17,12 @@ interface IAdminProps {
 }
 
 export const Admin = ({ className }: IAdminProps): JSX.Element => {
+  const dispatch = useAppDispatch()
+  const { paginationState, searchState, categoryState, sortState } =
+    useAppSelector(selectorFilter)
+
   const [modalActive, setModalActive] = useState(false)
+  const [openUpdate, setOpenUpdate] = useToggle()
 
   const putFetch = async () => {
     await fetch('http://localhost:5172/pizzas/3', {
@@ -29,31 +37,58 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   }
 
   const resetData = async () => {
-    const res = await fetch(import.meta.env.VITE_API_URL)
-    const data = await res.json()
+    try {
+      const res = await fetch(import.meta.env.VITE_API_URL)
+      const data = await res.json()
 
-    const ids = data
-      .reduce((id, pizza) => {
-        id.push(pizza.id)
-        return id
-      }, [])
-      .sort((a, b) => (Number(a) > Number(b) ? 1 : -1))
-    console.log('ids', ids)
+      if (!res.ok) {
+        throw new Error('Что-то не так. Повторите через минуту.')
+      }
 
-    for (let i = ids.length - 1; i >= 0; i--) {
-      await fetch(import.meta.env.VITE_API_URL + `/${ids[i]}`, {
-        method: 'DELETE',
-      })
-    }
+      const ids = data
+        .reduce((id: string[], pizza: IPizzas) => {
+          id.push(pizza.id)
+          return id
+        }, [])
+        .sort((a: string, b: string) => (Number(a) > Number(b) ? 1 : -1))
+      console.log('ids', ids)
 
-    for (let i = 0; i < dataDefault.length; i++) {
-      await fetch(import.meta.env.VITE_API_URL, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(dataDefault[i]),
-      })
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const res = await fetch(import.meta.env.VITE_API_URL + `/${ids[i]}`, {
+          method: 'DELETE',
+        })
+
+        if (!res.ok) {
+          throw new Error('Что-то не так. Повторите через минуту.')
+        }
+      }
+
+      for (let i = 0; i < dataDefault.length; i++) {
+        const res = await fetch(import.meta.env.VITE_API_URL, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(dataDefault[i]),
+        })
+
+        if (!res.ok) {
+          throw new Error('Что-то не так. Повторите через минуту.')
+        }
+      }
+    } catch (e) {
+      alert(e)
+    } finally {
+      dispatch(
+        fetchWithParams({
+          paginationState,
+          searchState,
+          categoryState,
+          sortState,
+        })
+      )
     }
   }
+
+  const [open, setOpen] = useToggle(true)
 
   return (
     <div className={cn(className, styles.admin)}>
@@ -63,12 +98,17 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
       {modalActive && (
         <Modal active={modalActive} setActive={setModalActive}>
           <div className={styles.adminBody}>
+            <button onClick={setOpen}>{open.toString()}</button>
             <Button onClick={resetData} appearance="default">
               Сбросить данные
             </Button>
-            <Button onClick={putFetch} appearance="default">
+
+            <Button onClick={setOpenUpdate} appearance="default">
               Обновить данные
             </Button>
+
+            {openUpdate && <div>Window update</div>}
+
             <Button appearance="default">Добавить данные</Button>
           </div>
         </Modal>

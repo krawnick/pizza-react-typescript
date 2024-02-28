@@ -1,6 +1,10 @@
 @import "./variables";
 @import "./libs/normalize";
 
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
 body {
   overflow-x: hidden;
   background-color: $background;
