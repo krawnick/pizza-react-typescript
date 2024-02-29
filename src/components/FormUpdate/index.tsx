@@ -4,147 +4,148 @@ import { Button } from '..'
 
 import styles from './FormUpdate.module.scss'
 
-export const FormUpdate = () => {
-  const [name, setName] = useState('')
-  const [types, setTypes] = useState('')
-  const [sizes, setSizes] = useState('')
-  const [price, setPrice] = useState('')
-  const [rating, setRating] = useState('')
-  const [category, setCategory] = useState('')
+interface ICheckboxes {
+  [index: string]: string[]
+}
 
-  const [checkboxes, setCheckboxes] = useState({
-    types0: false,
-    types1: false,
-    sizes0: false,
-    sizes1: false,
-    sizes2: false,
+export const FormUpdate = () => {
+  // const [checkForm, setCheckForm] = useState(false)
+
+  const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
+    types: [],
+    sizes: [],
   })
   console.log('checkboxes', checkboxes)
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      name,
+      checked,
+      value,
+    }: { name: string; checked: boolean; value: string } = event.target
+    let arr: string[] = [...checkboxes[name]]
+
+    if (checked) {
+      arr.push(value)
+    } else {
+      arr = arr.filter((v) => {
+        console.log('v', v)
+        return v !== value
+      })
+    }
+
     setCheckboxes({
       ...checkboxes,
-      [name]: checked,
+      [name]: arr.sort(),
     })
   }
 
+  const [text, setText] = useState({
+    name: '',
+    price: '',
+    rating: '',
+    category: '',
+  })
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setText({
+      ...text,
+      [name]: value,
+    })
+  }
+  console.log('text', text)
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+  }
+
+  // const buildObject = () => {
+  //   const types = []
+
+  //   if ()
+
+  //   return {
+  //     types,
+  //     sizes,
+  //     name,
+  //     price,
+  //     rating,
+  //     category,
+  //   }
+  // }
+
+  // console.log('buildObject', buildObject())
+
   return (
-    <form className={styles.formUpdate}>
+    <form onSubmit={handleSubmit} className={styles.formUpdate}>
       <h1>Обновление/добавление данных</h1>
+
       <label className={styles.formUpdateText}>
         Название пиццы
-        <input name="name" type="text" />
+        <input onChange={handleTextChange} name="name" type="text" />
       </label>
       <label className={styles.formUpdateText}>
         Цена за малый круг
-        <input name="price" type="text" />
-      </label>
-      <label className={styles.formUpdateText}>
-        Рейтинг от 0 до 10
-        <input name="rating" type="text" />
+        <input name="price" type="number" max="2000" />
       </label>
       <label className={styles.formUpdateText}>
         Категория
         <input name="category" type="text" />
       </label>
-      <label className={styles.formUpdateCheckbox}>
-        <p>Типы пиццы</p>
-
-        <input
-          name="types0"
-          type="checkbox"
-          checked={checkboxes.types0}
-          onChange={handleCheckboxChange}
-        />
-        <span>Тонкое</span>
-
-        <input
-          name="types1"
-          type="checkbox"
-          checked={checkboxes.types1}
-          onChange={handleCheckboxChange}
-        />
-        <span>Традиционное</span>
+      <label className={styles.formUpdateText}>
+        Рейтинг от 0 до 10
+        <input name="rating" type="range" min="0" max="10" />
       </label>
-      <label className={styles.formUpdateCheckbox}>
+      <div className={styles.formUpdateCheckbox}>
+        <p>Типы пиццы</p>
+        <label>
+          <input
+            name="types"
+            value="0"
+            type="checkbox"
+            onChange={handleCheckboxChange}
+          />
+          <span>Тонкое</span>
+        </label>
+        <label>
+          <input
+            name="types"
+            value="1"
+            type="checkbox"
+            onChange={handleCheckboxChange}
+          />
+          <span>Традиционное</span>
+        </label>
+      </div>
+      <div className={styles.formUpdateCheckbox}>
         <p>Размеры пиццы</p>
         <input
-          name="sizes0"
+          name="sizes"
           type="checkbox"
-          checked={checkboxes.sizes0}
           onChange={handleCheckboxChange}
+          value="26"
         />
         <span>26</span>
         <input
-          name="sizes1"
+          name="sizes"
           type="checkbox"
-          checked={checkboxes.sizes1}
           onChange={handleCheckboxChange}
+          value="30"
         />
         <span>30</span>
         <input
-          name="sizes2"
+          name="sizes"
           type="checkbox"
-          checked={checkboxes.sizes2}
           onChange={handleCheckboxChange}
+          value="40"
         />
         <span>40</span>
-      </label>
+      </div>
+
       <Button type="submit" appearance="default">
         Отправить
       </Button>
     </form>
   )
 }
-
-// const MultipleCheckboxesExample = () => {
-//   const [checkboxes, setCheckboxes] = useState({
-//     checkbox1: false,
-//     checkbox2: false,
-//     checkbox3: false,
-//   });
-
-//   const handleCheckboxChange = (event) => {
-//     const { name, checked } = event.target;
-//     setCheckboxes({
-//       ...checkboxes,
-//       [name]: checked,
-//     });
-//   };
-
-//   return (
-//     <div>
-//       <label>
-//         <input
-//           type="checkbox"
-//           name="checkbox1"
-//           checked={checkboxes.checkbox1}
-//           onChange={handleCheckboxChange}
-//         />
-//         Checkbox 1
-//       </label>
-//       <label>
-//         <input
-//           type="checkbox"
-//           name="checkbox2"
-//           checked={checkboxes.checkbox2}
-//           onChange={handleCheckboxChange}
-//         />
-//         Checkbox 2
-//       </label>
-//       <label>
-//         <input
-//           type="checkbox"
-//           name="checkbox3"
-//           checked={checkboxes.checkbox3}
-//           onChange={handleCheckboxChange}
-//         />
-//         Checkbox 3
-//       </label>
-//       <p>Checked checkboxes: {Object.keys(checkboxes).filter(key => checkboxes[key]).join(', ')}</p>
-//     </div>
-//   );
-// };
-
-// export default MultipleCheckboxesExample;
