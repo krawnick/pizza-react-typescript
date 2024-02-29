@@ -1,0 +1,51 @@
+@import "../../scss/variables";
+
+.formUpdate {
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  border: 2px solid $black;
+  border-radius: 20px;
+
+  h1 {
+    font-size: 36px;
+  }
+
+  button {
+    align-self: flex-end;
+  }
+
+  &Text {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      font-size: 20px;
+      border-radius: 20px;
+    }
+  }
+
+  &Checkbox {
+    margin-bottom: 15px;
+
+    input {
+      position: relative;
+      top: 2px;
+      left: 0;
+
+      width: 20px;
+      height: 20px;
+      margin: 0 3px 0 0;
+    }
+
+    span {
+      padding-right: 14px;
+      font-size: 20px;
+      line-height: 133%;
+    }
+  }
+}

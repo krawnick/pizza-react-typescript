@@ -8,6 +8,7 @@ import { selectorFilter } from '../../redux/slices/filter/selectors.ts'
 import { IPizzas } from '../../redux/slices/pizzas/types.ts'
 import { useAppDispatch, useAppSelector } from '../../redux/store.ts'
 import { fetchWithParams } from '../../utils/fetchWithParams.ts'
+import { FormUpdate } from '../FormUpdate/index.tsx'
 import { Modal } from '../Modal'
 
 import styles from './Admin.module.scss'
@@ -21,7 +22,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   const { paginationState, searchState, categoryState, sortState } =
     useAppSelector(selectorFilter)
 
-  const [modalActive, setModalActive] = useState(false)
+  const [modalActive, setModalActive] = useState(true)
   const [openUpdate, setOpenUpdate] = useToggle()
 
   const putFetch = async () => {
@@ -88,8 +89,6 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
     }
   }
 
-  const [open, setOpen] = useToggle(true)
-
   return (
     <div className={cn(className, styles.admin)}>
       <button className={styles.adminOpen} onClick={() => setModalActive(true)}>
@@ -98,7 +97,6 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
       {modalActive && (
         <Modal active={modalActive} setActive={setModalActive}>
           <div className={styles.adminBody}>
-            <button onClick={setOpen}>{open.toString()}</button>
             <Button onClick={resetData} appearance="default">
               Сбросить данные
             </Button>
@@ -107,7 +105,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
               Обновить данные
             </Button>
 
-            {openUpdate && <div>Window update</div>}
+            {openUpdate && <FormUpdate />}
 
             <Button appearance="default">Добавить данные</Button>
           </div>

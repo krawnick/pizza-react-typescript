@@ -7,9 +7,7 @@ export const getCartFromLS = (): ICartState => {
     return { itemsState: [], totalCountState: 0, totalPriceState: 0 }
   }
 
-  const { itemsState, totalCountState, totalPriceState } = json
-    ? JSON.parse(json)
-    : []
+  const { itemsState, totalCountState, totalPriceState } = JSON.parse(json)
 
   return { itemsState, totalCountState, totalPriceState }
 }
