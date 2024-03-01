@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '..'
+import { IPizzas } from '../../redux/slices/pizzas/types'
 
 import styles from './FormUpdate.module.scss'
 
@@ -10,12 +11,34 @@ interface ICheckboxes {
 
 export const FormUpdate = () => {
   // const [checkForm, setCheckForm] = useState(false)
+  const [data, setData] = useState<IPizzas[]>()
+  const [selectData, setSelectData] = useState(0)
+  console.log('selectData', selectData)
+
+  useEffect(() => {
+    const fetchPizzas = async () => {
+      try {
+        const res = await fetch(import.meta.env.VITE_API_URL)
+        const data = await res.json()
+        setData(data)
+        if (!res.ok) throw new Error('Ошибка загрузки')
+      } catch (error) {
+        alert(error)
+      }
+    }
+    fetchPizzas()
+  }, [])
 
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
     types: [],
     sizes: [],
   })
   console.log('checkboxes', checkboxes)
+
+  const handleSelectChange = (event) => {
+    console.log(event.target)
+    setSelectData(event.target.value)
+  }
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -76,26 +99,57 @@ export const FormUpdate = () => {
   // }
 
   // console.log('buildObject', buildObject())
+  if (!data) {
+    return 'Идет загрузка'
+  }
 
   return (
     <form onSubmit={handleSubmit} className={styles.formUpdate}>
       <h1>Обновление/добавление данных</h1>
 
+      <label>
+        <select onChange={handleSelectChange} value={selectData}>
+          {data.map((el, index) => {
+            return (
+              <option value={index} key={el.id}>
+                {el.name}
+              </option>
+            )
+          })}
+        </select>
+      </label>
+
       <label className={styles.formUpdateText}>
         Название пиццы
-        <input onChange={handleTextChange} name="name" type="text" />
+        <input
+          onChange={handleTextChange}
+          name="name"
+          type="text"
+          value={data[selectData].name}
+        />
       </label>
       <label className={styles.formUpdateText}>
         Цена за малый круг
-        <input name="price" type="number" max="2000" />
+        <input
+          name="price"
+          type="number"
+          max="2000"
+          value={data[selectData].price}
+        />
       </label>
       <label className={styles.formUpdateText}>
         Категория
-        <input name="category" type="text" />
+        <input name="category" type="text" value={data[selectData].category} />
       </label>
       <label className={styles.formUpdateText}>
         Рейтинг от 0 до 10
-        <input name="rating" type="range" min="0" max="10" />
+        <input
+          name="rating"
+          type="range"
+          min="0"
+          max="10"
+          value={data[selectData].rating}
+        />
       </label>
       <div className={styles.formUpdateCheckbox}>
         <p>Типы пиццы</p>

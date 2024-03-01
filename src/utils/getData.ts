@@ -1,6 +1,6 @@
-export const fetchData = async (url: string, options?: RequestInit) => {
+export const getData = async () => {
   try {
-    const response = await fetch(url, options)
+    const response = await fetch(import.meta.env.VITE_API_URL)
     const data = await response.json()
 
     if (!response.ok) {
