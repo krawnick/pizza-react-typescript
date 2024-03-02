@@ -20,7 +20,7 @@ export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
 
       return data
     } catch (error) {
-      console.log('error', error)
+      alert(`'error', ${error}`)
       return []
     }
   }

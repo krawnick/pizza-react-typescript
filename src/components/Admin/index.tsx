@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '..'
 import { data as dataDefault } from '../../assets/defaultData.ts'
@@ -8,6 +8,7 @@ import { selectorFilter } from '../../redux/slices/filter/selectors.ts'
 import { IPizzas } from '../../redux/slices/pizzas/types.ts'
 import { useAppDispatch, useAppSelector } from '../../redux/store.ts'
 import { fetchWithParams } from '../../utils/fetchWithParams.ts'
+import { getData } from '../../utils/getData.ts'
 import { FormUpdate } from '../FormUpdate/index.tsx'
 import { Modal } from '../Modal'
 
@@ -22,22 +23,23 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   const { paginationState, searchState, categoryState, sortState } =
     useAppSelector(selectorFilter)
 
-  const [modalActive, setModalActive] = useState(true)
+  const [modalActive, setModalActive] = useState(false)
   const [openUpdate, setOpenUpdate] = useToggle()
+  const [data, setData] = useState()
+  const [isReset, setIsReset] = useState(false)
 
-  const putFetch = async () => {
-    await fetch('http://localhost:5172/pizzas/3', {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: 'Кисло-сладкий цыпленок',
-      }),
-    })
-  }
+  useEffect(() => {
+    if (modalActive === true) {
+      const loadData = async () => {
+        setData(await getData())
+      }
+      loadData()
+    }
+  }, [modalActive])
 
   const resetData = async () => {
+    setIsReset(true)
+
     try {
       const res = await fetch(import.meta.env.VITE_API_URL)
       const data = await res.json()
@@ -75,9 +77,12 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
           throw new Error('Что-то не так. Повторите через минуту.')
         }
       }
+
+      alert('Данные успешно обновлены')
     } catch (e) {
       alert(e)
     } finally {
+      setIsReset(false)
       dispatch(
         fetchWithParams({
           paginationState,
@@ -97,17 +102,31 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
       {modalActive && (
         <Modal active={modalActive} setActive={setModalActive}>
           <div className={styles.adminBody}>
-            <Button onClick={resetData} appearance="default">
-              Сбросить данные
-            </Button>
+            {data ? (
+              <>
+                <Button
+                  disabled={isReset}
+                  onClick={resetData}
+                  appearance="default"
+                >
+                  Сбросить данные
+                </Button>
 
-            <Button onClick={setOpenUpdate} appearance="default">
-              Обновить данные
-            </Button>
+                {isReset && <div>Идет обновление данных...</div>}
 
-            {openUpdate && <FormUpdate />}
+                <Button onClick={setOpenUpdate} appearance="default">
+                  Обновить данные
+                </Button>
 
-            <Button appearance="default">Добавить данные</Button>
+                {openUpdate && (
+                  <FormUpdate data={data} setOpen={setOpenUpdate} />
+                )}
+
+                <Button appearance="default">Добавить данные</Button>
+              </>
+            ) : (
+              <div>Идет загрузка...</div>
+            )}
           </div>
         </Modal>
       )}
