@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Button } from '..'
 import { data as dataDefault } from '../../assets/defaultData.ts'
@@ -11,6 +11,7 @@ import { fetchWithParams } from '../../utils/fetchWithParams.ts'
 import { getData } from '../../utils/getData.ts'
 import { FormUpdate } from '../FormUpdate/index.tsx'
 import { Modal } from '../Modal'
+import { ProgressBar } from '../ProgressBar/index.tsx'
 
 import styles from './Admin.module.scss'
 
@@ -27,6 +28,10 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   const [openUpdate, setOpenUpdate] = useToggle()
   const [data, setData] = useState()
   const [isReset, setIsReset] = useState(false)
+  const currentProgress = useRef(0)
+  const [progress, setProress] = useState(0)
+  console.log('progress', progress)
+  console.log('currentProgress', currentProgress.current)
 
   useEffect(() => {
     if (modalActive === true) {
@@ -54,7 +59,6 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
           return id
         }, [])
         .sort((a: string, b: string) => (Number(a) > Number(b) ? 1 : -1))
-      console.log('ids', ids)
 
       for (let i = ids.length - 1; i >= 0; i--) {
         const res = await fetch(import.meta.env.VITE_API_URL + `/${ids[i]}`, {
@@ -64,6 +68,10 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
         if (!res.ok) {
           throw new Error('Что-то не так. Повторите через минуту.')
         }
+        await new Promise((res) => setTimeout(res, 400))
+        // currentProgress.current = progress
+        currentProgress.current = currentProgress.current + 50 / data.length
+        setProress(currentProgress.current)
       }
 
       for (let i = 0; i < dataDefault.length; i++) {
@@ -76,12 +84,18 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
         if (!res.ok) {
           throw new Error('Что-то не так. Повторите через минуту.')
         }
+
+        await new Promise((res) => setTimeout(res, 400))
+        currentProgress.current =
+          currentProgress.current + 50 / dataDefault.length
+        setProress(currentProgress.current)
       }
 
       alert('Данные успешно обновлены')
     } catch (e) {
       alert(e)
     } finally {
+      currentProgress.current = 0
       setIsReset(false)
       dispatch(
         fetchWithParams({
@@ -112,7 +126,12 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
                   Сбросить данные
                 </Button>
 
-                {isReset && <div>Идет обновление данных...</div>}
+                {isReset && (
+                  <div>
+                    Идет обновление данных...
+                    <ProgressBar progress={progress} />
+                  </div>
+                )}
 
                 <Button onClick={setOpenUpdate} appearance="default">
                   Обновить данные

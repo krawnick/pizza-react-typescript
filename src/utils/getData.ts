@@ -1,13 +1,12 @@
 export const getData = async () => {
   try {
-    const response = await fetch(import.meta.env.VITE_API_URL)
-    const data = await response.json()
+    const res = await fetch(import.meta.env.VITE_API_URL)
 
-    if (!response.ok) {
-      throw new Error(response.status + ': ' + response.statusText.toString())
+    if (!res.ok) {
+      throw new Error(res.status + ': ' + res.statusText.toString())
     }
 
-    return data
+    return res.json()
   } catch (e) {
     console.log(e)
     return false
