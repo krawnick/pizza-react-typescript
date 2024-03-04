@@ -22,10 +22,14 @@
   animation: modal $duration ease-in-out forwards;
 
   &Content {
+    position: relative;
     transform: scale(0.5);
+
+    overflow: auto;
 
     width: 80vw;
     max-width: 800px;
+    max-height: 80vh;
     padding: 20px;
 
     background-color: $white;
@@ -33,6 +37,15 @@
 
     transition: $duration;
     animation: content $duration ease-in-out forwards;
+
+    &::-webkit-scrollbar {
+      width: 30px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $orange;
+      border-radius: 15px;
+    }
   }
 }
 

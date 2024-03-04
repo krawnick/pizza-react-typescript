@@ -1,11 +1,10 @@
 @import "../../scss/variables";
 
-.formUpdate {
+.formAdd {
   display: flex;
   flex-direction: column;
 
   width: 80%;
-  margin-bottom: 20px;
   padding: 20px;
 
   border: 2px solid $black;
@@ -15,30 +14,29 @@
     font-size: 36px;
   }
 
-  &SelectPizza {
-    display: flex;
-
-    margin-bottom: 30px;
-    padding: 5px 10px;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    border-radius: 20px;
-
-    option {
-      padding: 3px;
-    }
-
-    option:focus {
-      color: $white;
-      background-color: $orange;
-    }
+  button {
+    align-self: flex-end;
   }
 
   &Text {
     display: flex;
     flex-direction: column;
+
+    textarea {
+      resize: none;
+
+      min-height: 150px;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+
+      font-size: 20px;
+
+      border-radius: 20px;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
 
     input {
       margin-bottom: 10px;
@@ -66,10 +64,5 @@
       font-size: 20px;
       line-height: 133%;
     }
-  }
-
-  &Bottom {
-    display: flex;
-    justify-content: space-between;
   }
 }

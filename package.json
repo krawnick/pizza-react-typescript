@@ -14,12 +14,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/jest": "^29.5.11",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.11.4",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
     "@types/react-transition-group": "^4.4.10",
+    "@vitejs/plugin-react": "^4.0.3",
     "ahooks": "^3.7.8",
     "axios": "^1.6.3",
-    "babel-eslint": "^10.1.0",
     "classnames": "^2.3.2",
     "concurrently": "^8.2.2",
     "json-server": "^0.17.4",
@@ -33,16 +37,16 @@
     "react-router-dom": "^6.21.3",
     "react-transition-group": "^4.4.5",
     "sass": "^1.69.3",
-    "tunnel-agent": "^0.6.0"
+    "tunnel-agent": "^0.6.0",
+    "typescript": "^5.3.3",
+    "vite": "^4.4.5",
+    "vite-plugin-svgr": "^3.2.0",
+    "vite-plugin-webpackchunkname": "^1.0.1"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
-    "@types/lodash.debounce": "^4.0.9",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "babel-eslint": "^10.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -51,10 +55,6 @@
     "stylelint-config-clean-order": "^5.4.0",
     "stylelint-config-standard-scss": "^13.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-order": "^6.0.4",
-    "typescript": "^5.3.3",
-    "vite": "^4.4.5",
-    "vite-plugin-svgr": "^3.2.0",
-    "vite-plugin-webpackchunkname": "^1.0.1"
+    "stylelint-order": "^6.0.4"
   }
 }

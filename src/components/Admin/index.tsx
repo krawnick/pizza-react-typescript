@@ -9,6 +9,7 @@ import { IPizzas } from '../../redux/slices/pizzas/types.ts'
 import { useAppDispatch, useAppSelector } from '../../redux/store.ts'
 import { fetchWithParams } from '../../utils/fetchWithParams.ts'
 import { getData } from '../../utils/getData.ts'
+import { FormAdd } from '../FormAdd/index.tsx'
 import { FormUpdate } from '../FormUpdate/index.tsx'
 import { Modal } from '../Modal'
 import { ProgressBar } from '../ProgressBar/index.tsx'
@@ -25,13 +26,12 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
     useAppSelector(selectorFilter)
 
   const [modalActive, setModalActive] = useState(false)
-  const [openUpdate, setOpenUpdate] = useToggle()
-  const [data, setData] = useState()
   const [isReset, setIsReset] = useState(false)
-  const currentProgress = useRef(0)
   const [progress, setProress] = useState(0)
-  console.log('progress', progress)
-  console.log('currentProgress', currentProgress.current)
+  const [data, setData] = useState()
+  const currentProgress = useRef(0)
+  const [openUpdate, setOpenUpdate] = useToggle()
+  const [openAdd, setOpenAdd] = useToggle()
 
   useEffect(() => {
     if (modalActive === true) {
@@ -40,7 +40,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
       }
       loadData()
     }
-  }, [modalActive])
+  }, [modalActive, openUpdate])
 
   const resetData = async () => {
     setIsReset(true)
@@ -68,10 +68,9 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
         if (!res.ok) {
           throw new Error('Что-то не так. Повторите через минуту.')
         }
-        await new Promise((res) => setTimeout(res, 400))
-        // currentProgress.current = progress
         currentProgress.current = currentProgress.current + 50 / data.length
         setProress(currentProgress.current)
+        await new Promise((res) => setTimeout(res, 400))
       }
 
       for (let i = 0; i < dataDefault.length; i++) {
@@ -85,10 +84,10 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
           throw new Error('Что-то не так. Повторите через минуту.')
         }
 
-        await new Promise((res) => setTimeout(res, 400))
         currentProgress.current =
           currentProgress.current + 50 / dataDefault.length
         setProress(currentProgress.current)
+        await new Promise((res) => setTimeout(res, 400))
       }
 
       alert('Данные успешно обновлены')
@@ -96,6 +95,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
       alert(e)
     } finally {
       currentProgress.current = 0
+      setProress(0)
       setIsReset(false)
       dispatch(
         fetchWithParams({
@@ -141,7 +141,11 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
                   <FormUpdate data={data} setOpen={setOpenUpdate} />
                 )}
 
-                <Button appearance="default">Добавить данные</Button>
+                <Button onClick={setOpenAdd} appearance="default">
+                  Добавить данные
+                </Button>
+
+                {openAdd && <FormAdd setOpen={setOpenAdd} />}
               </>
             ) : (
               <div>Идет загрузка...</div>

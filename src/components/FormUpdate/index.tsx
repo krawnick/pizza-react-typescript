@@ -26,7 +26,6 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
   const { paginationState, searchState, categoryState, sortState } =
     useAppSelector(selectorFilter)
 
-  // const [data, setData] = useState<IExtendPizzas[]>()
   const [selectData, setSelectData] = useState(0)
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
     types: [],
@@ -113,6 +112,8 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
             throw new Error('Произошла ошибка при отправке данных')
           }
 
+          alert('Данные успешно отправлены')
+
           dispatch(
             fetchWithParams({
               paginationState,
@@ -131,7 +132,31 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
     updateData()
   }
 
-  console.log('data', data)
+  const deletePizza = async () => {
+    try {
+      const res = await fetch(
+        import.meta.env.VITE_API_URL + '/' + data[selectData].id,
+        { method: 'DELETE' }
+      )
+
+      if (!res.ok) {
+        throw new Error('Произошла ошибка при удалении данных')
+      }
+      alert('Данные успешно удалены')
+
+      dispatch(
+        fetchWithParams({
+          paginationState,
+          searchState,
+          categoryState,
+          sortState,
+        })
+      )
+      setOpen()
+    } catch (error) {
+      alert(error)
+    }
+  }
 
   if (!data) {
     return 'Идет загрузка...'
@@ -145,7 +170,7 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
       }}
       className={styles.formUpdate}
     >
-      <h1>Обновление/добавление данных</h1>
+      <h1>Обновление данных</h1>
 
       <label>
         Выберите пиццу для редактирования
@@ -254,9 +279,15 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
         <span>40</span>
       </div>
 
-      <Button type="submit" appearance="default">
-        Отправить
-      </Button>
+      <div className={styles.formUpdateBottom}>
+        <Button type="button" onClick={deletePizza} appearance="default">
+          Удалить пиццу
+        </Button>
+
+        <Button type="submit" appearance="default">
+          Отправить
+        </Button>
+      </div>
     </form>
   )
 }
