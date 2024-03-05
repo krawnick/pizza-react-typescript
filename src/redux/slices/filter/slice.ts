@@ -9,7 +9,7 @@ const initialState: IFilterState = {
   paginationState: 1,
   searchState: '',
   sortState: {
-    name: 'популярности',
+    name: 'сначала популярные',
     sortProperty: 'rating',
   },
 }
@@ -32,24 +32,16 @@ const filterSlice = createSlice({
       state.paginationState = initialState.paginationState
       state.searchState = action.payload
     },
-    setPage: (state, action: PayloadAction<number>) => {
-      state.paginationState = action.payload
-    },
     resetFilter: () => initialState,
   },
 })
 
-// Actions, reducer
-
 export const {
   clearValueSearch,
   setCategoryId,
-  setPage,
   setSort,
   setValueSearch,
   resetFilter,
 } = filterSlice.actions
 
 export const filterReducer = filterSlice.reducer
-
-// Selectors

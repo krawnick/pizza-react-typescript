@@ -1,14 +1,7 @@
 import { useEffect } from 'react'
 
-import {
-  Categories,
-  Pagination,
-  PizzaBlock,
-  Skeleton,
-  Sort,
-} from '../../components'
+import { Categories, PizzaBlock, Skeleton, Sort } from '../../components'
 import { selectorFilter } from '../../redux/slices/filter/selectors'
-import { setPage } from '../../redux/slices/filter/slice'
 import {
   selectorPizzas,
   selectorPizzasStatus,
@@ -67,10 +60,6 @@ export const Home = (): JSX.Element => {
     }
   }
 
-  const onChangePage = (page: number): void => {
-    dispatch(setPage(page))
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.contentTop}>
@@ -79,10 +68,6 @@ export const Home = (): JSX.Element => {
       </div>
       <h2 className={styles.contentTitle}>Все пиццы</h2>
       <div className={styles.contentItems}>{showPizzas()}</div>
-      <Pagination
-        className={styles.paginationHome}
-        onChangePage={onChangePage}
-      />
     </div>
   )
 }

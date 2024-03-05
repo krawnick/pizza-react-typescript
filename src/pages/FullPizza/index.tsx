@@ -43,11 +43,7 @@ export const FullPizza = ({ className }: IFullPizzaProps): JSX.Element => {
                     Пицца &quot;{data.name}&quot;
                   </h2>
                   <p className={styles.fullPizzaDescription}>
-                    Описание пиццы необходимо добавить! Описание отсутствует!
-                    Описание пиццы необходимо добавить! Описание отсутствует!
-                    Описание пиццы необходимо добавить! Описание отсутствует!
-                    Описание пиццы необходимо добавить! Описание отсутствует!
-                    Описание пиццы необходимо добавить! Описание отсутствует!
+                    {data.description}
                   </p>
                   <div className={styles.fullPizzaParams}>
                     <p>Доступные размеры:</p>

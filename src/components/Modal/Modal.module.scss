@@ -22,6 +22,8 @@
   animation: modal $duration ease-in-out forwards;
 
   &Content {
+    scrollbar-gutter: stable;
+
     position: relative;
     transform: scale(0.5);
 

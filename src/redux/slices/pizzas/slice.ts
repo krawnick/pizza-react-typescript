@@ -6,12 +6,10 @@ import { IPizzas, IPizzasState, StatusLoading } from './types'
 export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
   'pizzas/fetchPizzas',
 
-  async ({ category, sortBy, order, search, page }, thunkAPI) => {
+  async ({ category, sortBy, order, search }, thunkAPI) => {
     try {
       const { data } = await axios.get<IPizzas[]>(
-        `${
-          import.meta.env.VITE_API_URL
-        }?limit=4${page}${search}${category}${sortBy}${order}`
+        `${import.meta.env.VITE_API_URL}?${search}${category}${sortBy}${order}`
       )
 
       if (data.length === 0) {
@@ -59,8 +57,4 @@ const pizzasSlice = createSlice({
   },
 })
 
-// Actions, reducer
-
 export const pizzasReducer = pizzasSlice.reducer
-
-// Selectors

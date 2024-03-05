@@ -110,9 +110,13 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
 
   return (
     <div className={cn(className, styles.admin)}>
-      <button className={styles.adminOpen} onClick={() => setModalActive(true)}>
+      <Button
+        className={styles.adminOpen}
+        appearance="back"
+        onClick={() => setModalActive(true)}
+      >
         ADMIN
-      </button>
+      </Button>
       {modalActive && (
         <Modal active={modalActive} setActive={setModalActive}>
           <div className={styles.adminBody}>

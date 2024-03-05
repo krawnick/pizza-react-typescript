@@ -9,7 +9,6 @@ interface IParamsFetch {
 }
 
 export const fetchWithParams = ({
-  paginationState,
   searchState,
   categoryState,
   sortState,
@@ -18,7 +17,6 @@ export const fetchWithParams = ({
   const sortBy = `&sortBy=${sortState.sortProperty}`
   const order = sortState.desc ? '&order=desc' : ''
   const search = searchState ? `&search=${searchState}` : ''
-  const page = `&page=${paginationState}`
 
-  return fetchPizzas({ category, sortBy, order, search, page })
+  return fetchPizzas({ category, sortBy, order, search })
 }
