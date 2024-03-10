@@ -1,28 +1,34 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 
-import { IPizzas, IPizzasState, StatusLoading } from './types'
+import { IPizzaObject } from '../../../interface/Pizza.interface'
+import { fetchParams } from '../../../utils/fetchParams'
+import { RootState } from '../../store'
 
-export const fetchPizzas = createAsyncThunk<IPizzas[], Record<string, string>>(
-  'pizzas/fetchPizzas',
+import { IPizzasState, StatusLoading } from './types'
 
-  async ({ category, sortBy, order, search }, thunkAPI) => {
-    try {
-      const { data } = await axios.get<IPizzas[]>(
-        `${import.meta.env.VITE_API_URL}?${search}${category}${sortBy}${order}`
-      )
-
-      if (data.length === 0) {
-        return thunkAPI.rejectWithValue('Not pizzas')
+export const fetchPizzas = createAsyncThunk<
+  IPizzaObject[],
+  void,
+  { state: RootState }
+>('pizzas/fetchPizzas', async (_, { getState }) => {
+  return await fetch(
+    import.meta.env.VITE_API_URL + '?' + fetchParams(getState())
+  )
+    .then((res) => {
+      if (!res.ok) {
+        if (res.url.includes('search')) {
+          return []
+        }
+        throw new Error('Ошибка при получении всех данных')
       }
+      return res.json()
+    })
 
-      return data
-    } catch (error) {
-      alert(`'error', ${error}`)
+    .catch((error) => {
+      alert(error)
       return []
-    }
-  }
-)
+    })
+})
 
 const initialState: IPizzasState = {
   items: [],
@@ -32,29 +38,34 @@ const initialState: IPizzasState = {
 const pizzasSlice = createSlice({
   name: 'pizzas',
   initialState,
-  reducers: {},
+  reducers: {
+    deletePizza: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((pizza) => {
+        return action.payload !== Number(pizza.id)
+      })
+    },
+  },
 
   extraReducers: (builder) => {
     builder
+
       .addCase(fetchPizzas.pending, (state) => {
         state.items = []
         state.status = StatusLoading.LOADING
-        console.log('pizzasSlice:', state.status)
       })
       .addCase(
         fetchPizzas.fulfilled,
-        (state, action: PayloadAction<IPizzas[]>) => {
+        (state, action: PayloadAction<IPizzaObject[]>) => {
           state.items = action.payload
           state.status = StatusLoading.SUCCESS
-          console.log('pizzasSlice:', state.status)
         }
       )
-      .addCase(fetchPizzas.rejected, (state, { payload }) => {
+      .addCase(fetchPizzas.rejected, (state) => {
         state.items = []
         state.status = StatusLoading.ERROR
-        console.log('pizzasSlice:', payload)
       })
   },
 })
 
 export const pizzasReducer = pizzasSlice.reducer
+export const { deletePizza } = pizzasSlice.actions

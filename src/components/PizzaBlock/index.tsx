@@ -67,7 +67,11 @@ export const PizzaBlock = ({
     <div className={styles.pizzaBlock}>
       <Link to={`/pizza/${id}`}>
         <img className={styles.pizzaBlockImage} src={imageUrl} alt="Pizza" />
-        <h4 className={styles.pizzaBlockTitle}>{name}</h4>
+        <h4 className={styles.pizzaBlockTitle}>
+          {name}
+          <br />
+          {` ID: ${id}`}
+        </h4>
       </Link>
       <div className={styles.pizzaBlockSelector}>
         <ul>

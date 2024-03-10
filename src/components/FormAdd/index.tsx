@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
 import { Button } from '..'
-import { selectorFilter } from '../../redux/slices/filter/selectors'
-import { useAppDispatch, useAppSelector } from '../../redux/store'
-import { fetchWithParams } from '../../utils/fetchWithParams'
 
 import styles from './FormAdd.module.scss'
 
@@ -16,10 +13,6 @@ interface ICheckboxes {
 }
 
 export const FormAdd = ({ setOpen }: IFormAddProps) => {
-  const dispatch = useAppDispatch()
-  const { paginationState, searchState, categoryState, sortState } =
-    useAppSelector(selectorFilter)
-
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
     types: [],
     sizes: [],
@@ -91,15 +84,6 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
         }
 
         alert('Данные успешно отправлены')
-
-        dispatch(
-          fetchWithParams({
-            paginationState,
-            searchState,
-            categoryState,
-            sortState,
-          })
-        )
       } catch (error) {
         alert(error)
       } finally {

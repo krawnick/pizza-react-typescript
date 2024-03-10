@@ -1,8 +1,5 @@
-import { IPizzaBlockProps } from '../../../components/PizzaBlock'
+import { IPizzaObject } from '../../../interface/Pizza.interface'
 
-export interface IPizzas extends IPizzaBlockProps {
-  rating: number
-}
 export enum StatusLoading {
   LOADING = 'loading',
   SUCCESS = 'success',
@@ -10,6 +7,6 @@ export enum StatusLoading {
 }
 
 export interface IPizzasState {
-  items: IPizzas[]
+  items: IPizzaObject[]
   status: StatusLoading
 }

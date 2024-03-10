@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
 
 import { Button } from '..'
-import { selectorFilter } from '../../redux/slices/filter/selectors'
-import { IPizzas } from '../../redux/slices/pizzas/types'
-import { useAppDispatch, useAppSelector } from '../../redux/store'
-import { fetchWithParams } from '../../utils/fetchWithParams'
+import { IPizzaObject } from '../../interface/Pizza.interface'
+import { deleteItem } from '../../redux/slices/admin/slice'
+import { useAppDispatch } from '../../redux/store'
 
 import styles from './FormUpdate.module.scss'
 
 interface IFormUpdateProps {
-  data: IExtendPizzas[]
+  data: IPizzaObject[]
   setOpen: () => void
 }
 
@@ -17,14 +16,8 @@ interface ICheckboxes {
   [index: string]: number[]
 }
 
-interface IExtendPizzas extends IPizzas {
-  category: string
-}
-
 export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
   const dispatch = useAppDispatch()
-  const { paginationState, searchState, categoryState, sortState } =
-    useAppSelector(selectorFilter)
 
   const [selectData, setSelectData] = useState(0)
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
@@ -35,10 +28,10 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
     name: '',
     price: '',
     rating: '',
-    category: '',
+    category: 0,
   })
 
-  const refreshForm = (data: IExtendPizzas[]) => {
+  const refreshForm = (data: IPizzaObject[]) => {
     if (data) {
       setInput({
         name: data[selectData].name,
@@ -113,15 +106,6 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
           }
 
           alert('Данные успешно отправлены')
-
-          dispatch(
-            fetchWithParams({
-              paginationState,
-              searchState,
-              categoryState,
-              sortState,
-            })
-          )
         } catch (error) {
           alert(error)
         } finally {
@@ -132,30 +116,8 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
     updateData()
   }
 
-  const deletePizza = async () => {
-    try {
-      const res = await fetch(
-        import.meta.env.VITE_API_URL + '/' + data[selectData].id,
-        { method: 'DELETE' }
-      )
-
-      if (!res.ok) {
-        throw new Error('Произошла ошибка при удалении данных')
-      }
-      alert('Данные успешно удалены')
-
-      dispatch(
-        fetchWithParams({
-          paginationState,
-          searchState,
-          categoryState,
-          sortState,
-        })
-      )
-      setOpen()
-    } catch (error) {
-      alert(error)
-    }
+  const deletePizza = () => {
+    dispatch(deleteItem(Number(data[selectData].id)))
   }
 
   if (!data) {
