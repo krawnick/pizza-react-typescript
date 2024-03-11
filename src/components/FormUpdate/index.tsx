@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Button } from '..'
 import { IPizzaObject } from '../../interface/Pizza.interface'
-import { deleteItem } from '../../redux/slices/admin/slice'
+import { deleteItems } from '../../redux/slices/admin/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './FormUpdate.module.scss'
@@ -117,7 +117,7 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
   }
 
   const deletePizza = () => {
-    dispatch(deleteItem(Number(data[selectData].id)))
+    dispatch(deleteItems([Number(data[selectData].id)]))
   }
 
   if (!data) {

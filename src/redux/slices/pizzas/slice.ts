@@ -39,6 +39,9 @@ const pizzasSlice = createSlice({
   name: 'pizzas',
   initialState,
   reducers: {
+    addPizza: (state, action: PayloadAction<IPizzaObject>) => {
+      state.items.push(action.payload)
+    },
     deletePizza: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((pizza) => {
         return action.payload !== Number(pizza.id)
@@ -68,4 +71,4 @@ const pizzasSlice = createSlice({
 })
 
 export const pizzasReducer = pizzasSlice.reducer
-export const { deletePizza } = pizzasSlice.actions
+export const { addPizza, deletePizza } = pizzasSlice.actions

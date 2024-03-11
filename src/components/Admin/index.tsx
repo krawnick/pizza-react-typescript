@@ -2,9 +2,14 @@ import cn from 'classnames'
 import { useEffect, useState } from 'react'
 
 import { Button } from '..'
+import { data as defaultData } from '../../assets/defaultData.ts'
 import { useToggle } from '../../hooks/useToggle.ts'
 import { selectorAllData } from '../../redux/slices/admin/selectors.ts'
-import { getAllData } from '../../redux/slices/admin/slice.ts'
+import {
+  addItems,
+  deleteItems,
+  getAllData,
+} from '../../redux/slices/admin/slice.ts'
 import { useAppDispatch, useAppSelector } from '../../redux/store.ts'
 import { FormAdd } from '../FormAdd/index.tsx'
 import { FormUpdate } from '../FormUpdate/index.tsx'
@@ -30,7 +35,12 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
     }
   }, [modalActive, openUpdate])
 
-  const resetData = () => {}
+  const resetData = () => {
+    dispatch(deleteItems(items.map((item) => +item.id))).then((res) => {
+      console.log('res', res)
+      dispatch(addItems(defaultData))
+    })
+  }
 
   return (
     <div className={cn(className, styles.admin)}>

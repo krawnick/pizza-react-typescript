@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { IPizzaObject } from '../../../interface/Pizza.interface'
-import { deletePizza } from '../pizzas/slice'
+import { addPizza, deletePizza } from '../pizzas/slice'
 import { IPizzasState, StatusLoading } from '../pizzas/types'
 
 export const getAllData = createAsyncThunk('admin/getAllData', async () => {
@@ -16,21 +16,46 @@ export const getAllData = createAsyncThunk('admin/getAllData', async () => {
     })
 })
 
-export const deleteItem = createAsyncThunk<void, number>(
-  'admin/deleteItem',
-  async (id, { dispatch }) => {
-    return await fetch(import.meta.env.VITE_API_URL + '/' + id, {
-      method: 'DELETE',
+export const addItems = createAsyncThunk<void, IPizzaObject[]>(
+  'admin/addItems',
+  async (items, { dispatch }) => {
+    items.forEach(async (item, index) => {
+      setTimeout(async () => {
+        await fetch(import.meta.env.VITE_API_URL, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(item),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('Ошибка при добавлении продукта')
+            }
+            dispatch(addPizza(item))
+          })
+          .catch((error) => alert(error))
+      }, index * 1000)
     })
-      .then((res) => {
-        if (!res.ok) throw new Error('Ошибка при удалении данных')
+  }
+)
+
+export const deleteItems = createAsyncThunk<void, number[]>(
+  'admin/deleteItems',
+  async (ids, { dispatch }) => {
+    return await new Promise((resolve) => {
+      return ids.map((id, index) => {
+        setTimeout(() => {
+          fetch(import.meta.env.VITE_API_URL + '/' + id, { method: 'DELETE' })
+            .then((res) => {
+              if (!res.ok) throw new Error('Ошибка при удалении продукта')
+              dispatch(deletePizza(id))
+              if (index === ids.length - 1) resolve()
+            })
+            .catch((error) => {
+              alert(error)
+            })
+        }, index * 1000)
       })
-      .then(() => {
-        dispatch(deletePizza(id))
-      })
-      .catch((error) => {
-        alert(error)
-      })
+    })
   }
 )
 
@@ -45,7 +70,6 @@ const adminSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       .addCase(getAllData.pending, (state) => {
         state.items = []
         state.status = StatusLoading.LOADING
