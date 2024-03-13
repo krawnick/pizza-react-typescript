@@ -47,6 +47,11 @@ const pizzasSlice = createSlice({
         return action.payload !== Number(pizza.id)
       })
     },
+    updatePizza: (state, action: PayloadAction<IPizzaObject>) => {
+      state.items = state.items.map((item) => {
+        return item.id === action.payload.id ? action.payload : item
+      })
+    },
   },
 
   extraReducers: (builder) => {
@@ -71,4 +76,4 @@ const pizzasSlice = createSlice({
 })
 
 export const pizzasReducer = pizzasSlice.reducer
-export const { addPizza, deletePizza } = pizzasSlice.actions
+export const { addPizza, deletePizza, updatePizza } = pizzasSlice.actions

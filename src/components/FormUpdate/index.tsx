@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Button } from '..'
 import { IPizzaObject } from '../../interface/Pizza.interface'
-import { deleteItems } from '../../redux/slices/admin/slice'
+import { deleteItems, updateItem } from '../../redux/slices/admin/slice'
 import { useAppDispatch } from '../../redux/store'
 
 import styles from './FormUpdate.module.scss'
@@ -11,23 +11,26 @@ interface IFormUpdateProps {
   data: IPizzaObject[]
   setOpen: () => void
 }
+type TName = 'types' | 'sizes'
 
-interface ICheckboxes {
-  [index: string]: number[]
-}
-
-export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
+export const FormUpdate = ({ data }: IFormUpdateProps) => {
   const dispatch = useAppDispatch()
 
   const [selectData, setSelectData] = useState(0)
-  const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
+  const [checkboxes, setCheckboxes] = useState<
+    Pick<IPizzaObject, 'sizes' | 'types'>
+  >({
     types: [],
     sizes: [],
   })
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<
+    Omit<IPizzaObject, 'sizes' | 'types' | 'id'>
+  >({
     name: '',
-    price: '',
-    rating: '',
+    price: 0,
+    rating: 0,
+    description: '',
+    imageUrl: '',
     category: 0,
   })
 
@@ -35,8 +38,10 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
     if (data) {
       setInput({
         name: data[selectData].name,
-        price: data[selectData].price.toString(),
-        rating: data[selectData].rating.toString(),
+        price: data[selectData].price,
+        description: data[selectData].description.toString(),
+        rating: data[selectData].rating,
+        imageUrl: data[selectData].imageUrl.toString(),
         category: data[selectData].category,
       })
       setCheckboxes({
@@ -63,57 +68,30 @@ export const FormUpdate = ({ data, setOpen }: IFormUpdateProps) => {
   }
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      name,
-      checked,
-      value,
-    }: { name: string; checked: boolean; value: string } = event.target
-    let arr: number[] = [...checkboxes[name]]
+    const { name, checked, value } = event.target
 
-    if (checked) {
-      arr.push(Number(value))
-    } else {
-      arr = arr.filter((v) => {
-        return v !== Number(value)
-      })
-    }
+    checked
+      ? checkboxes[name as TName].push(Number(value))
+      : (checkboxes[name as TName] = checkboxes[name as TName].filter(
+          (v) => v !== Number(value)
+        ))
 
     setCheckboxes({
       ...checkboxes,
-      [name]: arr.sort(),
+      [name]: [...checkboxes[name as TName]].sort(),
     })
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const updateData = async () => {
-      if (data) {
-        try {
-          const res = await fetch(
-            import.meta.env.VITE_API_URL + '/' + data[selectData].id,
-            {
-              method: 'PUT',
-              headers: { 'content-type': 'application/json' },
-              body: JSON.stringify({
-                ...input,
-                ...checkboxes,
-              }),
-            }
-          )
 
-          if (!res.ok) {
-            throw new Error('Произошла ошибка при отправке данных')
-          }
-
-          alert('Данные успешно отправлены')
-        } catch (error) {
-          alert(error)
-        } finally {
-          setOpen()
-        }
-      }
-    }
-    updateData()
+    dispatch(
+      updateItem({
+        id: data[selectData].id.toString(),
+        ...checkboxes,
+        ...input,
+      })
+    )
   }
 
   const deletePizza = () => {
