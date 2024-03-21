@@ -14,7 +14,7 @@ export type TSortList = {
 }
 
 const sortList: TSortList[] = [
-  { name: 'сначала популярные', sortProperty: 'rating', desc: true },
+  { name: 'сначала популярные', sortProperty: 'rating' },
   { name: 'сначала дорогие', sortProperty: 'price', desc: true },
   { name: 'сначала недорогие', sortProperty: 'price' },
   { name: 'по названию (Я-А)', sortProperty: 'name', desc: true },

@@ -17,8 +17,11 @@
 
     span {
       cursor: pointer;
+
       font-weight: 700;
       color: $orange;
+      white-space: nowrap;
+
       border-bottom: 2px dashed $orange;
     }
   }

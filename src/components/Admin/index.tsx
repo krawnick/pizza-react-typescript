@@ -2,7 +2,7 @@ import cn from 'classnames'
 import { useEffect, useState } from 'react'
 
 import { Button, FormAdd, FormUpdate, Modal } from '..'
-import { data as defaultData } from '../../assets/defaultData.ts'
+import data from '../../assets/defaultData.json'
 import { useToggle } from '../../hooks/useToggle.ts'
 import {
   selectorAdminStatus,
@@ -46,7 +46,7 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
 
   const resetData = () => {
     dispatch(deleteItems(items.map((item) => +item.id))).then(() => {
-      dispatch(addItems(defaultData))
+      dispatch(addItems(data))
     })
   }
 

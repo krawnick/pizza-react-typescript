@@ -51,6 +51,8 @@ export const deleteItems = createAsyncThunk<void, number[]>(
   'admin/deleteItems',
   async (ids, { dispatch }) => {
     return await new Promise((resolve) => {
+      if (!ids.length) resolve()
+
       return ids.map((id, index) => {
         setTimeout(() => {
           fetch(import.meta.env.VITE_API_URL + '/' + id, { method: 'DELETE' })

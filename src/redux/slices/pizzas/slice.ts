@@ -16,7 +16,7 @@ export const fetchPizzas = createAsyncThunk<
   )
     .then((res) => {
       if (!res.ok) {
-        if (res.url.includes('search')) {
+        if (res.url.includes('search' && 'sort')) {
           return []
         }
         throw new Error('Ошибка при получении всех данных')

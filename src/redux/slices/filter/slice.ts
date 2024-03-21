@@ -11,6 +11,7 @@ const initialState: IFilterState = {
   sortState: {
     name: 'сначала популярные',
     sortProperty: 'rating',
+    desc: true,
   },
 }
 
