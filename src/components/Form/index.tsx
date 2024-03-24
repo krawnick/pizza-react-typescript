@@ -1,18 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Button } from '..'
+import { Button, Loader } from '..'
+import { IPizzaObject } from '../../interface/Pizza.interface'
 
-import styles from './FormAdd.module.scss'
+import styles from './Form.module.scss'
 
-interface IFormAddProps {
-  setOpen: () => void
+interface IFormProps {
+  setShow: () => void
+  edit?: true
+  items?: IPizzaObject[]
 }
 
 interface ICheckboxes {
   [index: string]: number[]
 }
 
-export const FormAdd = ({ setOpen }: IFormAddProps) => {
+export const Form = ({ setShow, edit, items }: IFormProps) => {
+  const [pizza, setPizza] = useState<IPizzaObject>()
+
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
     types: [],
     sizes: [],
@@ -25,6 +30,29 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
     category: '',
     description: '',
   })
+
+  useEffect(() => {
+    if (items) {
+      setPizza(items[0])
+    }
+  }, [])
+
+  useEffect(() => {
+    if (pizza) {
+      setInput({
+        name: pizza.name,
+        price: pizza.price.toString(),
+        imageUrl: pizza.imageUrl,
+        rating: pizza.rating,
+        category: pizza.category.toString(),
+        description: pizza.description,
+      })
+      setCheckboxes({
+        types: pizza.types,
+        sizes: pizza.sizes,
+      })
+    }
+  }, [pizza])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -66,44 +94,83 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
     })
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const updateData = async () => {
-      try {
-        const res = await fetch(import.meta.env.VITE_API_URL, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            ...input,
-            ...checkboxes,
-          }),
-        })
-
-        if (!res.ok) {
-          throw new Error('Произошла ошибка при отправке данных')
-        }
-
-        alert('Данные успешно отправлены')
-      } catch (error) {
-        alert(error)
-      } finally {
-        setOpen()
-      }
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (items) {
+      setPizza(items.find((el) => el.id! === event.target.value))
     }
-    updateData()
+  }
+
+  const deletePizza = () => {
+    console.log('delete pizza')
+  }
+  const sendPizza = () => {
+    console.log('send pizza')
+  }
+
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+  //   const updateData = async () => {
+  //     try {
+  //       const res = await fetch(import.meta.env.VITE_API_URL, {
+  //         method: 'POST',
+  //         headers: { 'content-type': 'application/json' },
+  //         body: JSON.stringify({
+  //           ...input,
+  //           ...checkboxes,
+  //         }),
+  //       })
+
+  //       if (!res.ok) {
+  //         throw new Error('Произошла ошибка при отправке данных')
+  //       }
+
+  //       alert('Данные успешно отправлены')
+  //     } catch (error) {
+  //       alert(error)
+  //     } finally {
+  //       setOpen()
+  //     }
+  //   }
+  //   updateData()
+  // }
+
+  if (edit && !items) {
+    return <Loader />
   }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault()
+        setShow()
+      }}
       onKeyDown={(event) => {
         if (event.code === 'Enter') event.preventDefault()
       }}
-      className={styles.formAdd}
+      className={styles.form}
     >
-      <h1>Добавление данных</h1>
+      <h1>{!edit ? 'Добавление данных' : 'Редактирование данных'}</h1>
 
-      <label className={styles.formAddText}>
+      {edit && (
+        <label>
+          Выберите пиццу для редактирования
+          <select
+            className={styles.formSelectPizza}
+            onChange={handleSelect}
+            value={pizza?.id}
+          >
+            {items?.map((el) => {
+              return (
+                <option value={el.id} key={el.id}>
+                  {el.name}
+                </option>
+              )
+            })}
+          </select>
+        </label>
+      )}
+
+      <label className={styles.formText}>
         Название пиццы
         <input
           onChange={handleInputChange}
@@ -112,7 +179,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           value={input.name}
         />
       </label>
-      <label className={styles.formAddText}>
+      <label className={styles.formText}>
         Цена за малый круг
         <input
           onChange={handleInputChange}
@@ -122,7 +189,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           value={input.price}
         />
       </label>
-      <label className={styles.formAddText}>
+      <label className={styles.formText}>
         Категория
         <input
           onChange={handleInputChange}
@@ -132,7 +199,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
         />
       </label>
 
-      <label className={styles.formAddText}>
+      <label className={styles.formText}>
         Ссылка на изображение
         <input
           onChange={handleInputChange}
@@ -141,7 +208,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           value={input.imageUrl}
         />
       </label>
-      <label className={styles.formAddText}>
+      <label className={styles.formText}>
         Описание
         <textarea
           onChange={handleTextAreaChange}
@@ -149,7 +216,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           value={input.description}
         />
       </label>
-      <label className={styles.formAddText}>
+      <label className={styles.formText}>
         {`Рейтинг: ${input.rating}`}
         <input
           onChange={handleInputChange}
@@ -160,7 +227,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           value={input.rating}
         />
       </label>
-      <div className={styles.formAddCheckbox}>
+      <div className={styles.formCheckbox}>
         <p>Типы пиццы</p>
         <label>
           <input
@@ -183,7 +250,7 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
           <span>Традиционное</span>
         </label>
       </div>
-      <div className={styles.formAddCheckbox}>
+      <div className={styles.formCheckbox}>
         <p>Размеры пиццы</p>
         <input
           name="sizes"
@@ -211,9 +278,17 @@ export const FormAdd = ({ setOpen }: IFormAddProps) => {
         <span>40</span>
       </div>
 
-      <Button type="submit" appearance="default">
-        Отправить
-      </Button>
+      <div className={styles.formBottom}>
+        {edit && (
+          <Button type="submit" onClick={deletePizza} appearance="default">
+            Удалить пиццу
+          </Button>
+        )}
+
+        <Button type="submit" onClick={sendPizza} appearance="default">
+          Отправить
+        </Button>
+      </div>
     </form>
   )
 }

@@ -1,21 +1,16 @@
-import React from 'react'
-import { createBrowserRouter, defer } from 'react-router-dom'
+import React, { Suspense } from 'react'
+import { createBrowserRouter } from 'react-router-dom'
 
 import { MainLayout } from '../layouts/MainLayout'
 import { Home, NotFound } from '../pages'
 
 // eslint-disable-next-line react-refresh/only-export-components
 const FullPizza = React.lazy(() =>
-  import(/* webpackChunkName: 'FullPizzaChunk' */ '../pages/FullPizza').then(
-    (module) => ({ default: module.FullPizza })
-  )
+  import('../pages/').then((module) => ({ default: module.FullPizza }))
 )
-
 // eslint-disable-next-line react-refresh/only-export-components
 const Cart = React.lazy(() =>
-  import(/* webpackChunkName: 'CartChunk' */ '../pages/Cart').then(
-    (module) => ({ default: module.Cart })
-  )
+  import('../pages/').then((module) => ({ default: module.Cart }))
 )
 
 export const router = createBrowserRouter([
@@ -27,30 +22,18 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: (
-          <React.Suspense fallback={<h1>🍕🍕🍕🍕🍕🍕🍕🍕</h1>}>
+          <Suspense>
             <Cart />
-          </React.Suspense>
+          </Suspense>
         ),
       },
       {
-        loader: async ({ params }) => {
-          try {
-            const data = await fetch(
-              `${import.meta.env.VITE_API_URL}/${params.id}`
-            ).then((res) => res.json())
-
-            if (typeof data === 'string') throw Error('Not found')
-
-            return defer({
-              pizza: data,
-            })
-          } catch (error) {
-            alert(error)
-          }
-        },
-
         path: 'pizza/:id',
-        element: <FullPizza />,
+        element: (
+          <Suspense>
+            <FullPizza />
+          </Suspense>
+        ),
       },
       { path: '*', element: <NotFound /> },
     ],

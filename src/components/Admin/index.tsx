@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
 
-import { Button, FormAdd, FormUpdate, Modal } from '..'
+import { Button, Form, Modal } from '..'
 import data from '../../assets/defaultData.json'
 import { useToggle } from '../../hooks/useToggle.ts'
 import {
@@ -27,8 +27,8 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
   const isLoading =
     useAppSelector(selectorAdminStatus) === 'loading' ? true : false
 
-  const [openAdd, setOpenAdd, closeAdd] = useToggle()
-  const [openUpdate, setOpenUpdate, closeUpdate] = useToggle()
+  const [showAdd, setShowAdd, closeAdd] = useToggle()
+  const [showUpdate, setShowUpdate, closeUpdate] = useToggle()
   const [modalActive, setModalActive] = useState(false)
 
   useEffect(() => {
@@ -70,16 +70,16 @@ export const Admin = ({ className }: IAdminProps): JSX.Element => {
               >
                 Сбросить данные
               </Button>
-              <Button onClick={setOpenUpdate} appearance="default">
+              <Button onClick={setShowUpdate} appearance="default">
                 Обновить данные
               </Button>
-              {openUpdate && (
-                <FormUpdate data={items} setOpen={setOpenUpdate} />
+              {showUpdate && (
+                <Form edit items={items} setShow={setShowUpdate} />
               )}
-              <Button onClick={setOpenAdd} appearance="default">
+              <Button onClick={setShowAdd} appearance="default">
                 Добавить данные
               </Button>
-              {openAdd && <FormAdd setOpen={setOpenAdd} />}
+              {showAdd && <Form setShow={setShowAdd} />}
             </>
           </div>
         </Modal>
