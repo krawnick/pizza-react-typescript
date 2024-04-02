@@ -31,7 +31,7 @@
 
     width: 80vw;
     max-width: 800px;
-    max-height: 80vh;
+    max-height: 90vh;
     padding: 20px;
 
     background-color: $white;
@@ -47,6 +47,16 @@
     &::-webkit-scrollbar-thumb {
       background-color: $orange;
       border-radius: 15px;
+    }
+  }
+}
+
+@media (width <= 768px) {
+  .modal {
+    &Content {
+      width: 100%;
+      margin: 5px;
+      padding: 10px;
     }
   }
 }

@@ -35,7 +35,7 @@ export const Home = (): JSX.Element => {
       }
       case StatusLoading.SUCCESS: {
         return pizzas.map((pizza) => (
-          <PizzaBlock key={pizza.id} {...pizza}></PizzaBlock>
+          <PizzaBlock key={pizza.name} {...pizza}></PizzaBlock>
         ))
       }
     }

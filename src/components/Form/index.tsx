@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react'
 
 import { Button, Loader } from '..'
 import { IPizzaObject } from '../../interface/Pizza.interface'
+import {
+  addItems,
+  deleteItems,
+  updateItem,
+} from '../../redux/slices/admin/slice'
+import { useAppDispatch } from '../../redux/store'
 
 import styles from './Form.module.scss'
 
@@ -12,17 +18,27 @@ interface IFormProps {
 }
 
 interface ICheckboxes {
-  [index: string]: number[]
+  [key: string]: number[]
+}
+
+interface IInputType {
+  name: string
+  price: string
+  imageUrl: string
+  rating: number
+  category: string
+  description: string
 }
 
 export const Form = ({ setShow, edit, items }: IFormProps) => {
+  const dispatch = useAppDispatch()
   const [pizza, setPizza] = useState<IPizzaObject>()
 
   const [checkboxes, setCheckboxes] = useState<ICheckboxes>({
     types: [],
     sizes: [],
   })
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<IInputType>({
     name: '',
     price: '',
     imageUrl: '',
@@ -78,7 +94,9 @@ export const Form = ({ setShow, edit, items }: IFormProps) => {
       checked,
       value,
     }: { name: string; checked: boolean; value: string } = event.target
-    let arr: number[] = [...checkboxes[name]]
+    let arr: number[] = [
+      ...(checkboxes[name] as ICheckboxes['types' | 'sizes']),
+    ]
 
     if (checked) {
       arr.push(Number(value))
@@ -101,38 +119,27 @@ export const Form = ({ setShow, edit, items }: IFormProps) => {
   }
 
   const deletePizza = () => {
-    console.log('delete pizza')
+    if (pizza) {
+      dispatch(deleteItems([Number(pizza.id)]))
+    }
   }
-  const sendPizza = () => {
-    console.log('send pizza')
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('submit')
+    event.preventDefault()
+    edit
+      ? dispatch(
+          updateItem({
+            ...(checkboxes as ICheckboxes),
+            ...(input as IInputType),
+            id: pizza?.id,
+          } as unknown as IPizzaObject)
+        )
+      : dispatch(
+          addItems([{ ...checkboxes, ...input } as unknown as IPizzaObject])
+        )
+    setShow()
   }
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault()
-  //   const updateData = async () => {
-  //     try {
-  //       const res = await fetch(import.meta.env.VITE_API_URL, {
-  //         method: 'POST',
-  //         headers: { 'content-type': 'application/json' },
-  //         body: JSON.stringify({
-  //           ...input,
-  //           ...checkboxes,
-  //         }),
-  //       })
-
-  //       if (!res.ok) {
-  //         throw new Error('Произошла ошибка при отправке данных')
-  //       }
-
-  //       alert('Данные успешно отправлены')
-  //     } catch (error) {
-  //       alert(error)
-  //     } finally {
-  //       setOpen()
-  //     }
-  //   }
-  //   updateData()
-  // }
 
   if (edit && !items) {
     return <Loader />
@@ -140,10 +147,7 @@ export const Form = ({ setShow, edit, items }: IFormProps) => {
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        setShow()
-      }}
+      onSubmit={handleSubmit}
       onKeyDown={(event) => {
         if (event.code === 'Enter') event.preventDefault()
       }}
@@ -252,40 +256,46 @@ export const Form = ({ setShow, edit, items }: IFormProps) => {
       </div>
       <div className={styles.formCheckbox}>
         <p>Размеры пиццы</p>
-        <input
-          name="sizes"
-          type="checkbox"
-          onChange={handleCheckboxChange}
-          value="26"
-          checked={checkboxes.sizes.includes(26)}
-        />
-        <span>26</span>
-        <input
-          name="sizes"
-          type="checkbox"
-          onChange={handleCheckboxChange}
-          value="30"
-          checked={checkboxes.sizes.includes(30)}
-        />
-        <span>30</span>
-        <input
-          name="sizes"
-          type="checkbox"
-          onChange={handleCheckboxChange}
-          value="40"
-          checked={checkboxes.sizes.includes(40)}
-        />
-        <span>40</span>
+        <label>
+          <input
+            name="sizes"
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            value="26"
+            checked={checkboxes.sizes.includes(26)}
+          />
+          <span>26</span>
+        </label>
+        <label>
+          <input
+            name="sizes"
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            value="30"
+            checked={checkboxes.sizes.includes(30)}
+          />
+          <span>30</span>
+        </label>
+        <label>
+          <input
+            name="sizes"
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            value="40"
+            checked={checkboxes.sizes.includes(40)}
+          />
+          <span>40</span>
+        </label>
       </div>
 
       <div className={styles.formBottom}>
         {edit && (
-          <Button type="submit" onClick={deletePizza} appearance="default">
+          <Button type="button" onClick={deletePizza} appearance="default">
             Удалить пиццу
           </Button>
         )}
 
-        <Button type="submit" onClick={sendPizza} appearance="default">
+        <Button type="submit" appearance="default">
           Отправить
         </Button>
       </div>

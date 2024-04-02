@@ -14,10 +14,6 @@
     font-size: 36px;
   }
 
-  button {
-    align-self: flex-end;
-  }
-
   &Text {
     display: flex;
     flex-direction: column;
@@ -91,5 +87,50 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+  }
+}
+
+@media (width <= 768px) {
+  .form {
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+
+@media (width <= 425px) {
+  .form {
+    text-align: center;
+    border: none;
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      line-height: 150%;
+    }
+
+    &Checkbox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        position: static;
+        width: 20px;
+        height: 20px;
+      }
+
+      span {
+        padding-right: 14px;
+        font-size: 20px;
+        line-height: 133%;
+      }
+    }
+
+    &Bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 }
